@@ -18,6 +18,7 @@ Key features of this software include module support (but unfortunately no modul
 8. Import the SQL file
 9. Run `php app/console assets:install` to generate the static assets
 10. Add `php app/console app_admin:generate_recurring` to your crontab to run daily
+11. Log in with username "admin" and password "123456" at URL "/login"
 
 If you need additional help, please consider our [forum](http://community.loadingdeck.com) that you can use to discuss the software with us. Paid support and development are also available by email and telephone (see above).
 
