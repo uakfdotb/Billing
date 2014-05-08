@@ -3,7 +3,6 @@
 /app/spool/
 /vendor
 /.idea
-/web/.htaccess
 /web/bundles
 /nbproject/private
 .DS_STORE
