@@ -1,0 +1,12 @@
+services:
+    easy_mapping:
+        class: Easy\MappingBundle\Mapping\Manager
+        arguments: [@service_container, %easy_mapping.config%]
+
+    ## MAPPING TYPE
+    easy_mapping_type_doctrine:
+        class: Easy\MappingBundle\Mapping\Type\Doctrine
+        arguments: [@doctrine]
+    easy_mapping_type_static:
+        class: Easy\MappingBundle\Mapping\Type\StaticMap
+        arguments: []

@@ -1,0 +1,147 @@
+## CLIENT
+App\ClientBundle\Entity\Client:
+    properties:
+        email:
+        - Email: ~
+        - NotBlank: ~
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+
+## PROJECT
+App\ClientBundle\Entity\Project:
+    properties:
+        name:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~
+        idType:
+            - NotBlank: ~
+        idClient:
+            - NotBlank: ~
+
+## ESTIMATE
+App\ClientBundle\Entity\Estimate:
+    properties:
+        idClient:
+            - NotBlank: ~
+
+## RECURRING
+App\ClientBundle\Entity\Recurring:
+    properties:
+        idClient:
+            - NotBlank: ~
+
+## STAFF
+App\ClientBundle\Entity\Staff:
+    properties:
+        firstname:
+            - NotBlank: ~
+        lastname:
+            - NotBlank: ~
+        email:
+            - Email: ~
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+        constraints:
+            - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+
+## PRODUCT
+App\ClientBundle\Entity\Product:
+    properties:
+        name:
+            - NotBlank: ~
+        idPaymentType:
+            - NotBlank: ~
+
+## AUTOMATION GROUP
+App\ClientBundle\Entity\AutomationGroup:
+    properties:
+        name:
+            - NotBlank: ~
+        url:
+            - NotBlank: ~    
+
+## SUPPLIER
+
+## SUPPLIER PURCHASE
+App\ClientBundle\Entity\SupplierPurchase:
+    properties:
+        name:
+            - NotBlank: ~
+        idAccount:
+            - NotBlank: ~
+        amount:
+            - NotBlank: ~
+
+## ACCOUNT
+App\ClientBundle\Entity\Account:
+    properties:
+        name:
+            - NotBlank: ~
+
+App\ClientBundle\Entity\Transfer:
+    properties:
+        idAccountOut:
+            - NotBlank: ~
+        idAccountIn:
+            - NotBlank: ~
+        amount:
+            - NotBlank: ~
+
+## ESTIMATE PURCHASE
+App\ClientBundle\Entity\EstimatePurchase:
+    properties:
+        name:
+            - NotBlank: ~
+
+## CLIENT CONTACT
+App\ClientBundle\Entity\ClientContact:
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+
+## CLIENT NOTE
+App\ClientBundle\Entity\ClientNote:
+    properties:
+        subject:
+            - NotBlank: ~
+
+## ORDER
+App\ClientBundle\Entity\Order:
+    properties:
+        idProduct:
+            - NotBlank: ~
+        idClient:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~            
+        idOrderPaymentTerm:
+            - NotBlank: ~
+
+## EMAIL
+App\ClientBundle\Entity\Email:
+    properties:
+        name:
+            - NotBlank: ~    
+        subject:
+            - NotBlank: ~
+
+## PRODUCT GROUP
+App\ClientBundle\Entity\ProductGroup:
+    properties:
+        name:
+            - NotBlank: ~    
+
+## PHYSICAL ITEM
+App\ClientBundle\Entity\PhysicalItem:
+    properties:
+        name:
+            - NotBlank: ~
+
+## CREDIT NOTE
+App\ClientBundle\Entity\CreditNote:
+    properties:
+        idClient:
+            - NotBlank: ~

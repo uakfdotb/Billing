@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\ProductGroup;class EditModel{    public $name;    public $isAvailable;}

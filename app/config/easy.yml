@@ -1,0 +1,9 @@
+easy_mapping:
+    mapping:
+        - "%kernel.root_dir%/../src/Leep/AdminBundle/Resources/config/mapping.yml"
+    nocache: true
+
+easy_formatter:
+    formatter:
+        - "%kernel.root_dir%/../src/Leep/AdminBundle/Resources/config/formatter.yml"
+    nocache: true

@@ -1,0 +1,98 @@
+<div id="{{ widgetElementId }}" class="half" style="height: 200px">
+    <h2>
+        Total Value of Sales
+        <span>&laquo;&raquo;</span>
+        {% include 'AppAdminBundle:Dashboard:viewby.html.twig' with {'id': widgetElementId ~ '_viewby', 'viewby': viewby } %}       
+    </h2>
+    <div id="{{ widgetElementId }}_graph"></div>
+    <p id="{{ widgetElementId }}_summary">
+    </p>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {        
+        var totalValueOfSalesChart = new Highcharts.Chart({
+            chart: {
+                renderTo: '{{ widgetElementId }}_graph', 
+                type: 'column',
+                height: 170,
+                width: 232,
+                backgroundColor: 'transparent',
+            },
+            credits: {
+                enabled: false
+            },
+            colors: ["#68c1ba"],
+            title: {
+                text:''
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                formatter: function() {
+                    var s = this.series.name + ' in <b>' + this.x + '</b>:<br /><b>{{ currencyCode }}'+ this.y +'</b>';
+                    return s;
+                },
+                borderColor: '#FFF',
+                borderWidth: 1,
+                backgroundColor: '#50bcb1',
+                style: {
+                    color: '#FFF',
+                    fontSize: '13px',
+                    padding: '4px'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: '',
+                    style: {
+                        color: '#A6A6A6',
+                        font: 'normal 12px Arial, Helvetica, sans-serif',
+                    }
+                },
+                gridLineColor: '#EEE',
+            },
+            xAxis: {
+                title: {
+                    text: '',
+                    style: {
+                        color: '#A6A6A6',
+                        font: 'normal 12px Arial, Helvetica, sans-serif',
+                    }
+                },
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+            },
+            series: [{
+                name: 'Sales',
+                data: []
+            }]
+        });
+
+        // Process action
+        buildWidgetViewByEvents(
+            '#{{ widgetElementId }}_viewby',
+            '{{ widgetUpdateUrl }}',
+            '{{ idWidget }}',
+            onTotalValueOfSalesChartPreUpdate,
+            onTotalValueOfSalesChartPostUpdate
+        );
+
+        function onTotalValueOfSalesChartPreUpdate() {
+            totalValueOfSalesChart.showLoading();
+        }
+        
+        function onTotalValueOfSalesChartPostUpdate(response) {
+            var series = JSON.parse(response);
+            totalValueOfSalesChart.series[0].setData(series['data']);
+            totalValueOfSalesChart.hideLoading();
+
+            // Update summary
+            var summaryNode = jQuery('#{{ widgetElementId }}_summary');
+            summaryNode.empty();
+            summaryNode.append(buildAmountElement(series['total']));
+            summaryNode.append(jQuery('<br/>'));
+            summaryNode.append(buildPercentageElement(series['percentage']));
+        }
+    });
+</script>

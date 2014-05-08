@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\ProjectTracking;class EditModel{    public $start;    public $end;    public $staff;    public $hourly;    public $invoiced;}

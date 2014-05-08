@@ -1,0 +1,45 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block masterHeadText %}
+    <h3>{{ 'CLIENT_PRODUCT' | trans }} - {{ client.firstname }} {{ client.lastname }}</h3>
+{% endblock %}
+
+{% block listGrid %}
+{% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+    {% block gridButtons %}
+        <script id="note-view-button" type="text/x-kendo-template">
+            <a class="k-button k-button-icontext" href="{{ path('app_admin_client_product_view') }}?id=${id}">
+                <i class="k-icon k-edit"></i>{{ 'VIEW' | trans }}
+                                    </a>
+        </script>
+    {% endblock %}
+
+    {% block gridToolbar %}
+        { name: "add", text: "{{ 'PLACE_ORDER' | trans }}", template: kendo.template(jQuery("#note-create-button").html()) }
+    {% endblock %}
+
+    {% block gridFields %}
+        id: { editable: false, nullable: false },
+        cost: { editable: false, nullable: false },
+        idSchedule: { editable: false, nullable: false },
+        nextDue: { editable: false, nullable: false },
+        status: { editable: false, nullable: false },
+        domain: { editable: false, nullable: true },
+        name: { editable: false, nullable: true },
+    {% endblock %}
+
+    {% block gridColumns %}
+        { field:"id", title:"{{ 'ID' | trans }}", width: 80 },
+        { field:"name", title:"{{ 'NAME' | trans }}", width: 150 },
+        { field:"domain", title:"{{ 'DOMAIN' | trans }}", width: 150 },
+        { field:"idSchedule", title:"{{ 'SCHEDULE' | trans }}", width: 80 },
+        { field:"nextDue", title:"{{ 'NEXT_DUE' | trans }}", width: 80 },
+        { field:"cost", title:"{{ 'PRICE' | trans }}", width: 80 },
+        { template: kendo.template(jQuery("#note-view-button").html()), width: 115 }
+    {% endblock %}
+
+    {% block extraScript %}
+
+    {% endblock %}
+{% endembed %}
+{% endblock %}

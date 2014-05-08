@@ -1,0 +1,9 @@
+App\UserBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank: { message: Username should not be blank, groups: [ 'create', 'edit' ] }
+        plainPassword:
+            - NotBlank: { message: Password should not be blank, groups: [ 'create', user_signup ] }
+        email:
+            - Email: { groups: [user_signup] }
+            - NotBlank : { groups: [user_signup] }

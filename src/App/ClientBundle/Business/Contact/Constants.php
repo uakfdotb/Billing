@@ -1,0 +1,1 @@
+<?phpnamespace App\ClientBundle\Business\Contact;class Constants{}

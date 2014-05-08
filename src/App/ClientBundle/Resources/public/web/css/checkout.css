@@ -1,0 +1,262 @@
+.checkout {
+  color: #707070 !important;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  padding-top: 6em !important;
+  padding-bottom: 6em !important;
+}
+.checkout .spacer {
+ height: 3.7em !important;
+}
+
+/*** ORDER FORM ***/
+.order-form .half-row {
+  width: 49% !important;
+  display:inline-block !important;
+}
+.order-form .one-third-row {
+  width: 33% !important;
+  display:inline-block !important;
+}
+.order-form .two-thirds-row {
+  width: 65% !important;
+  display:inline-block !important;
+}
+.order-form p {
+  margin-bottom: 1.2em !important;
+}
+.order-form .legend {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  letter-spacing: 0.9px !important;
+  margin-top: 4.2em !important;
+  margin-bottom: 1.8em !important;
+}
+.order-form .legend.first {
+  margin-top: 0 !important;
+}
+.order-form .legend span {
+  background-color: #EA6156 !important;
+  color: white !important;
+  width: 27px !important;
+  height: 27px !important;
+  line-height: 27px !important;
+  text-align: center !important;
+  font-weight: bold !important;
+  font-size: 15px !important;
+  display: inline-block !important;
+  margin-right: 12px !important;
+  border-radius: 2px !important;
+}
+.order-form .form-control {
+  background-color: #F0F3F5 !important;
+  height: 48px !important;
+  border-radius: 2px !important;
+  font-weight: 400 !important;
+  color: #333 !important;
+}
+.order-form select.form-control {
+  background-image: url('../img/dropdown-arrow.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: right center !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  color: #999 !important;
+}
+@-moz-document url-prefix() {
+  .order-form select.form-control {
+    text-indent: 0.01px !important;
+    text-overflow: '' !important;
+  }
+}
+.order-form select.form-control option {
+  color: #333 !important;
+}
+.order-form select.form-control option[disabled] {
+  color: #999 !important;
+}
+.order-form select.form-control.has-success {
+  color: #333 !important;
+}
+.order-form .form-control.has-success {
+  background-image: url('../img/has-success.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: right center !important;
+}
+.order-form label {
+  cursor: pointer !important;
+}
+.order-form div.fieldset {
+    /* avoid jumpy animation: http://stackoverflow.com/a/8596292/370290 */
+    border: 1px solid transparent !important;
+}
+
+.order-form .pay-method {
+  margin: 3em 0 2.5em !important;
+}
+.order-form p.check-control.pay-method:not(#foo) label {
+  padding-left: 32px !important !important;
+}
+.order-form .pay-method label img { position:relative !important; }
+.order-form .pay-method label[for=credit-card] img { top: -3px !important; }
+.order-form .pay-method label[for=paypal] img { top: -1px !important; }
+.order-form p.check-control.pay-method:not(#foo) label[for=paypal] { margin-left: 3.7em !important; }
+.order-form .terms {
+  margin-top: 5em !important;
+  margin-bottom: 2.1em !important;
+}
+.order-form .terms label {
+  font-weight: 300 !important;
+  font-size: 12px !important;
+}
+.order-form p.check-control.terms:not(#foo) label {
+  padding-left: 30px !important !important;
+}
+.order-form .sign-up .btn {
+  font-size: 15px !important;
+  font-weight: bold !important;
+  padding: 1.2em 3.7em !important;
+}
+
+/*** ORDER SUMMARY ***/
+.order-summary {
+  border: 2px solid #E8EBED !important;
+  padding: 1.2em !important;
+  max-width: 421px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.order-summary hr {
+  border-width: 2px !important;
+}
+.order-summary .header {
+  line-height: 22px !important;
+}
+.order-summary .header .title {
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  vertical-align: middle !important;
+  padding-left: 5px !important;
+}
+.order-summary .header a {
+  font-weight: 400 !important;
+  font-size: 9px !important;
+  vertical-align: middle !important;
+}
+.order-summary .plan-price span {
+  position: absolute !important;
+}
+.order-summary .plan-price strong {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #5C5F60 !important;
+  text-shadow:  0px 0px 1px rgba(0, 0, 0, 0.3) !important;
+}
+.order-summary .plan-price .details {
+  text-align: right !important;
+  color: #A6ABAD !important;
+}
+.order-summary .plan-price .vat {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
+.order-summary .price-total span {
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  color: #EA6156 !important;
+  text-shadow:  0px 0px 1px rgba(234, 97, 86, 0.3) !important;
+}
+
+/*** SUPPORT CONTACT ***/
+.contact {
+  margin-top: 5em !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+}
+.contact .ruler {
+  background-image: url('../img/contact-ruler.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  min-height: 7px !important;
+}
+.contact .ruler .questions {
+  background-color: white !important;
+  padding: 0px 18px !important;
+  margin: 0 auto !important;
+  display: table !important;
+  line-height: 17px !important;
+}
+.contact .ruler .questions span {
+  vertical-align: middle !important;
+  padding-left: 10px !important;
+}
+.contact .info {
+  padding: 1em !important;
+}
+.contact .info div {
+  text-align: center !important;
+  padding: 1em 0 !important;
+}
+.contact .info img {
+  height: 33px !important;
+  margin-bottom: 15px !important;
+}
+.contact .info p {
+  margin-bottom: 3px !important;
+}
+.contact .info a {
+  font-size: 12px !important;
+}
+
+/*** CSS-ONLY CUSTOM CHECKBOX AND RADIO INPUT W/ FULL KEYBOARD ACCESSIBILITY ***/
+/* http://www.thecssninja.com/css/custom-inputs-using-css#sprite */
+
+p.check-control:not(#foo) > input {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 18px !important;
+  width: 18px !important;
+  float: left !important;
+  position: absolute !important;
+  left: 0 !important;
+  opacity: 0 !important;
+}
+p.check-control:not(#foo) > input + label {
+  background: url('../img/checkboxes-and-radios.png') 0 -1px no-repeat !important;
+  height: 18px !important;
+  padding-left: 18px !important;
+}
+
+p.check-control:not(#foo) > input[type=checkbox] + label                        { background-position: 0 0px !important; }
+p.check-control:not(#foo) > input[type=radio] + label                           { background-position: 0 -161px !important; }
+
+/* Checked styles */
+p.check-control:not(#foo) > input[type=radio]:checked + label                   { background-position: 0 -241px !important; }
+p.check-control:not(#foo) > input[type=checkbox]:checked + label                { background-position: 0 -81px !important; }
+p.check-control:not(#foo) > input[type=checkbox]:hover:checked + label,
+p.check-control:not(#foo) > input[type=checkbox]:focus:checked + label,
+p.check-control:not(#foo) > input[type=checkbox]:checked + label:hover,
+p.check-control:not(#foo) > input[type=checkbox]:focus:checked + label          { background-position: 0 -101px !important; }
+p.check-control:not(#foo) > input[type=radio]:hover:checked + label,
+p.check-control:not(#foo) > input[type=radio]:focus:checked + label,
+p.check-control:not(#foo) > input[type=radio]:checked + label:hover,
+p.check-control:not(#foo) > input[type=radio]:focus:checked + label             { background-position: 0 -261px !important; }
+
+/* Hover & Focus styles */
+p.check-control:not(#foo) > input[type=checkbox]:hover + label,
+p.check-control:not(#foo) > input[type=checkbox]:focus + label,
+p.check-control:not(#foo) > input[type=checkbox] + label:hover                  { background-position: 0 -21px !important; }
+p.check-control:not(#foo) > input[type=radio]:hover + label,
+p.check-control:not(#foo) > input[type=radio]:focus + label,
+p.check-control:not(#foo) > input[type=radio] + label:hover                     { background-position: 0 -181px !important; }
+
+/* Active styles */
+p.check-control:not(#foo) > input[type=checkbox]:active + label,
+p.check-control:not(#foo) > input[type=checkbox] + label:hover:active           { background-position: 0 -41px !important; }
+p.check-control:not(#foo) > input[type=radio]:active + label,
+p.check-control:not(#foo) > input[type=radio] + label:hover:active              { background-position: 0 -201px !important; }
+p.check-control:not(#foo) > input[type=checkbox]:active:checked + label,
+p.check-control:not(#foo) > input[type=checkbox]:checked + label:hover:active   { background-position: 0 -121px !important; }
+p.check-control:not(#foo) > input[type=radio]:active:checked + label,
+p.check-control:not(#foo) > input[type=radio]:checked + label:hover:active      { background-position: 0 -281px !important; }

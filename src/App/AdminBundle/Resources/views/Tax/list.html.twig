@@ -1,0 +1,29 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: true, nullable: true },
+            value: { editable: true, nullable: true }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120 },
+            { field:"name", title:"{{ 'NAME' | trans }}", width: 150 },
+            { field:"value", title:"{{ 'RATE' | trans }}", width: 150, template: '#=(value * 100).toFixed(2)#%'},
+            { template: kendo.template(jQuery("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

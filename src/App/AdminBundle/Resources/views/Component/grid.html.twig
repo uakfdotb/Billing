@@ -1,0 +1,106 @@
+{% block gridButtons %}    
+    
+    <div>
+        <script id="create-button" type="text/x-kendo-template">
+            <a class="k-button k-button-icontext" href="{{ grid.createUrl }}">
+                <i class="k-icon k-add"></i>
+                {{ grid.addNewLabel | default('ADD_NEW_RECORD') | trans }}
+            </a>
+        </script>
+
+        <script id="export-button" type="text/x-kendo-template">
+            <a class="k-button k-button-icontext" href="javascript:kendoGridExportToCsv('{{ grid.exportUrl }}', '{{ grid.jsId | default('grid') }}')">
+                <i class="k-icon k-export"></i>
+                {{ 'EXPORT' | trans }}
+            </a>
+        </script>
+        
+        <script id="edit-button" type="text/x-kendo-template">
+            <a class="k-button k-button-icontext" href="{{ grid.editUrl }}?id=${id}">
+                <i class="k-icon k-edit"></i>{{ 'EDIT' | trans }}
+            </a>
+        </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<script>
+    function initializeGrid{{ grid.jsId | default('grid') }}() {
+        jQuery("#{{ grid.jsId | default('grid') }}").kendoGrid({
+            dataSource: {
+                transport: {
+                    {% block dataSourceTransport %}
+                    read: "{{ grid.readUrl }}",
+                    update: {
+                        url: "{{ grid.editUrl }}",
+                        type: "POST"
+                    },
+                    destroy: {
+                        url: "{{ grid.deleteUrl }}",
+                        type: "POST"
+                    },
+                    create: {
+                        url: "{{ grid.createUrl }}",
+                        type: "POST"
+                    },
+                    type: 'GET',
+                    dataType: "json"
+                    {% endblock %}
+                },
+                schema: {
+                    data: "data",
+                    total: "total",
+                    model: {
+                        id: "id",
+                        fields: {
+                            {% block gridFields %}
+                            {% endblock %}
+                        }
+                    }
+                },
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+                pageSize: 10,
+                batch: true,
+                page: 1,
+                scrollable: {
+                    virtual: true
+                },
+                sort: { field: "id", dir: "desc"},
+                {% block extraConfigDataSource %}
+                {% endblock %}
+            },
+            sortable: true,
+            resizable: true,
+            reorderable: true,
+            editable: "{{ grid.config.editable | default('popup') | raw }}",
+        {# toolbar: [{% block gridToolbar%}{% endblock %}], #}
+            filterable: {
+                extra: true
+            },
+            pageable: {
+                numeric: false,
+                pageSizes: [ 10 , 25, 50 ],
+                {% if singlePageGrid is defined %}pageSize: 999,{% endif %}
+                previousNext: true,
+                input: true,
+                info: true
+            },
+            columns: [
+                {% block gridColumns %}
+                {% endblock %}
+            ],
+            {% block extraConfig %}
+            {% endblock %}
+        });
+    }
+
+    {% block initializeGrid %}
+    initializeGrid{{ grid.jsId | default('grid') }}();
+    {% endblock %}
+
+    {% block extraScript %}
+    {% endblock %}
+</script>

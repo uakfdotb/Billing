@@ -1,0 +1,35 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            supplier: { editable: false, nullable: false},
+            name: { editable: false, nullable: false},
+            purchaseDate: { editable: false, nullable: false },
+            amount: {editable: true, nullable: false},
+            attachments: { editable: false, nullable: false },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120, filterable: false },
+            { field:"supplier", title:"{{ 'SUPPLIER' | trans }}", filterable: false },
+            { field:"name", title:"{{ 'NAME' | trans }}", filterable: false },
+            { field:"purchaseDate", title:"{{ 'PURCHASE_DATE' | trans }}", filterable: false },
+            { field:"amount", title:"{{ 'AMOUNT' | trans }}", width: 95, filterable: false, sortable: false},
+            { field:"attachments", title:"{{ 'ATTACHMENTS' | trans }}", filterable: false, template: '#= attachments #' },
+            { template: kendo.template(jQuery("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'SEARCH' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% for r in result %}
+        {% if r['records'] is not empty %}
+            <h4>{{ r['name'] }}</h4>
+            {% for row in r['records'] %}
+                <p><a href="{{ row['link'] }}">{{ 'VIEW' | trans }}</a>&nbsp; {{ row['text'] }}</p>
+            {% endfor %}
+            <hr />
+        {% endif %}
+    {% endfor %}
+{% endblock %}

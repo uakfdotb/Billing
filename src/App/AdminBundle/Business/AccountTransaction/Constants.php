@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\AccountTransaction;class Constants{}

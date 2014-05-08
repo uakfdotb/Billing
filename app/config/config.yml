@@ -1,0 +1,95 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: services.yml }
+    - { resource: security.yml }
+
+doctrine:
+    dbal:
+        default_connection: client_connection
+        connections:
+            client_connection:
+                driver:     pdo_mysql
+                host:       %database_host%
+                port:       3306
+                dbname:     %database_dbname%
+                user:       %database_username%
+                password:   %database_password%
+                charset:    UTF8
+
+    orm:
+        default_entity_manager:   client
+        entity_managers:
+            client:
+                connection:       client_connection
+                mappings:
+                    AppUserBundle: ~
+                    AppAdminBundle: ~
+                    AppClientBundle: ~
+                    AppPaymentsBundle: ~
+                    ColourStreamCronBundle: ~
+                    AppApiBundle: ~
+                    FOSUserBundle:
+
+framework:
+    #esi:             ~
+    translator:      ~
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enabled: true, enable_annotations: true }
+    templating:      { engines: ['twig'], assets_version: v08 }
+    default_locale:  %locale%
+    trust_proxy_headers: false
+    session:         ~
+    templating:
+        engines: ['twig']
+        assets_base_urls:
+            http: [http://localhost/] # CHANGE ME
+            ssl: [https://localhost/] # CHANGE ME
+    translator: { fallback: en }
+
+services:
+    pdo:
+        class: PDO
+        arguments:
+            dsn:      "mysql:host=%database_host%;dbname=%database_dbname%"
+            user:     %database_username%
+            password: %database_password%
+        calls:
+            - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
+
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+
+lexik_maintenance:                                                      # Optional. Authorized route attributes
+    driver:
+        ttl: 3600                                                                  # Optional ttl option, can be not set
+         # File driver
+        class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'                # class for file driver
+        options: {file_path: %kernel.root_dir%/cache/lock}                         # file_path is the complete path for create the file
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    encryption: ssl
+    auth_mode: login
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+fos_rest:
+    routing_loader:
+        default_format: json
+    param_fetcher_listener: true
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    user_class: App\UserBundle\Entity\User
+    firewall_name: secured_client_area

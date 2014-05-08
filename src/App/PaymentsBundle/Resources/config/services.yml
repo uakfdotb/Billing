@@ -1,0 +1,13 @@
+services:
+    payments.request_matcher:
+        class: App\PaymentsBundle\Security\PaymentsRequestMatcher
+
+    payments.payment_manager:
+        class: App\PaymentsBundle\Manager\PaymentManager
+        arguments: [ @kernel, @doctrine.orm.entity_manager ]
+
+    payments.gateway.validator:
+        class: App\PaymentsBundle\Validator\Constraints\PaymentGatewayValidator
+        arguments: [ @payments.payment_manager ]
+        tags:
+            - {name: validator.constraint_validator, alias: payments.gateway.validator }

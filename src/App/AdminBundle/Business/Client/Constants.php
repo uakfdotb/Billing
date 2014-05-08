@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\Client;class Constants{    const CLIENT_STATUS_ACTIVE = 1;    const CLIENT_STATUS_INACTIVE = 0;    public static function getClientStatus()    {        return array(            self::CLIENT_STATUS_ACTIVE   => 'Active',            self::CLIENT_STATUS_INACTIVE => 'Inactive'        );    }}

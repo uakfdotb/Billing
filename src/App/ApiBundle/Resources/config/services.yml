@@ -1,0 +1,11 @@
+parameters:
+#    app_api.example.class: App\ApiBundle\Example
+
+services:
+    api_key.security.authentication.provider:
+        class:  App\ApiBundle\Security\Authentication\Provider\ApiAuthenticationProvider
+        arguments: [ "", "@security.encoder_factory" ]
+
+    api_key.security.authentication.listener:
+        class: App\ApiBundle\Security\Firewall\ApiBasicAuthenticationListener
+        arguments: ["@security.context", "@security.authentication.manager", "", "@?logger"]

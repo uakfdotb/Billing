@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Loading Deck</title>
+
+    {% block headerScript %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appadmin/styles/kendo.common.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appadmin/styles/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appadmin/styles/bootstrap-responsive.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appadmin/styles/billr.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appadmin/styles/kendo.bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appadmin/wysiwyg/styles/default.css') }}" />
+
+        <script src="{{ asset('bundles/appadmin/lib/jquery/jquery-1.10.2.min.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/lib/jquery/jquery-migrate-1.2.1.min.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/js/kendo.all.min.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/js/cultures/kendo.culture.en-GB.min.js') }}"></script>
+
+        <!-- WYSIWYG -->
+        <script src="{{ asset('bundles/appadmin/wysiwyg/scripts/innovaeditor.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/appadmin/wysiwyg/scripts/jquery.innovaeditor.js') }}" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" type="text/javascript"></script>
+        <script src="{{ asset('bundles/appadmin/wysiwyg/scripts/common/webfont.js') }}" type="text/javascript"></script>
+
+        <!-- Color Picker -->
+        <link rel="stylesheet" media="screen" type="text/css" href="{{ asset('bundles/appadmin/colorpicker/spectrum.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/appadmin/colorpicker/spectrum.js') }}"></script>
+
+        <!-- New themes -->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,400,400italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/bundles/appadmin/themes/new/css/font-awesome.css">
+        <link rel="stylesheet" href="/bundles/appadmin/themes/new/css/lib/entypo.css">
+        <link rel="stylesheet" href="{{ asset('bundles/appadmin/themes/new/css/application.css') }}">
+    {% endblock %}
+
+    <script type="text/javascript">
+        kendo.culture("{{ config.culture }}");
+    </script>
+
+    {% block customHeaderScript %}
+
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+    <!-- TOP BAR -->
+    <div id="topbar">
+        <div class="container">
+            <div id="top-nav">
+                <a href="{{ dashboardUrl }}" class="logo pull-left">{{ 'BILLR' | trans }}</a>
+                
+                <ul class="pull-right top-right-menu">
+                    <li class="search-area">
+                        <form action="{{ searchUrl }}">
+                            <input name="s" type="search" class="smart-search" placeholder="{{ 'SMART_SEARCH' | trans }}" />
+                        </form>
+                    </li>
+                    <li class="search-button">
+                        <a href="#">
+                            <i class="entypo search"></i>
+                            Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ logoutUrl }}">
+                            <i class="entypo key"></i>
+                            {{ 'LOGOUT' | trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <ul class="drop-menu">
+                            {% for menuId, menu in mainMenu %}
+                                {% if menu['menu'] is defined %}{% set hasSubMenu = true %}{% else %}{% set hasSubMenu = false %}{% endif %}
+
+                                <li class="{% if hasSubMenu %}dropdown{% else %}nav-icon{% endif %}{% if menuId == headerMenuSelected %} active {% endif %}">
+                                    <a {% if hasSubMenu %} href="javascript:;" {% else %} href="{{ menu['href'] }}" {% endif %}>
+                                        <i class="{{ menu['class'] }}"></i>
+                                        <span>{{ menu['title'] | trans }}</span>
+                                        {% if hasSubMenu %}<b class="caret"></b>{% endif %}
+                                    </a>
+                                    {% if hasSubMenu %}
+                                        <ul class="sub-menu">
+                                            {% for cMenu in menu['menu'] %}
+                                                <li><a href="{{ cMenu['href'] }}">
+                                                        <i class="{{ cMenu['class'] }}"></i>
+                                                        {{ cMenu['title'] | trans }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="content">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+</div>
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <a href="http://www.loadingdeck.com"><img src="{{ asset('bundles/appadmin/images/logo-footer.png') }}"></a>
+            </div>
+            <div class="span6" align="right">
+                <p class="copyright">Built by <a href="http://www.loadingdeck.com/">Loading Deck</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% block footerScript %}
+    <script src="{{ asset('bundles/appadmin/themes/new/js/libs/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/appadmin/themes/new/js/Theme.js') }}"></script>
+    <script src="{{ asset('bundles/appadmin/js/billr.js') }}"></script>
+{% endblock %}
+</body>
+</html>

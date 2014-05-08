@@ -1,0 +1,32 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'ADD_PHYSICAL_ITEM' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    {% embed 'AppAdminBundle:Component:form_one_column.html.twig' with {'form': form} %}
+        {% block visibleFields %}
+            <fieldset>
+                {{ form_row(form['view'].idSupplier) }}
+                {{ form_row(form['view'].dateIn) }}
+                {{ form_row(form['view'].purchasePrice) }}
+
+                <!-- Price -->
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">{{ 'SERIAL_NUMBERS' | trans }}</label>
+
+                    <div class="controls">
+                        {{ form_widget(form['view'].serialNumbers ) }}
+                        <div>{{ 'EACH_ROW_ONE_SERIAL_NUMBER' | trans }}</div>
+                    </div>
+
+                </div>
+
+            </fieldset>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

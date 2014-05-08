@@ -1,0 +1,11 @@
+App\AdminBundle\Helper\ReCaptchaResponse::__set_state(array(
+   'is_valid' => true,
+   'error' => NULL,
+)) 03AHJ_Vut1AAH7MVTOoQ_eNo5YZx9NejVhCCx37YkNIKW5fj6Ro2LZMUX_VPDPcxifFJ12Z8WED2VBmz5mbhfyD6nwYWQc4mVbHAXamlhBmPvkWmDEJSmpmeWDL1fiDopXI8jXX9UnK4J5ltV1eX_JoaTth-bhDiYGEZm6N0NXWlIl6QojkAB0jF4 elaboration Membdu array (
+  'username' => 'me@jhadley.net',
+  'password' => '123456',
+  'recaptcha_challenge_field' => '03AHJ_Vut1AAH7MVTOoQ_eNo5YZx9NejVhCCx37YkNIKW5fj6Ro2LZMUX_VPDPcxifFJ12Z8WED2VBmz5mbhfyD6nwYWQc4mVbHAXamlhBmPvkWmDEJSmpmeWDL1fiDopXI8jXX9UnK4J5ltV1eX_JoaTth-bhDiYGEZm6N0NXWlIl6QojkAB0jF4',
+  'recaptcha_response_field' => 'elaboration Membdu',
+  'SS_MID' => 'aebc3e88-afc4-4eed-8814-3c9731280058hdmauqg8',
+  'PHPSESSID' => 'b99e34a1834f70182f0b95a4a1aba6cb',
+)

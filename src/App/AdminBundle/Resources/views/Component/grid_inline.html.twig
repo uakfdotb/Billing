@@ -1,0 +1,41 @@
+{% extends 'AppAdminBundle:Component:grid.html.twig' %}
+
+{% block dataSourceTransport %}
+    read: {
+    url: "{{ grid.readUrl }}",
+    dataType: "jsonp"
+    },
+    update: {
+    url: "{{ grid.editUrl }}",
+    dataType: "jsonp",
+    complete: function(jqXHR, textStatus) {
+    var grid = jQuery('#{{ grid.jsId | default('grid') }}').data("kendoGrid");
+    grid.dataSource.read();
+    grid.refresh();
+    }
+    },
+    destroy: {
+    url: "{{ grid.deleteUrl }}",
+    dataType: "jsonp"
+    },
+    create: {
+    url: "{{ grid.createUrl }}",
+    dataType: "jsonp",
+    complete: function(jqXHR, textStatus) {
+    var grid = jQuery('#{{ grid.jsId | default('grid') }}').data("kendoGrid");
+    grid.dataSource.read();
+    grid.refresh();
+    }
+    }
+    /*
+    parameterMap: function(options, operation) {
+    if (operation !== "read" && options.models) {
+    return {models: kendo.stringify(options.models)};
+    }
+    }
+    */
+{% endblock %}
+
+{% block extraConfig %}
+
+{% endblock %}

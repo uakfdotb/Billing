@@ -1,0 +1,33 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'INVOICE_LIST' | trans }}</h4>
+    <br />
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block header %}
+            <th>{{ 'ID' | trans }}</th>
+            <th>{{ 'SUBJECT' | trans }}</th>
+            <th>{{ 'ISSUE_DATE' | trans }}</th>
+            <th>{{ 'DUE_DATE' | trans }}</th>
+            <th>{{ 'STATUS' | trans }}</th>
+            <th>{{ 'AMOUNT' | trans }}</th>
+            <th>{{ 'PAYMENT' | trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['number'] }}</td>
+            <td>{{ row['subject'] }}</td>
+            <td>{{ row['issueDate'] }}</td>
+            <td>{{ row['dueDate'] }}</td>
+            <td>{{ row['status'] }}</td>
+            <td>{{ row['amount'] }}</td>
+            <td>{{ row['payment'] }}</td>
+            <td>
+                {% if row['status'] != 'Paid' %}
+                <a href="{{ path('app_client_invoice_show', { 'id': row['id'], 'token': row['invoiceAccessToken'] }) }}">{{ 'PAY' | trans }}</a>
+                {% endif %}
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

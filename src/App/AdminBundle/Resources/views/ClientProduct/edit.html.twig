@@ -1,0 +1,39 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'EDIT_CLIENT_PRODUCT' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    {% if app.request.get('message') %}
+        <div class="alert">{{ app.request.get('message') }}</div>
+    {% endif %}
+    <div class="row-fluid">
+        <div class="span6">
+            <h4>Summary</h4>
+            Client Product ID: {{ cp.id }}<br />
+            Paid: {{ cp.term }}<br />
+            IP (if applicable): {{ cp.ip }}<br />
+            Username (if applicable): {{ cp.user }}<br />
+            Password (if applicable): {{ cp.pass }}<br />
+            Server (if applicable): {{ cp.server }}<br />
+            Cost: {{ cp.cost }}<br />
+            Next Due: {{ cp.due|date('d/m/Y') }}<br />
+            Product Name: {{ cp.product }}<br />
+        </div>
+        <div class="span6">
+            <form method="post" action="{{ path('app_admin_client_product_module', {'idCP': cp.id}) }}">
+                {# Begin Controls #}
+                <div class="form-actions">
+                    <button type="submit" name="submit" value="create" class="btn btn-primary btn-large" style="width: 175px">Module Create</button>
+                    <button type="submit" name="submit" value="suspend" class="btn btn-large" style="width: 175px">Module Suspend</button>
+                    <button type="submit" name="submit" value="terminate" class="btn btn-large" style="width: 175px">Module Delete</button>
+                </div>
+                {# End Controls #}
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'REPORT' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+            <a href="?report=accountant"<strong>Full Report</strong></a><br />
+            This report generates a Microsoft Excel (XLS) file containing all clients, invoices, suppliers and expenses.
+        </div>
+    </div>
+{% endblock %}

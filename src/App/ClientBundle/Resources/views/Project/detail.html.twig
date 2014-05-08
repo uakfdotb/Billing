@@ -1,0 +1,68 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h3>{{ 'VIEW_PROJECT' | trans }}: {{ project.name }}</h4>
+    <br />
+    <h5>{{ 'TRACKING' | trans }}</h5>
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': tracking_grid} %}
+        {% block header %}
+            <th>{{ 'START' | trans }}</th>
+            <th>{{ 'STOP' | trans }}</th>
+            <th>{{ 'STAFF' | trans }}</th>
+            <th>{{ 'HOURLY' | trans }}</th>
+            <th>{{ 'INVOICED' | trans }}</th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['start'] }}</td>
+            <td>{{ row['stop'] }}</td>
+            <td>{{ row['staff'] }}</td>
+            <td>{{ row['hourly'] }}</td>
+            <td>{% if row['invoiced'] %}{{ 'YES' | trans }}{% endif %}</td>
+        {% endblock %}
+    {% endembed %}
+
+    <br />
+    <h5>Task</h5>
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': task_grid} %}
+        {% block header %}
+            <th>{{ 'DATETIME' | trans }}</th>
+            <th>{{ 'SUBJECT' | trans }}</th>
+            <th>{{ 'UNIT' | trans }}</th>
+            <th>{{ 'QUANTITY' | trans }}</th>
+            <th>{{ 'UNIT_PRICE' | trans }}</th>
+            <th>{{ 'STATUS' | trans }}</th>
+            <th>{{ 'BILLABLE' | trans }}</th>
+            <th>{{ 'INVOICED' | trans }}</th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['timestamp'] }}</td>
+            <td>{{ row['subject'] }}</td>
+            <td>{{ row['unit'] }}</td>
+            <td>{{ row['quantity'] }}</td>
+            <td>{{ row['unitPrice'] }}</td>
+            <td>{{ row['status'] }}</td>
+            <td>{% if row['isBillable'] %}{{ 'YES' | trans }}{% endif %}</td>
+            <td>{% if row['invoiced'] %}{{ 'YES' | trans }}{% endif %}</td>
+        {% endblock %}
+    {% endembed %}
+
+    <br />
+    <h5>Attachments</h5>
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': attachment_grid} %}
+        {% block header %}
+            <th>{{ 'NAME' | trans }}</th>
+            <th>{{ 'DESCRIPTION' | trans }}</th>
+            <th>{{ 'TIMESTAMP' | trans }}</th>
+            <th>{{ 'FILES' | trans }}</th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['name'] }}</td>
+            <td>{{ row['description'] }}</td>
+            <td>{{ row['timestamp'] }}</td>
+            <td>{{ row['attachments'] | raw }}</td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

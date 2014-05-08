@@ -1,0 +1,88 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'EDIT_ORDER' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    {% if app.request.get('message') %}
+        <div class="alert">{{ app.request.get('message') }}</div>
+    {% endif %}
+    <div class="row-fluid">
+        <div class="span4">
+            <h4>Product</h4>
+            Domain: {{ product.domain }}<br />
+            Username: {{ username }}<br />
+            Password: {{ password }}<br />
+            IP Address: {{ product.ipAddress }}<br />
+        </div>
+        <div class="span4">
+            <h4>Invoice</h4>
+            Number: {{ invoice.number }}<br />
+            Status: {{ invoiceStatus }}<br />
+            Total: {{ invoice.totalAmount }}<br />
+            Payments: {{ invoice.totalPayment }}<br />
+        </div>
+        <div class="span4">
+            <h4>Order</h4>
+            Timestamp: {{ order.timestamp|date(config.dateFormat) }}<br />
+            Status: {{ orderStatus }}<br />
+            Number: {{ order.orderNumber }}<br />
+            IP Address: {{ order.ipAddress }}<br />
+        </div>
+    </div>
+
+    <form method="post" action="{{ path('app_admin_order_change_status', {'idOrder': order.id}) }}">
+        {# Begin Controls #}
+        <div class="form-actions">
+            <div class="form-horizontal">
+                <label for="moduleCreate">Create product via automation module</label>
+                <input type="checkbox" id="moduleCreate" name="moduleCreate" checked />
+                <label for="welcomeEmail">Send product welcome e-mail to client</label>
+                <input type="checkbox" id="welcomeEmail" name="welcomeEmail" checked />
+                <label for="username">Module username</label>
+                <input type="text" name="username" value="{{ username }}" id="username" />
+                <label for="username">Module password</label>
+                <input type="text" name="username" value="{{ password }}" id="password" />
+            </div>
+
+            <button type="submit" name="submit" value="accept" class="btn btn-primary btn-large" style="width: 175px">Accept Order</button>
+            <button type="submit" name="submit" value="pending" class="btn btn-large" style="width: 175px">Set Pending</button>
+            <button type="submit" name="submit" value="fraud" class="btn btn-large" style="width: 175px">Set Fraud</button>
+            <button type="submit" name="submit" value="cancel" class="btn btn-large" style="width: 175px">Cancel Order</button>
+            <button type="submit" name="submit" value="delete" class="btn btn-large" style="width: 175px">Delete Order</button>
+        </div>
+        {# End Controls #}
+    </form>
+    <!-- Maxmind -->
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">{{ 'AUTOMATIC_FRAUD_SCORING' | trans }}</label>
+
+        <div class="controls">
+            <table class="table table-bordered">
+                <tbody>
+                {% set i = -1 %}
+                {% for k, v in maxmind %}
+                    {% if v is not empty %}
+                    {% set i = i + 1 %}
+                    {% if i % 3 == 0 %}
+                    <tr>
+                        <td><strong>{{ k }}</strong></td>
+                        <td>{{ v }}</td>
+                    {% else %}
+                        <td><strong>{{ k }}</strong></td>
+                        <td>{{ v }}</td>
+                    {% endif %}
+                    {% if i % 3 == 2 %}
+                    </tr>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

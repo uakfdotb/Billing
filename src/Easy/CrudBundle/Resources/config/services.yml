@@ -1,0 +1,4 @@
+services:
+    easy_crud_grid_ajaxsource:
+        class: Easy\CrudBundle\Grid\DataTableAjaxSourceHandler
+        arguments: [@service_container]

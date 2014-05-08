@@ -1,0 +1,99 @@
+## ORDER FORM
+web_client_order:
+    pattern:  /order
+    defaults: { _controller: AppClientBundle:Web:order }
+web_client_order_login:
+    pattern:  /order_login
+    defaults: { _controller: AppClientBundle:Web:orderLogin }
+
+## PAYMENT GATEWAY RETURNS
+app_admin_return:
+    pattern: /return/{gateway}
+    defaults: { _controller: AppClientBundle:Return:return }
+
+## DEFAULT
+app_client_default:
+    pattern:  /default/
+    defaults: { _controller: AppClientBundle:Default:index }
+
+## DASHBOARD
+app_client_dashboard_list:
+    pattern:  /dashboard/list
+    defaults: { _controller: AppClientBundle:Dashboard:list }
+app_client_dashboard_list2:
+    pattern:  /
+    defaults: { _controller: AppClientBundle:Dashboard:list }
+
+## INVOICE
+app_client_invoice_list:
+    pattern:  /invoice/
+    defaults: { _controller: AppClientBundle:Invoice:list }
+app_client_invoice_view:
+    pattern:  /invoice/view
+    defaults: { _controller: AppClientBundle:Invoice:view }
+app_client_invoice_gateway:
+    pattern:  /invoice/gateway
+    defaults: { _controller: AppClientBundle:Invoice:gateway }
+app_client_invoice_show:
+    pattern:  /invoice/show/{id}/{token}
+    defaults: { _controller: AppClientBundle:Invoice:show }
+    requirements:
+        _scheme:  https
+app_client_invoice_pay:
+    pattern:  /invoice/pay/{id}/{token}/{gateway}
+    defaults: { _controller: AppClientBundle:Invoice:pay }
+    requirements:
+        _scheme:  https
+
+## ESTIMATE
+app_client_estimate_list:
+    pattern:  /estimate/
+    defaults: { _controller: AppClientBundle:Estimate:list }
+## ESTIMATE
+app_client_estimate_view:
+    pattern:  /estimate/view
+    defaults: { _controller: AppClientBundle:Estimate:view }
+
+## PRODUCT
+app_client_product_list:
+    pattern:  /product/
+    defaults: { _controller: AppClientBundle:Product:list }
+app_client_product_view:
+    pattern:  /product/view
+    defaults: { _controller: AppClientBundle:Product:view }
+app_client_product_control:
+    pattern:  /product/control
+    defaults: { _controller: AppClientBundle:Product:control }
+app_client_product_hook:
+    pattern:  /product/hook
+    defaults: { _controller: AppClientBundle:Product:hook }
+
+## PROFILE
+app_client_profile_edit:
+    pattern:  /profile/edit
+    defaults: { _controller: AppClientBundle:Profile:edit }
+
+## CONTACT
+app_client_contact_list:
+    pattern:  /contact/list
+    defaults: { _controller: AppClientBundle:Contact:list }
+app_client_contact_read:
+    pattern:  /contact/read
+    defaults: { _controller: AppClientBundle:Contact:read }
+app_client_contact_create:
+    pattern:  /contact/create
+    defaults: { _controller: AppClientBundle:Contact:create }
+app_client_contact_edit:
+    pattern:  /contact/edit
+    defaults: { _controller: AppClientBundle:Contact:edit }
+app_client_contact_delete:
+    pattern:  /contact/delete
+    defaults: { _controller: AppClientBundle:Contact:delete }
+
+## PROJECT
+app_client_project_list:
+    pattern:  /project/list
+    defaults: { _controller: AppClientBundle:Project:list }
+app_client_project_detail:
+    pattern:  /project/detail
+    defaults: { _controller: AppClientBundle:Project:detail }

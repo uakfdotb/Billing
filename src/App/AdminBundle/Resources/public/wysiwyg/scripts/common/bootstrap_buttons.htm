@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        .item {padding:15px 30px 30px;border-bottom:#e7e7e7 1px solid;
+            -webkit-box-shadow:0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow:0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 0 40px rgba(0, 0, 0, 0.1) inset;}
+        body {overflow:hidden}
+    </style>
+    <script src="jquery-1.7.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function insertSnippet(id) {
+            parent.oUtil.obj.insertHTML(document.getElementById(id).innerHTML);
+        }
+        function insertButton(classname) {
+            parent.oUtil.obj.insertHTML('<a href="#" class="' + classname + '" title="">Action</a> &nbsp;');
+        }
+        function setPreview() {
+            var tmp = $('input:radio[name=rdoButtonType]:checked').val();
+            var tmp2 = $('input:radio[name=rdoButtonSize]:checked').val();
+            $('#divSnippet a').attr('class', tmp + ' ' + tmp2);
+            $('#divSnippet a').html($('#inpText').val());
+            $('#divSnippet a').attr('href', $('#inpUrl').val());
+        }
+    </script>
+</head>
+<body>
+
+<div class="item">
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Buttons (Links)</h4> <br />
+        <p>Select Type:</p>
+        <p class="butttontypes form-inline">    
+            <label for="rdoButtonType1"><input id="rdoButtonType1" name="rdoButtonType" type="radio" value="btn btn-primary" checked="checked" /> <a class="btn btn-primary" href="javascript:$('#rdoButtonType1').click();setPreview()">Primary</a></label> &nbsp; 
+            <label for="rdoButtonType2"><input id="rdoButtonType2" name="rdoButtonType" type="radio" value="btn btn-default" /> <a class="btn btn-default" href="javascript:$('#rdoButtonType2').click();setPreview()">Default</a></label> &nbsp; 
+            <label for="rdoButtonType3"><input id="rdoButtonType3" name="rdoButtonType" type="radio" value="btn btn-info" /> <a class="btn btn-info" href="javascript:$('#rdoButtonType3').click();setPreview()">Info</a></label> &nbsp;   
+            <label for="rdoButtonType4"><input id="rdoButtonType4" name="rdoButtonType" type="radio" value="btn btn-success" /> <a class="btn btn-success" href="javascript:$('#rdoButtonType4').click();setPreview()">Success</a></label> &nbsp;  
+            <label for="rdoButtonType5"><input id="rdoButtonType5" name="rdoButtonType" type="radio" value="btn btn-warning" /> <a class="btn btn-warning" href="javascript:$('#rdoButtonType5').click();setPreview()">Warning</a></label> &nbsp;    
+            <label for="rdoButtonType6"><input id="rdoButtonType6" name="rdoButtonType" type="radio" value="btn btn-danger" /> <a class="btn btn-danger" href="javascript:$('#rdoButtonType6').click();setPreview()">Danger</a></label> &nbsp;  
+            <label for="rdoButtonType7"><input id="rdoButtonType7" name="rdoButtonType" type="radio" value="btn btn-link" /> <a class="btn btn-link" href="javascript:$('#rdoButtonType7').click();setPreview()">Link</a></label> &nbsp; 
+        </p>
+        <p>Select Size:</p>
+        <p class="form-inline">  
+            <label for="rdoButtonSize1"><input id="rdoButtonSize1" name="rdoButtonSize" type="radio" value="btn-lg" onclick="setPreview()" /> Large</label> &nbsp;   
+            <label for="rdoButtonSize2"><input id="rdoButtonSize2" name="rdoButtonSize" type="radio" value="" onclick="setPreview()" checked="checked" /> Default</label> &nbsp; 
+            <label for="rdoButtonSize3"><input id="rdoButtonSize3" name="rdoButtonSize" type="radio" value="btn-sm" onclick="setPreview()" /> Small</label> &nbsp; 
+            <label for="rdoButtonSize4"><input id="rdoButtonSize4" name="rdoButtonSize" type="radio" value="btn-xs" onclick="setPreview()" /> Mini</label> &nbsp; 
+        </p>
+        <div class="row">
+            <div class="col-lg-6">
+                Preview:<br />
+                <div id="divSnippet" class="well" style="text-align:center;padding:25px;height:85px">
+                <a class="btn btn-primary" href="javascript:$('#rdoButtonType1').click();">Buy Now</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label for="inpUrl">URL: </label><input id="inpUrl" type="text" class="form-control" value="http://" onkeyup="setPreview()" />
+                <br />
+                <label for="inpText">Button Text: </label><input id="inpText" type="text" class="form-control" value="Buy Now" onkeyup="setPreview()" />
+                <br />
+            </div>
+        </div>
+
+        <a class="btn btn-default" href="javascript:insertSnippet('divSnippet')">Insert</a>
+
+    </div>
+</div>
+</div>
+
+</body>
+</html>

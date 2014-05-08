@@ -1,0 +1,39 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <link rel='stylesheet' href='{{ asset('payments/css/style.css') }}'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+    <div class="payment-wrapper">
+        <header class="invoice-header clearfix">
+            <h3>Below is the total cost of this transaction.</h3>
+            <h4>Invoice #{{ invoice.number }}</h4>
+
+            <div class="total">
+                <p><strong>Total:</strong> <span>{{ sumAmountDue }}</span></p>
+            </div>
+
+            <div class="payment-select">
+                <p><strong>Select your payment method:</strong></p>
+
+                <form action="" method="post" accept-charset="utf-8">
+                <ul>
+                    {% for paymentGateway in paymentsGateways %}
+                        <li>
+                            <input type="radio" name="method" id="method_{{ loop.index }}" value="{{ paymentGateway.id }}">
+                            <a href="javascript:set_radio('method_{{ loop.index }}');"><img src="{{ asset('payments/img/gateways/'~ paymentGateway.name ~'.png') }}"></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <hr>
+
+                <input type="submit" name="" value="Continue" class="submit-button" disabled>
+
+                </form>
+            </div>
+        </header>
+    </div>
+
+    <script src='{{ asset('payments/js/jquery-1.8.3.min.js') }}'></script>
+    <script src='{{ asset('payments/js/app.js') }}'></script>
+{% endblock %}

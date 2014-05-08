@@ -1,0 +1,1 @@
+<?phpnamespace App\ClientBundle\Business\TicketItem;class CreateModel{    public $subject;    public $status;    public $body;    public $attachments;}

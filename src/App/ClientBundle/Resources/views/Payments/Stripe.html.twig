@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel='stylesheet' href='{{ asset('payments/css/normalize.css') }}'>
+    <link rel='stylesheet' href='{{ asset('payments/css/style.css') }}'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+
+    <title>Invoice Payment</title>
+    <style type="text/css">
+        ul {
+            padding: 0 0 0 10px;
+        }
+        li {
+            list-style: none;
+            list-style-type: none;
+        }
+        @media screen and (max-width: 450px) {
+            .wrapper {
+                width: 90%;
+                box-sizing: border-box;
+                position: static;
+                margin: 0 auto;
+                margin-top: 5px;
+            }
+        }
+    </style>
+
+    <script src='{{ asset('payments/js/jquery-1.8.3.min.js') }}'></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+        // This identifies your website in the createToken call below
+        Stripe.setPublishableKey('{{ publishable }}');
+
+        var stripeResponseHandler = function(status, response) {
+            var $form = $('#payment-form');
+
+            if (response.error) {
+                // Show the errors on the form
+                $form.find('.payment-errors').text(response.error.message);
+                $form.find('button').prop('disabled', false);
+            } else {
+                // token contains id, last4, and card type
+                var token = response.id;
+                // Insert the token into the form so it gets submitted to the server
+                $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+                // and re-submit
+                $form.get(0).submit();
+            }
+        };
+
+        jQuery(function($) {
+            $('#payment-form').submit(function(e) {
+                var $form = $(this);
+
+                // Disable the submit button to prevent repeated clicks
+                $form.find('button').prop('disabled', true);
+
+                Stripe.createToken($form, stripeResponseHandler);
+
+                // Prevent the form from submitting with the default action
+                return false;
+            });
+        });
+    </script>
+</head>
+
+<body>
+{% if config.clientHeader is defined %}{{ config.clientHeader|raw }}{% endif %}
+<div class="payment-wrapper">
+    <form id="payment-form" class="clearfix" action="" method="POST">
+        {% if logo %}<div class="logo"><img src="{{ logo }}" /></div>{% endif %}
+        <span class="payment-errors"></span>
+        <header class="invoice-header">
+            <div class="details clearfix">
+                <p class="pull-left"><strong>Amount: </strong>{{ total }} {{ currency_code }}</p>
+                <p class="pull-right"><strong>Invoice No.:</strong> {{ invoice.number }}</p>
+
+                <div class="clearfix"></div>
+
+                <p class="paying-with"><strong>Paying with:</strong> {{ gateway.name }}</p>
+            </div>
+        </header>
+
+        <div class="credit">
+            <p class="description pull-left">Credit Card</p>
+            <p class="illustration pull-right"><img src="{{ asset('payments/img/gateways/CreditCard.png') }}"></p>
+
+            <div class="clearfix"></div>
+
+            <div class="number">
+                <input type="text" maxlength="20" required="required" data-stripe="number" />
+            </div>
+
+            <div class="valid-date pull-left half">
+                <label>Good thru</label>
+                <input type="text" placeholder="MM" class="month" maxlength="2" required="required" data-stripe="exp-month" />
+                <input type="text" placeholder="YYYY" class="year" maxlength="4" required="required" data-stripe="exp-year" />
+            </div>
+
+            <div class="code pull-right half">
+                <label>CVV Code</label>
+                <input type="text" placeholder="CVC" class="code-number" maxlength="4" required="required" data-stripe="cvc" />
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <button class="submit-button" style="margin-top: 25px;" type="submit">Pay</button>
+    </form>
+</div>
+{% if config.clientFooter is defined %}{{ config.clientFooter|raw }}{% endif %}
+<script src='{{ asset('payments/js/app.js') }}'></script>
+
+</body>
+
+</html>

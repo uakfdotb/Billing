@@ -1,0 +1,11 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+    {% block topMessage %}
+
+    {% endblock %}
+    {% embed 'AppAdminBundle:Component:form_one_column.html.twig' with {'form': form} %}
+    {% endembed %}
+{% endblock %}

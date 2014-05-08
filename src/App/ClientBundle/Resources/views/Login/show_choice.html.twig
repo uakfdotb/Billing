@@ -1,0 +1,15 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block headerBar %}
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block content %}
+    <h4>{{ 'PLEASE' | trans }}
+        <a href="{{ path('app_client_login_show') }}">{{ 'LOGIN' | trans }}</a> {{ 'OR' | trans }}
+        <a href="{{ path('app_client_client_create') }}">{{ 'REGISTER' | trans }}</a> {{ 'TO_PLACE_AN_ORDER' | trans }}
+    </h4>
+
+{% endblock %}

@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{ 'CLIENT_AREA' | trans }}</title>
+
+    <link href="{{ asset('bundles/appclient/styles/reset.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/appclient/styles/invoice.css') }}" rel="stylesheet">
+
+</head>
+<body>
+<!-- begin markup -->
+
+<div id="invoice">
+
+
+    <div class="this-is">
+        <strong>{{ 'ESTIMATE' | trans }}</strong>
+    </div>
+    <!-- invoice headline -->
+
+
+    <header id="header">
+        <div class="invoice-intro">
+            <h1>{{ config.businessName }}</h1>
+            <!-- You may enter a strapline here -->
+        </div>
+
+        <dl class="invoice-meta">
+            <dt class="invoice-number">{{ 'ESTIMATE' | trans }} #</dt>
+            <dd>{{ estimate.number }}</dd>
+            <dt class="invoice-date">{{ 'ISSUE_DATE' | trans }}</dt>
+            <dd>{{ estimate_issue_date }}</dd>
+            <dt class="invoice-due">{{ 'DUE_DATE' | trans }}</dt>
+            <dd>{{ estimate_due_date }}</dd>
+            <dt class="invoice-due">{{ 'VAT_NUMBER' | trans }}</dt>
+            <dd>{{ client.vatNumber }}</dd>
+        </dl>
+    </header>
+    <!-- e: invoice header -->
+
+
+    <section id="parties">
+
+        <div class="invoice-to">
+            <h2>{{ 'ESTIMATE_TO' | trans }}:</h2>
+
+            <div id="hcard-Hiram-Roth" class="vcard">
+                <div class="fn">{{ client.firstname }} {{ client.lastname }}</div>
+                <div class="org">{{ client.company }}</div>
+
+                <div class="adr">
+                    <div class="street-address">
+                        {{ client.address1 }}<br />
+                        {{ client.address2 }}
+                    </div>
+                    <span class="locality">{{ client.city }}, {{ client.state }}</span>
+                    <span class="country-name">{{ client.idCountry }}</span>
+                </div>
+
+                <div class="tel">{{ client.phone }}</div>
+            </div>
+            <!-- e: vcard -->
+        </div>
+        <!-- e invoice-to -->
+
+
+        <div class="invoice-from">
+            <h2>{{ 'ESTIMATE_FROM' | trans }}:</h2>
+
+            <div id="hcard-Admiral-Valdore" class="vcard">
+                <div class="org">{{ config.businessName }}</div>
+                <a class="email" href="{{ config.defaultEmail }}">{{ config.defaultEmail }}</a>
+
+                <div class="adr">
+                    <div class="street-address">{{ config.businessAddress }}</div>
+                </div>
+            </div>
+            <!-- e: vcard -->
+        </div>
+        <!-- e invoice-from -->
+
+
+        <div class="invoice-status">
+            <h3>{{ 'ESTIMATE_STATUS' | trans }}</h3>
+            <strong>{{ 'ESTIMATE_IS' | trans }} <em>{{ status | trans }}</em></strong>
+        </div>
+        <!-- e: invoice-status -->
+    </section>
+    <!-- e: invoice partis -->
+
+
+    <section class="invoice-financials">
+
+        <div class="invoice-items">
+            <table>
+                <caption>{{ 'YOUR_ESTIMATE' | trans }}</caption>
+                <thead>
+                <tr>
+                    <th>{{ 'ITEM' | trans }} &amp; {{ 'DESCRIPTION' | trans }}</th>
+                    <th>{{ 'QUANTITY' | trans }}</th>
+                    <th>{{ 'PRICE' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in estimateItems %}
+                    <tr>
+                        <th>{{ item['type'] }} - {{ item['description'] }}</th>
+                        <td>{{ item['quantity'] }}</td>
+                        <td>{{ item['unitPrice'] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- e: invoice items -->
+
+
+        <div class="invoice-totals">
+            <table>
+                <caption>{{ 'TOTAL' | trans }}:</caption>
+                <tbody>
+                <tr>
+                    <th>{{ 'SUBTOTAL' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumSubTotal }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'DISCOUNT' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumDiscount }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'TAX' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumTax }}</td>
+                </tr>
+                <tr>
+                    <th><strong>{{ 'GRAND_TOTAL' | trans }}:</strong></th>
+                    <td></td>
+                    <td><strong>{{ sumAmount }}</strong></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- e: invoice totals -->
+
+
+        <div class="invoice-notes">
+            <h6>{{ 'NOTES' | trans }} &amp; {{ 'INFORMATION' | trans }}:</h6>
+
+            <p>{{ estimate.notes }}</p>
+        </div>
+        <!-- e: invoice-notes -->
+
+    </section>
+    <!-- e: invoice financials -->
+
+
+    <footer id="footer">
+        <p>
+            <a href="{{ printPdfUrl }}">{{ 'DOWNLOAD_PDF' | trans }}</a>
+        </p>
+    </footer>
+
+
+</div>
+<!-- e: invoice -->
+
+
+</body>
+</html>

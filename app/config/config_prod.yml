@@ -1,0 +1,35 @@
+imports:
+    - { resource: config.yml }
+twig:
+    globals:
+        applicationUrl: http://localhost/symfony2/web/app_dev.php/
+
+doctrine:
+    dbal:
+        default_connection: app_connection
+        connections:
+            app_connection:
+                driver:   pdo_mysql
+                host:     localhost
+                port:     3306
+                dbname:
+                user:     root
+                password:
+                charset:  UTF8
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: error
+
+
+swiftmailer:
+    transport: %mailer_transport%
+    encryption: ssl
+    auth_mode: login
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }

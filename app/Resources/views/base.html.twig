@@ -1,0 +1,12 @@
+<html>
+<head>
+    <title>{{ 'CLIENT_AREA' | trans }}</title>
+    <link rel="stylesheet" href="{{ asset('bundles/appclient/styles/bootstrap.css') }}">
+    {% block javascripts %}{% endblock javascripts %}
+    {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body>
+{% block content %}{% endblock content %}
+</body>
+</html>

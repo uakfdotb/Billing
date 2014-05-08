@@ -1,0 +1,13 @@
+<ul class="breadcrumb pull-left">
+    {% for item in breadscrum %}
+        {% if loop.last %}
+            <li class="active">{{ item['title'] | trans }}</li>
+        {% else %}
+            <li>
+                <a href="{{ item['href'] }}">{{ item['title'] | trans }}</a>
+                <span class="divider">/</span>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<div class="clearfix"></div>

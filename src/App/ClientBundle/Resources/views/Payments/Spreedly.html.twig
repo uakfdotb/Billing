@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel='stylesheet' href='{{ asset('payments/css/normalize.css') }}'>
+    <link rel='stylesheet' href='{{ asset('payments/css/style.css') }}'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+
+    <title>Invoice Payment</title>
+    <style type="text/css">
+        ul {
+            padding: 0 0 0 10px;
+        }
+        li {
+            list-style: none;
+            list-style-type: none;
+        }
+        @media screen and (max-width: 450px) {
+            .wrapper {
+                width: 90%;
+                box-sizing: border-box;
+                position: static;
+                margin: 0 auto;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+{% if config.clientHeader is defined %}{{ config.clientHeader|raw }}{% endif %}
+<div class="payment-wrapper">
+    <form id="credit-card-form" class="clearfix" action="https://core.spreedly.com/v1/payment_methods" method="POST">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <input type="hidden" name="redirect_url" value="{{ redirect_url }}" />
+        <input type="hidden" name="environment_key" value="{{ environment_key }}" />
+        {% if logo %}<div class="logo"><img src="{{ logo }}" /></div>{% endif %}
+        <header class="invoice-header">
+            <div class="details clearfix">
+                <p class="pull-left"><strong>Amount: </strong> {{ total }}</p>
+                <p class="pull-right"><strong>Invoice No.:</strong> {{ invoice.number }}</p>
+
+                <div class="clearfix"></div>
+
+                <p class="paying-with"><strong>Paying with:</strong> {{ gateway.name }}</p>
+            </div>
+        </header>
+        {% if errors|length %}
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="credit">
+            <p class="description pull-left">Credit Card</p>
+            <p class="illustration pull-right"><img src="{{ asset('payments/img/gateways/CreditCard.png') }}"></p>
+
+            <div class="clearfix"></div>
+
+            <div class="number">
+                {{ form_widget(form.number, {'attr': {'placeholder': 'Credit Card'}}) }}
+                {{ form_errors(form.number) }}
+            </div>
+
+            <div class="valid-date pull-left half">
+                <label>Good thru</label>
+                {{ form_widget(form.month, {
+                attr: {
+                placeholder: 'MM',
+                class: 'month',
+                maxlength: 2,
+                required: 'required'
+                }
+                }) }}
+                {{ form_widget(form.year, {
+                attr: {
+                placeholder: 'YYYY',
+                class: 'year',
+                maxlength: 4,
+                required: 'required'
+                }
+                }) }}
+                {{ form_errors(form.year) }}
+            </div>
+
+            <div class="code pull-right half">
+                <label>CVV Code</label>
+                {{ form_widget(form.verification_value, {'attr': {'placeholder': 'Code No.', 'class': 'code-number'}}) }}
+                {{ form_errors(form.verification_value) }}
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="name pull-left half">
+                {{ form_widget(form.first_name, {'attr': {'placeholder': 'First Name'}}) }}
+                {{ form_errors(form.first_name) }}
+            </div>
+
+            <div class="name pull-right half">
+                {{ form_widget(form.last_name, {'attr': {'placeholder': 'Last Name'}}) }}
+                {{ form_errors(form.last_name) }}
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <input class="submit-button" style="margin-top: 25px;" type="submit" value="Continue">
+    </form>
+</div>
+{% if config.clientFooter is defined %}{{ config.clientFooter|raw }}{% endif %}
+<script src='{{ asset('payments/js/jquery-1.8.3.min.js') }}'></script>
+<script src='{{ asset('payments/js/app.js') }}'></script>
+
+</body>
+
+</html>

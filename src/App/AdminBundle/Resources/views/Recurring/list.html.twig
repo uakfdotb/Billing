@@ -1,0 +1,132 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block gridButtons %}
+            {{ parent() }}
+        {% endblock %}
+
+        {% block initializeGrid %}
+            var scheduleDs;
+            var clientDs;
+
+            jQuery.when(
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/recurring_schedule',
+            success: function(response) {
+            scheduleDs = response["data"];
+            }
+            }),
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/client_list',
+            success: function(response) {
+            clientDs = response["data"];
+            }
+            })
+            ).done(function(a1, a2){
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            });
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            subject: { editable: true, nullable: false },
+            nextDue: { editable: true, nullable: false, type: "date", format: "yyyy-MM-dd" },
+            idSchedule: { editable: true, nullable: false},
+            amount: { editable: false, nullable: false, type: "number" },
+            idClient: { editable: true, nullable: false }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 95, template: '\
+            <a href="{{ recurringItemListUrl }}?id=#=id#">#=id#</a>' },
+            { field:"idClient", title:"{{ 'CLIENT' | trans }}", editor: clientEditor, width: 200,
+            filterable: {
+            ui: clientFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"subject", title:"{{ 'SUBJECT' | trans }}", width: 250 },
+            { field:"amount", title:"{{ 'AMOUNT' | trans }}", width: 90, template: "{{ currencyCode }}#= amount.toFixed(2)#", filterable: false },
+            { field:"idSchedule", title:"{{ 'SCHEDULE' | trans }}", width: 90, editor: schedulePicker,
+            filterable: {
+            ui: scheduleFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"nextDue", title:"{{ 'NEXT_RECURS' | trans }}", width: 90, editor: datePicker, format: "{0:dd/MM/yyyy}", filterable: false },
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100  },
+        {% endblock %}
+
+        {% block extraScript %}
+
+            function clientFilter(element) {
+            element.kendoDropDownList({
+            dataSource: clientDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECTED_VALUE' | trans }} --"
+            });
+            }
+            function scheduleFilter(element) {
+            element.kendoDropDownList({
+            dataSource: scheduleDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECTED_VALUE' | trans }} --"
+            });
+            }
+
+            function clientEditor(container, options) {
+
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoAutoComplete({
+            minLength: 3,
+            filter: 'contains',
+            dataSource: {
+            type: "json",
+            transport: {
+            read: "http://dev.sysadmin.co.uk/old/admin/crud/general/clients.json.php"
+            },
+            schema: {
+            data: "data",
+            }
+            }
+            });
+            }
+            function datePicker(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDatePicker({
+
+            });
+            }
+            function schedulePicker(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDropDownList({
+            dataSource: {
+            transport: {
+            read: "http://dev.sysadmin.co.uk/old/admin/crud/general/schedule.json.php"
+            },
+            schema: {
+            data: "data",
+            }
+            }
+            });
+            }
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

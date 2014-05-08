@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ 'CLIENT_AREA' | trans }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ asset('bundles/appclient/styles/bootstrap.css') }}" rel="stylesheet">
+    <script src="{{ asset('bundles/appclient/js/jquery-1.8.2.min.js') }}"></script>
+    <script src="{{ asset('bundles/appclient/js/bootstrap.min.js') }}"></script>
+    {% block extraHead %}
+    {% endblock %}
+</head>
+
+<body>
+{% if config.clientHeader is defined %}{{ config.clientHeader|raw }}{% endif %}
+<div class="container">
+    {% block menu %}
+        <div class="row">
+            <ul class="nav nav-tabs">
+                {% for menuId, menu in mainMenu %}
+                    <li {% if menuId == headerMenuSelected %} class="active" {% endif %}>
+                        <a href="{{ menu['href'] }}">{{ menu['title'] | trans }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    <br />
+</div>
+
+{% block footerScript %}
+
+{% endblock %}
+{% if config.clientFooter is defined %}{{ config.clientFooter|raw }}{% endif %}
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'CORE_SETTINGS' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% block listPageHeader %}
+        <div class="main_cont pie">
+            {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+            {% endembed %}
+
+            {% embed 'AppAdminBundle:Component:form_basic.html.twig' with {'form': form } %}
+                {% block content %}
+                    {% form_theme form['view'] 'AppAdminBundle:Setting:form_config_theme.html.twig' %}
+                    {{ block('hiddenFields') }}
+                    <div class="row-fluid">
+                        <div id="settings-wizard">
+                            <h3>{{ 'GENERAL' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].businessName ) }}
+                                    {{ form_row(form['view'].defaultEmail ) }}
+                                    {{ form_row(form['view'].webSite ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].logo ) }}
+                                    {{ form_row(form['view'].isEnabledDropIn ) }}
+                                </div>
+                            </section>
+
+                            <h3>{{ 'LOCALE' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].culture ) }}
+                                    {{ form_row(form['view'].dateFormat ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].billingCurrency ) }}    
+                                </div>
+                            </section>
+
+                            <h3>{{ 'PAYMENTS' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].businessAddress ) }}
+                                    {{ form_row(form['view'].invoiceNotes ) }}
+                                    {{ form_row(form['view'].paymentSuccessEmail ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].paymentFailureEmail ) }}
+                                    {{ form_row(form['view'].proformaInvoicePrefix ) }}
+                                    {{ form_row(form['view'].isProformaInvoiceEnabled ) }}
+                                    {{ form_row(form['view'].suspendAfter ) }}
+                                    {{ form_row(form['view'].terminateAfter ) }}
+                                </div>
+                            </section>
+
+                            <h3>{{ 'DEFAULTS' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].idDefaultWorkType ) }}
+                                    {{ form_row(form['view'].invoicePrefix ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].estimatePrefix ) }}
+                                    {{ form_row(form['view'].defaultTax ) }}
+                                </div>
+                            </section>
+
+                            <h3>{{ 'INVOICES' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].generateInvoice ) }}
+                                    {{ form_row(form['view'].sendOverdue ) }}
+                                    {{ form_row(form['view'].sendReminder ) }}
+                                    {{ form_row(form['view'].dailySummary ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].reminderEmail ) }}
+                                    {{ form_row(form['view'].invoiceEmail ) }}
+                                    {{ form_row(form['view'].overdueEmail ) }}
+                                </div>
+                            </section>
+
+                            <h3>{{ 'CLIENT_AREA' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].clientMenus ) }}
+                                    {{ form_row(form['view'].clientHeader ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].clientFooter ) }}
+                                </div>
+                            </section>
+
+                            <h3>{{ 'ORDER_FORM' | trans }}</h3>
+                            <section>
+                                <div class="span6">
+                                    {{ form_row(form['view'].maxmindEnabled ) }}
+                                    {{ form_row(form['view'].maxmindriskscorethreshold ) }}
+                                    {{ form_row(form['view'].maxmindlicensekey ) }}
+                                </div>
+                                <div class="span6">
+                                    {{ form_row(form['view'].tosUrl ) }}
+                                    {{ form_row(form['view'].privacyUrl ) }}
+                                    {{ form_row(form['view'].orderEmail ) }}
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                {% endblock %}
+            {% endembed %}
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block footerScript %}
+
+    {{ parent() }}
+
+    <script>
+    jQuery(document).ready(function($) {
+        $("#{{ form['view'].logo.get('id') }}").kendoUpload({
+            async: {
+                saveUrl: "{{ path('app_admin_setting_upload') }}",
+                //removeUrl: "{{ path('app_admin_setting_upload') }}",
+                removeField: "fileNames[]",
+                autoUpload: true
+            }
+        });
+    });
+    </script>
+
+{% endblock %}

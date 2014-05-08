@@ -1,0 +1,17 @@
+Dear {{ client.firstName }} {{ client.lastName }} ({{ client.company }}),<br />
+<br />
+This is a reminder e-mail to let you know that a you still have an open invoice at {{ businessName }}. Please find details below:
+<br />
+<br />
+Invoice ID: {{ invoice.id }}<br />
+Amount: {{ total }}<br />
+Invoice Date: {{ issueDate }}<br />
+Due Date: {{ dueDate }}<br />
+<br />
+Payment link: {{ paymentUrl }}<br />
+<br />
+Please do not hesitate to get in touch should you have any questions.<br />
+<br />
+Kind regards,<br />
+<br />
+{{ businessName }}<br />

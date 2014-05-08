@@ -1,0 +1,1 @@
+<?phpnamespace App\ClientBundle\Business\Base;use App\AdminBundle\Business as AdminBusiness;abstract class BaseGridHandler extends AdminBusiness\Base\BaseGridHandler{    public function getUserId()    {        $userSession = $this->container->get('app_admin.helper.user')->getUserSession();        return $userSession->getId();    }}

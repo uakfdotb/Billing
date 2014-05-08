@@ -1,0 +1,14 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'IMPORT_CLIENT' | trans }} - {{ 'RESULT' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-success">
+        {{ 'IMPORT_FINISH' | trans }}. {{ 'SUCCESS' | trans }}: {{ success }}, {{ 'FAILED' | trans }}: {{ failed }}.
+        <br />
+        {{ 'CLICK' | trans }}
+        <a href="{{ importUrl }}">{{ 'HERE' | trans }}</a> {{ 'TO_RETURN_BACK_TO_IMPORT_PAGE' | trans }}
+    </div>
+{% endblock %}

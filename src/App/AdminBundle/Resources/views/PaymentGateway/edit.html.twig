@@ -1,0 +1,21 @@
+{% extends 'AppAdminBundle:Base:create_one_column.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'EDIT_GATEWAY' | trans }}</h4>
+    <br />
+    {% form_theme form 'AppAdminBundle:Component:form_basic_theme.html.twig' %}
+
+    <form name="gateway" action="{{ path('app_admin_payment_gateway_update', {id: entity.id}) }}" method="post">
+        <div class="span12">{{ entity.name }}</div>
+        <br />
+        <br />
+        <div class="clearfix">
+            {{ form_rest(form) }}
+        </div>
+        {{ form_errors(form) }}
+        <div class="span12">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="reset" class="btn" value="Reset" />
+        </div>
+    </form>
+{% endblock %}

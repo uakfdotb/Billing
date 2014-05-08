@@ -1,0 +1,46 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block masterHeadText %}
+    <h3>{{ 'CLIENT_NOTE' | trans }} - {{ client.firstname }} {{ client.lastname }}</h3>
+{% endblock %}
+
+{% block listGrid %}
+{% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+    {% block gridButtons %}
+        <script id="note-edit-button" type="text/x-kendo-template">
+            <a class="k-button k-button-icontext" href="{{ grid.editUrl }}?id=${id}">
+                <i class="k-icon k-edit"></i>{{ 'EDIT' | trans }}
+                                    </a>
+        </script>
+
+        <script id="note-create-button" type="text/x-kendo-template">
+            <a class="k-button k-button-icontext" href="{{ grid.createUrl }}">
+                <i class="k-icon k-add"></i>
+                                        {{ grid.addNewLabel | default('ADD_NEW_RECORD') | trans }}
+                                    </a>
+        </script>
+    {% endblock %}
+
+    {% block gridToolbar %}
+        { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#note-create-button").html()) }
+    {% endblock %}
+
+    {% block gridFields %}
+        id: { editable: false, nullable: false },
+        timestamp: { editable: false, nullable: true },
+        subject: { editable: false, nullable: true },
+    {% endblock %}
+
+    {% block gridColumns %}
+        { field:"id", title:"{{ 'ID' | trans }}", width: 120 },
+        { field:"timestamp", title:"{{ 'TIMESTAMP' | trans }}", width: 150 },
+        { field:"subject", title:"{{ 'SUBJECT' | trans }}", width: 350 },
+        { template: kendo.template(jQuery("#note-edit-button").html()), width: 115 },
+        { command: "destroy", width: 100 }
+    {% endblock %}
+
+    {% block extraScript %}
+
+    {% endblock %}
+{% endembed %}
+{% endblock %}

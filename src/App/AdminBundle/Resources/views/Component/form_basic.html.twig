@@ -1,0 +1,64 @@
+{% form_theme form['view'] 'AppAdminBundle:Component:form_basic_theme.html.twig' %}
+
+{% block messages %}
+    {% if form['messages'] is not empty %}
+        <div class="alert alert-success">
+            {% for message in form['messages'] %}
+                {{ message | trans }}<br />
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form['errors'] is not empty %}
+        <div class="alert alert-error">
+            {% for error in form['errors'] %}
+                {{ error | trans }}<br />
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block formBlock %}
+    <div class="clearfix"></div>
+    <form action="{{ form['action'] }}" method="post" novalidate {{ form_enctype(form['view']) }} class="form-horizontal">
+        {% block content %}
+            <div class="row-fluid">
+            {% block hiddenFields %}
+                {% for element in form['view'] %}
+                    {% if 'hidden' in element.vars.block_prefixes %}
+                        {{ form_row(element) }}
+                    {% endif %}
+                {% endfor %}
+            {% endblock %}
+
+
+
+
+            {% block visibleFields %}
+                {% set i = 0 %}
+                {% for element in form['view'] %}
+                    {% if 'hidden' not in element.vars.block_prefixes %}
+                        {% if i % 2 == 0 %}
+                            <div class="row-fluid">
+                        {% endif %}
+                        {{ form_row(element) }}
+                        {% set i = i + 1 %}
+                        {% if i % 2 == 0 %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if i % 2 == 1 %}</div>{% endif %}
+            {% endblock %}
+
+            {% block submitButton %}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">{{ 'SUBMIT' | trans }}</button>
+                    <button type="reset" class="btn btn-large" onclick="goback()">{{ 'BACK' | trans }}</button>
+                </div>
+            {% endblock %}
+            </div>
+        {% endblock %}
+    </form>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>Core setting</h2>    
+{% endblock %}
+
+{% block content %}
+    {% block listPageHeader %}
+        <div class="main_cont pie">
+            {% embed 'AppAdminBundle:Component:form_basic.html.twig' with {'form': form }%}
+                {% block content %}
+                    {% form_theme form['view'] 'AppAdminBundle:Setting:form_config_theme.html.twig' %}
+                    {{ block('hiddenFields') }}
+
+                    <div id="tabStrip">
+                        <ul>
+                            <li class="k-state-active">General</li>
+                            <li>Locale</li>
+                            <li>Security</li>
+                            <li>Payments</li>
+                            <li>Defaults</li>
+                            <li>Ticket Import</li>
+                            <li>Maxmind</li>
+                        </ul>
+                        <!-- Begin First Tab Content -->
+                        <div>           
+                            {{ form_row(form['view'].installDirectory )}}
+                            {{ form_row(form['view'].adminDirectory )}}
+                            {{ form_row(form['view'].businessName )}}
+                            {{ form_row(form['view'].defaultEmail )}}
+                            {{ form_row(form['view'].licenceKey )}}
+                        </div>
+                        <div>
+                            {{ form_row(form['view'].clientLanguage )}}
+                            {{ form_row(form['view'].dateFormat )}}
+                            {{ form_row(form['view'].billingCurrency )}}
+                            {{ form_row(form['view'].currencyCode )}}                            
+                            {{ form_row(form['view'].culture )}}
+                        </div>
+                        <div>
+                            {{ form_row(form['view'].staffLoginNotify )}}
+                            {{ form_row(form['view'].staffLoginFailNotify )}}
+                            {{ form_row(form['view'].recaptchaPublic )}}
+                            {{ form_row(form['view'].recaptchaPrivate )}}
+                            {{ form_row(form['view'].staffLoginGreylist )}}
+                            {{ form_row(form['view'].staffIpVerification )}}
+                            {{ form_row(form['view'].staffMultipleLogins )}}
+                            {{ form_row(form['view'].staffTimeout )}}                                                        
+                        </div>
+                        <div>
+                            {{ form_row(form['view'].businessAddress )}}
+                            {{ form_row(form['view'].invoiceNotes )}}
+                            {{ form_row(form['view'].paymentSuccessEmail )}}
+                            {{ form_row(form['view'].paymentFailureEmail )}}
+                        </div>
+                        <div>
+                            {{ form_row(form['view'].idDefaultWorkType )}}
+                            {{ form_row(form['view'].defaultTax )}}
+                            {{ form_row(form['view'].defaultDiscount )}}
+                        </div>
+                        <div>
+                            {{ form_row(form['view'].ticketImapHost )}}
+                            {{ form_row(form['view'].ticketImapUsername )}}
+                            {{ form_row(form['view'].ticketImapPassword )}}
+                        </div>
+                        <div>
+                            {{ form_row(form['view'].maxmindLicenseKey )}}
+                            {{ form_row(form['view'].maxmindRiskScoreThreshold )}}
+                        </div>
+
+                    </div>
+
+                    <div align="center"><input type="submit" class="btn btn-primary" style="margin-top: 10px" value="Submit"/></div>
+                {% endblock %}
+            {% endembed %}
+
+            <script type='text/javascript'>
+                jQuery(document).ready(function() {
+                    jQuery("#tabStrip").kendoTabStrip();
+                });
+            </script>
+        </div>
+    {% endblock %}
+{% endblock %}
+

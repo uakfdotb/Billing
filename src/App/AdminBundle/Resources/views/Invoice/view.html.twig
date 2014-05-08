@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{ 'CLIENT_AREA' | trans }}</title>
+
+    <link href="{{ asset('bundles/appclient/styles/reset.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/appclient/styles/invoice.css') }}" rel="stylesheet">
+
+    <script>
+        (function (H) {
+            H.className = H.className.replace(/\bno-js\b/, 'js')
+        })(document.documentElement);
+        function proceedToPayment() {
+            var item = document.getElementById('gateway'),
+                    options = item.getElementsByTagName('option');
+            var path = "{{ path('invoice_payments_pay', {'tenant': subdomain, 'gateway': '__gateway__', 'invoice': invoice.id}) }}";
+            window.location.href = path.replace('__gateway__', options[item.selectedIndex].value);
+            item.setAttribute('disabled', 'disabled');
+        }
+    </script>
+</head>
+<body>
+<!-- begin markup -->
+
+
+{% if invoice.isProforma %}
+    <div id="invoice" class="new">
+{% elseif invoice.isPaid %}
+    <div id="invoice" class="paid">
+{% elseif not invoice.isPaid %}
+    <div id="invoice" class="unpaid">
+{% elseif invoice.status == 4 %}
+    <div id="invoice">
+{% endif %}
+    <div class="this-is">
+        <strong>{{ 'INVOICE' | trans }}</strong>
+    </div>
+    <!-- invoice headline -->
+
+
+    <header id="header">
+        <div class="invoice-intro">
+            <h1>{{ config.businessName }}</h1>
+            <!-- You may enter a strapline here -->
+        </div>
+
+        <dl class="invoice-meta">
+            <dt class="invoice-number">{{ 'INVOICE' | trans }} #</dt>
+            <dd>{{ invoice.number }}</dd>
+            <dt class="invoice-date">{{ 'ISSUE_DATE' | trans }}</dt>
+            <dd>{{ invoice_issue_date }}</dd>
+            <dt class="invoice-due">{{ 'DUE_DATE' | trans }}</dt>
+            <dd>{{ invoice_due_date }}</dd>
+            <dt class="invoice-due">{{ 'VAT_NUMBER' | trans }}</dt>
+            <dd>{{ client.vatNumber }}</dd>
+        </dl>
+    </header>
+    <!-- e: invoice header -->
+
+    <img src="../../../../../../web/logo/dinosaurs_feature.jpg" height="100" border="2" width="100" />
+    <section id="parties">
+
+        <div class="invoice-to">
+            <h2>{{ 'INVOICE_TO' | trans }}:</h2>
+
+            <div id="hcard-Hiram-Roth" class="vcard">
+                <div class="fn">{{ client.firstname }} {{ client.lastname }}</div>
+                <div class="org">{{ client.company }}</div>
+
+                <div class="adr">
+                    <div class="street-address">
+                        {{ client.address1 }}<br />
+                        {{ client.address2 }}
+                    </div>
+                    <span class="locality">{{ client.city }}, {{ client.state }}</span>
+                    <span class="country-name">{{ client.idCountry }}</span>
+                </div>
+
+                <div class="tel">{{ client.phone }}</div>
+            </div>
+            <!-- e: vcard -->
+        </div>
+        <!-- e invoice-to -->
+
+
+        <div class="invoice-from">
+            <h2>{{ 'INVOICE_FROM' | trans }}:</h2>
+
+            <div id="hcard-Admiral-Valdore" class="vcard">
+                <div class="org">{{ config.businessName }}</div>
+                <a class="email" href="{{ config.defaultEmail }}">{{ config.defaultEmail }}</a>
+
+                <div class="adr">
+                    <div class="street-address">{{ config.businessAddress }}</div>
+                </div>
+            </div>
+            <!-- e: vcard -->
+        </div>
+        <!-- e invoice-from -->
+
+
+        <div class="invoice-status">
+            <h3>{{ 'INVOICE_STATUS' | trans }}</h3>
+            {% if invoice.isPaid %}
+                <strong>{{ 'INVOICE_IS' | trans }} <em>{{ 'PAID' | trans }}</em></strong>
+            {% else %}
+                <strong>{{ 'INVOICE_IS' | trans }} <em>{{ 'UNPAID' | trans }}</em></strong>
+            {% endif %}
+        </div>
+        <!-- e: invoice-status -->
+
+    </section>
+    <!-- e: invoice partis -->
+
+
+    <section class="invoice-financials">
+
+        <div class="invoice-items">
+            <table>
+                <caption>{{ 'YOUR_INVOICE' | trans }}</caption>
+                <thead>
+                <tr>
+                    <th>{{ 'ITEM' | trans }} &amp; {{ 'DESCRIPTION' | trans }}</th>
+                    <th>{{ 'QUANTITY' | trans }}</th>
+                    <th>{{ 'PRICE' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in invoiceItems %}
+                    <tr>
+                        <th>{{ item['type'] }} - {{ item['description'] }}</th>
+                        <td>{{ item['quantity'] }}</td>
+                        <td>{{ item['unitPrice'] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- e: invoice items -->
+
+
+        <div class="invoice-totals">
+            <table>
+                <caption>{{ 'TOTAL' | trans }}:</caption>
+                <tbody>
+                <tr>
+                    <th>{{ 'SUBTOTAL' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumSubTotal }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'DISCOUNT' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumDiscount }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'TAX' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumTax }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'PAYMENTS' | trans }}:</th>
+                    <td></td>
+                    <td>{{ sumPayment }}</td>
+                </tr>
+                <tr>
+                    <th><strong>{{ 'TOTAL_DUE' | trans }}:</strong></th>
+                    <td></td>
+                    <td><strong>{{ sumAmountDue }}</strong></td>
+                </tr>
+                </tbody>
+            </table>
+            {% if not invoice.isPaid %}
+                <div class="invoice-pay">
+                    <h5>{{ 'PAYMENT' | trans }}</h5>
+                    {{ 'I_WOULD_LIKE_TO_PAY' | trans }}: {{ config.currencyCode }}
+                    <select id="gateway" onchange="proceedToPayment();">
+                        <option value="">{{ 'PLEASE_SELECT' | trans }}</option>
+                        {% for paymentGateway in paymentsGateways %}
+                            <option value="{{ paymentGateway.id }}">{{ paymentGateway.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div id="submitline">
+                        <div></div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <!-- e: invoice totals -->
+
+
+        <div class="invoice-notes">
+            <h6>{{ 'NOTES' | trans }} &amp; {{ 'INFORMATION' | trans }}:</h6>
+
+            <p>{{ invoice.notes }}</p>
+        </div>
+        <!-- e: invoice-notes -->
+
+    </section>
+    <!-- e: invoice financials -->
+
+
+    <footer id="footer">
+        <p>
+            <a href="{{ printPdfUrl }}">{{ 'DOWNLOAD_PDF' | trans }}</a>
+        </p>
+    </footer>
+
+
+</div>
+<!-- e: invoice -->
+
+
+</body>
+</html>

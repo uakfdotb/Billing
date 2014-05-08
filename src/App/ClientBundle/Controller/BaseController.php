@@ -1,0 +1,1 @@
+<?phpnamespace App\ClientBundle\Controller;use Symfony\Bundle\FrameworkBundle\Controller\Controller;class BaseController extends \App\AdminBundle\Controller\BaseController{}

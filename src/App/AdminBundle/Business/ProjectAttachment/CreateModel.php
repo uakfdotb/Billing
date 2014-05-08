@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\ProjectAttachment;class CreateModel{    public $name;    public $timestamp;    public $description;    public $attachments;}

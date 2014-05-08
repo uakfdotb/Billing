@@ -1,0 +1,1018 @@
+## COMMON
+app_admin_mapping_getKendoMapping:
+    pattern:  /mapping/getKendoMapping/{code}
+    defaults: { _controller: AppAdminBundle:Mapping:getKendoMapping, code: '' }
+
+## GOCARDLESS
+app_admin_gocardless_authorise:
+    pattern: /authorise/gocardless
+    defaults: { _controller: AppAdminBundle:InvoiceItem:goCardlessAuth }
+
+## CLIENT
+app_admin_client_list:
+    pattern:  /client/list
+    defaults: { _controller: AppAdminBundle:Client:list }
+app_admin_client_read:
+    pattern:  /client/read
+    defaults: { _controller: AppAdminBundle:Client:read }
+app_admin_client_export:
+    pattern:  /client/export
+    defaults: { _controller: AppAdminBundle:Client:export }
+app_admin_client_order:
+    pattern:  /client/order
+    defaults: { _controller: AppAdminBundle:Client:order }
+app_admin_client_create:
+    pattern:  /client/create
+    defaults: { _controller: AppAdminBundle:Client:create }
+app_admin_client_view:
+    pattern:  /client/view
+    defaults: { _controller: AppAdminBundle:Client:view }
+app_admin_client_edit:
+    pattern:  /client/edit
+    defaults: { _controller: AppAdminBundle:Client:edit }
+app_admin_client_statement:
+    pattern:  /client/statement
+    defaults: { _controller: AppAdminBundle:Client:statement }
+app_admin_client_delete:
+    pattern:  /client/delete
+    defaults: { _controller: AppAdminBundle:Client:delete }
+app_admin_client_import:
+    pattern:  /client/import
+    defaults: { _controller: AppAdminBundle:Client:import }
+app_admin_client_import_read:
+    pattern:  /client/import_read
+    defaults: { _controller: AppAdminBundle:Client:importRead }
+app_admin_client_import_proceed:
+    pattern:  /client/import_proceed
+    defaults: { _controller: AppAdminBundle:Client:importProceed }
+
+## CLIENT EMAIL
+app_admin_client_email_read:
+    pattern:  /client_email/read
+    defaults: { _controller: AppAdminBundle:ClientEmail:read }
+app_admin_client_email_export:
+    pattern:  /client_email/export
+    defaults: { _controller: AppAdminBundle:ClientEmail:export }
+
+## CLIENT CONTACTS
+app_admin_client_contact_list:
+    pattern:  /client_contact/list
+    defaults: { _controller: AppAdminBundle:ClientContact:list }
+app_admin_client_contact_read:
+    pattern:  /client_contact/read
+    defaults: { _controller: AppAdminBundle:ClientContact:read }
+app_admin_client_contact_export:
+    pattern:  /client_contact/export
+    defaults: { _controller: AppAdminBundle:ClientContact:export }
+app_admin_client_contact_create:
+    pattern:  /client_contact/create
+    defaults: { _controller: AppAdminBundle:ClientContact:create }
+app_admin_client_contact_edit:
+    pattern:  /client_contact/edit
+    defaults: { _controller: AppAdminBundle:ClientContact:edit }
+app_admin_client_contact_delete:
+    pattern:  /client_contact/delete
+    defaults: { _controller: AppAdminBundle:ClientContact:delete }
+
+## CLIENT NOTES
+app_admin_client_note_list:
+    pattern:  /client_note/list
+    defaults: { _controller: AppAdminBundle:ClientNote:list }
+app_admin_client_note_read:
+    pattern:  /client_note/read
+    defaults: { _controller: AppAdminBundle:ClientNote:read }
+app_admin_client_note_export:
+    pattern:  /client_note/export
+    defaults: { _controller: AppAdminBundle:ClientNote:export }
+app_admin_client_note_create:
+    pattern:  /client_note/create
+    defaults: { _controller: AppAdminBundle:ClientNote:create }
+app_admin_client_note_edit:
+    pattern:  /client_note/edit
+    defaults: { _controller: AppAdminBundle:ClientNote:edit }
+app_admin_client_note_delete:
+    pattern:  /client_note/delete
+    defaults: { _controller: AppAdminBundle:ClientNote:delete }
+
+## CLIENT PRODUCTS
+app_admin_client_product_list:
+    pattern:  /client_product/list
+    defaults: { _controller: AppAdminBundle:ClientProduct:list }
+app_admin_client_product_read:
+    pattern:  /client_product/read
+    defaults: { _controller: AppAdminBundle:ClientProduct:read }
+app_admin_client_product_export:
+    pattern:  /client_product/export
+    defaults: { _controller: AppAdminBundle:ClientProduct:export }
+app_admin_client_product_create:
+    pattern:  /client_product/create
+    defaults: { _controller: AppAdminBundle:ClientProduct:create }
+app_admin_client_product_edit:
+    pattern:  /client_product/edit
+    defaults: { _controller: AppAdminBundle:ClientProduct:edit }
+app_admin_client_product_delete:
+    pattern:  /client_product/delete
+    defaults: { _controller: AppAdminBundle:ClientProduct:delete }
+app_admin_client_product_view:
+    pattern:  /client_product/view
+    defaults: { _controller: AppAdminBundle:ClientProduct:view }
+app_admin_client_product_module:
+    pattern:  /client_product/module/{idCP}
+    defaults: { _controller: AppAdminBundle:ClientProduct:module }
+
+## PROJECT
+app_admin_project_list:
+    pattern:  /project/list
+    defaults: { _controller: AppAdminBundle:Project:list }
+app_admin_project_read:
+    pattern:  /project/read
+    defaults: { _controller: AppAdminBundle:Project:read }
+app_admin_project_export:
+    pattern:  /project/export
+    defaults: { _controller: AppAdminBundle:Project:export }
+app_admin_project_create:
+    pattern:  /project/create
+    defaults: { _controller: AppAdminBundle:Project:create }
+app_admin_project_edit:
+    pattern:  /project/edit
+    defaults: { _controller: AppAdminBundle:Project:edit }
+app_admin_project_delete:
+    pattern:  /project/delete
+    defaults: { _controller: AppAdminBundle:Project:delete }
+app_admin_project_timer:
+    pattern:  /project/timer
+    defaults: { _controller: AppAdminBundle:Project:timer }
+
+## PROJECT TRACKING
+app_admin_project_tracking_list:
+    pattern:  /project_tracking/list
+    defaults: { _controller: AppAdminBundle:ProjectTracking:list }
+app_admin_project_tracking_read:
+    pattern:  /project_tracking/read
+    defaults: { _controller: AppAdminBundle:ProjectTracking:read }
+app_admin_project_tracking_export:
+    pattern:  /project_tracking/export
+    defaults: { _controller: AppAdminBundle:ProjectTracking:export }
+app_admin_project_tracking_create:
+    pattern:  /project_tracking/create
+    defaults: { _controller: AppAdminBundle:ProjectTracking:create }
+app_admin_project_tracking_edit:
+    pattern:  /project_tracking/edit
+    defaults: { _controller: AppAdminBundle:ProjectTracking:edit }
+app_admin_project_tracking_delete:
+    pattern:  /project_tracking/delete
+    defaults: { _controller: AppAdminBundle:ProjectTracking:delete }
+app_admin_project_tracking_bill:
+    pattern:  /project_tracking/bill
+    defaults: { _controller: AppAdminBundle:ProjectTracking:bill }
+
+## PROJECT ATTACHMENT
+app_admin_project_attachment_list:
+    pattern:  /project_attachment/list
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:list }
+app_admin_project_attachment_read:
+    pattern:  /project_attachment/read
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:read }
+app_admin_project_attachment_export:
+    pattern:  /project_attachment/export
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:export }
+app_admin_project_attachment_create:
+    pattern:  /project_attachment/create
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:create }
+app_admin_project_attachment_edit:
+    pattern:  /project_attachment/edit
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:edit }
+app_admin_project_attachment_delete:
+    pattern:  /project_attachment/delete
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:delete }
+app_admin_project_attachment_download:
+    pattern:  /project_attachment/download
+    defaults: { _controller: AppAdminBundle:ProjectAttachment:download }
+
+## PROJECT TASK
+app_admin_project_task_read:
+    pattern:  /project_task/read
+    defaults: { _controller: AppAdminBundle:ProjectTask:read }
+app_admin_project_task_export:
+    pattern:  /project_task/export
+    defaults: { _controller: AppAdminBundle:ProjectTask:export }
+app_admin_project_task_create:
+    pattern:  /project_task/create
+    defaults: { _controller: AppAdminBundle:ProjectTask:create }
+app_admin_project_task_edit:
+    pattern:  /project_task/edit
+    defaults: { _controller: AppAdminBundle:ProjectTask:edit }
+app_admin_project_task_delete:
+    pattern:  /project_task/delete
+    defaults: { _controller: AppAdminBundle:ProjectTask:delete }
+app_admin_project_task_bill:
+    pattern:  /project_task/bill
+    defaults: { _controller: AppAdminBundle:ProjectTask:bill }
+
+## ESTIMATE
+app_admin_estimate_list:
+    pattern:  /estimate/list
+    defaults: { _controller: AppAdminBundle:Estimate:list }
+app_admin_estimate_read:
+    pattern:  /estimate/read
+    defaults: { _controller: AppAdminBundle:Estimate:read }
+app_admin_estimate_export:
+    pattern:  /estimate/export
+    defaults: { _controller: AppAdminBundle:Estimate:export }
+app_admin_estimate_create:
+    pattern:  /estimate/create
+    defaults: { _controller: AppAdminBundle:Estimate:create }
+app_admin_estimate_edit:
+    pattern:  /estimate/edit
+    defaults: { _controller: AppAdminBundle:Estimate:edit }
+app_admin_estimate_delete:
+    pattern:  /estimate/delete
+    defaults: { _controller: AppAdminBundle:Estimate:delete }
+app_admin_estimate_get_hash:
+    pattern:  /estimate/getHash
+    defaults: { _controller: AppAdminBundle:Estimate:getHash }
+app_admin_estimate_view:
+    pattern:  /estimate/view
+    defaults: { _controller: AppAdminBundle:Estimate:view }
+app_admin_estimate_get_gateways:
+    pattern:  /estimate/getGateways
+    defaults: { _controller: AppAdminBundle:Estimate:getGateways }
+app_admin_estimate_send_email:
+    pattern:  /estimate/sendEmail
+    defaults: { _controller: AppAdminBundle:Estimate:sendEmail }
+app_admin_estimate_make_invoice:
+    pattern:  /estimate/makeInvoice
+    defaults: { _controller: AppAdminBundle:Estimate:makeInvoice }
+
+## ESTIMATE ITEM
+app_admin_estimate_item_list:
+    pattern:  /estimate_item/list
+    defaults: { _controller: AppAdminBundle:EstimateItem:list }
+app_admin_estimate_item_read:
+    pattern:  /estimate_item/read
+    defaults: { _controller: AppAdminBundle:EstimateItem:read }
+app_admin_estimate_item_export:
+    pattern:  /estimate_item/export
+    defaults: { _controller: AppAdminBundle:EstimateItem:export }
+app_admin_estimate_item_create:
+    pattern:  /estimate_item/create
+    defaults: { _controller: AppAdminBundle:EstimateItem:create }
+app_admin_estimate_item_edit:
+    pattern:  /estimate_item/edit
+    defaults: { _controller: AppAdminBundle:EstimateItem:edit }
+app_admin_estimate_item_delete:
+    pattern:  /estimate_item/delete
+    defaults: { _controller: AppAdminBundle:EstimateItem:delete }
+app_admin_estimate_item_edit_estimate:
+    pattern:  /estimate_item/edit_estimate
+    defaults: { _controller: AppAdminBundle:EstimateItem:editEstimate }
+
+
+## RECURRING
+app_admin_recurring_list:
+    pattern:  /recurring/list
+    defaults: { _controller: AppAdminBundle:Recurring:list }
+app_admin_recurring_read:
+    pattern:  /recurring/read
+    defaults: { _controller: AppAdminBundle:Recurring:read }
+app_admin_recurring_export:
+    pattern:  /recurring/export
+    defaults: { _controller: AppAdminBundle:Recurring:export }
+app_admin_recurring_create:
+    pattern:  /recurring/create
+    defaults: { _controller: AppAdminBundle:Recurring:create }
+app_admin_recurring_edit:
+    pattern:  /recurring/edit
+    defaults: { _controller: AppAdminBundle:Recurring:edit }
+app_admin_recurring_delete:
+    pattern:  /recurring/delete
+    defaults: { _controller: AppAdminBundle:Recurring:delete }
+app_admin_recurring_chart:
+    pattern:  /recurring/chart
+    defaults: { _controller: AppAdminBundle:Recurring:chart }
+
+## RECURRING ITEM
+app_admin_recurring_item_list:
+    pattern:  /recurring_item/list
+    defaults: { _controller: AppAdminBundle:RecurringItem:list }
+app_admin_recurring_item_read:
+    pattern:  /recurring_item/read
+    defaults: { _controller: AppAdminBundle:RecurringItem:read }
+app_admin_recurring_item_export:
+    pattern:  /recurring_item/export
+    defaults: { _controller: AppAdminBundle:RecurringItem:export }
+app_admin_recurring_item_create:
+    pattern:  /recurring_item/create
+    defaults: { _controller: AppAdminBundle:RecurringItem:create }
+app_admin_recurring_item_edit:
+    pattern:  /recurring_item/edit
+    defaults: { _controller: AppAdminBundle:RecurringItem:edit }
+app_admin_recurring_item_delete:
+    pattern:  /recurring_item/delete
+    defaults: { _controller: AppAdminBundle:RecurringItem:delete }
+
+## TICKET
+app_admin_ticket_list:
+    pattern:  /ticket/list
+    defaults: { _controller: AppAdminBundle:Ticket:list }
+app_admin_ticket_read:
+    pattern:  /ticket/read
+    defaults: { _controller: AppAdminBundle:Ticket:read }
+app_admin_ticket_export:
+    pattern:  /ticket/export
+    defaults: { _controller: AppAdminBundle:Ticket:export }
+app_admin_ticket_delete:
+    pattern:  /ticket/delete
+    defaults: { _controller: AppAdminBundle:Ticket:delete }
+app_admin_ticket_edit:
+    pattern:  /ticket/show
+    defaults: { _controller: "AppAdminBundle:TicketItem:show" }
+app_admin_ticket_create:
+    pattern:  /ticket/create
+    defaults: { _controller: "AppAdminBundle:TicketItem:new" }
+app_admin_ticket_create_action:
+    pattern:  /ticket/create_action
+    defaults: { _controller: "AppAdminBundle:TicketItem:create" }
+    requirements: { _method: post }
+app_admin_ticket_delete:
+    pattern:  /ticket/delete
+    defaults: { _controller: "AppAdminBundle:TicketItem:delete" }
+    requirements: { _method: post|delete }
+app_admin_ticket_reply:
+    pattern:  /ticket/reply
+    defaults: { _controller: "AppAdminBundle:TicketItem:reply" }
+
+## SETTING
+app_admin_setting_edit:
+    pattern:  /setting/edit
+    defaults: { _controller: AppAdminBundle:Setting:edit }
+app_admin_setting_upload:
+    pattern:  /setting/async_upload
+    defaults: { _controller: AppAdminBundle:Setting:asyncUpload }
+
+## GATEWAY
+app_admin_gateway_edit:
+    pattern:  /gateway/edit
+    defaults: { _controller: AppAdminBundle:Gateway:edit }
+
+## GATEWAY
+app_admin_payment_gateway_list:
+    pattern:  /payment-gateway/
+    defaults: { _controller: AppAdminBundle:PaymentGateway:list }
+app_admin_payment_gateway_new:
+    pattern:  /payment-gateway/new
+    defaults: { _controller: AppAdminBundle:PaymentGateway:new }
+app_admin_payment_gateway_create:
+    pattern:  /payment-gateway/create
+    defaults: { _controller: AppAdminBundle:PaymentGateway:create }
+app_admin_payment_gateway_edit:
+    pattern:  /payment-gateway/{id}/edit
+    defaults: { _controller: AppAdminBundle:PaymentGateway:edit }
+app_admin_payment_gateway_update:
+    pattern:  /payment-gateway/{id}/update
+    defaults: { _controller: AppAdminBundle:PaymentGateway:update }
+app_admin_payment_gateway_delete:
+    pattern:  /payment-gateway/{id}/delete
+    defaults: { _controller: AppAdminBundle:PaymentGateway:delete }
+
+## STAFF
+app_admin_staff_list:
+    pattern:  /staff/list
+    defaults: { _controller: AppAdminBundle:Staff:list }
+app_admin_staff_read:
+    pattern:  /staff/read
+    defaults: { _controller: AppAdminBundle:Staff:read }
+app_admin_staff_export:
+    pattern:  /staff/export
+    defaults: { _controller: AppAdminBundle:Staff:export }
+app_admin_staff_create:
+    pattern:  /staff/create
+    defaults: { _controller: AppAdminBundle:Staff:create }
+app_admin_staff_edit:
+    pattern:  /staff/edit
+    defaults: { _controller: AppAdminBundle:Staff:edit }
+app_admin_staff_delete:
+    pattern:  /staff/delete
+    defaults: { _controller: AppAdminBundle:Staff:delete }
+app_admin_apikey_generate:
+    pattern:  /staff/apikey/generate
+    defaults: { _controller: AppAdminBundle:Staff:apiKeyGenerate }
+app_admin_apikey_remove:
+    pattern:  /staff/apikey/remove
+    defaults: { _controller: AppAdminBundle:Staff:apiKeyRemove }
+
+## DASHBOARD
+app_admin_dashboard_route:
+    pattern:  /dashboard/route
+    defaults: { _controller: AppAdminBundle:Dashboard:route }
+app_admin_dashboard_list:
+    pattern:  /dashboard/list
+    defaults: { _controller: AppAdminBundle:Dashboard:list }
+app_admin_dashboard_list2:
+    pattern:  /
+    defaults: { _controller: AppAdminBundle:Dashboard:list }
+app_admin_dashboard_update_sort_order:
+    pattern:  /dashboard/updateSortOrder
+    defaults: { _controller: AppAdminBundle:Dashboard:updateSortOrder }
+app_admin_dashboard_load_widget:
+    pattern:  /dashboard/loadWidget
+    defaults: { _controller: AppAdminBundle:Dashboard:loadWidget }
+
+## LOGIN
+app_admin_login_show:
+    pattern:  /login/show
+    defaults: { _controller: AppAdminBundle:Login:showLogin }
+app_admin_login_dropin:
+    pattern:  /login/dropin
+    defaults: { _controller: AppAdminBundle:Login:dropin }
+
+## PRODUCT
+app_admin_product_list:
+    pattern:  /product/list
+    defaults: { _controller: AppAdminBundle:Product:list }
+app_admin_product_read:
+    pattern:  /product/read
+    defaults: { _controller: AppAdminBundle:Product:read }
+app_admin_product_export:
+    pattern:  /product/export
+    defaults: { _controller: AppAdminBundle:Product:export }
+app_admin_product_create:
+    pattern:  /product/create
+    defaults: { _controller: AppAdminBundle:Product:create }
+app_admin_product_json:
+    pattern:  /product/create/json
+    defaults: { _controller: AppAdminBundle:Product:json }
+app_admin_product_edit:
+    pattern:  /product/edit
+    defaults: { _controller: AppAdminBundle:Product:edit }
+app_admin_product_delete:
+    pattern:  /product/delete
+    defaults: { _controller: AppAdminBundle:Product:delete }
+app_admin_product_import:
+    pattern:  /product/import
+    defaults: { _controller: AppAdminBundle:Product:import }
+app_admin_product_import_read:
+    pattern:  /product/import_read
+    defaults: { _controller: AppAdminBundle:Product:importRead }
+app_admin_product_import_proceed:
+    pattern:  /product/import_proceed
+    defaults: { _controller: AppAdminBundle:Product:importProceed }
+app_admin_product_variable_form:
+    pattern:  /product/variable_form
+    defaults: { _controller: AppAdminBundle:Product:variableForm }
+
+## AUTOMATION GROUP
+app_admin_automation_group_list:
+    pattern:  /automation_group/list
+    defaults: { _controller: AppAdminBundle:AutomationGroup:list }
+app_admin_automation_group_read:
+    pattern:  /automation_group/read
+    defaults: { _controller: AppAdminBundle:AutomationGroup:read }
+app_admin_automation_group_export:
+    pattern:  /automation_group/export
+    defaults: { _controller: AppAdminBundle:AutomationGroup:export }
+app_admin_automation_group_create:
+    pattern:  /automation_group/create
+    defaults: { _controller: AppAdminBundle:AutomationGroup:create }
+app_admin_automation_group_edit:
+    pattern:  /automation_group/edit
+    defaults: { _controller: AppAdminBundle:AutomationGroup:edit }
+app_admin_automation_group_delete:
+    pattern:  /automation_group/delete
+    defaults: { _controller: AppAdminBundle:AutomationGroup:delete }
+
+## SUPPLIER
+app_admin_supplier_list:
+    pattern:  /supplier/list
+    defaults: { _controller: AppAdminBundle:Supplier:list }
+app_admin_supplier_read:
+    pattern:  /supplier/read
+    defaults: { _controller: AppAdminBundle:Supplier:read }
+app_admin_supplier_export:
+    pattern:  /supplier/export
+    defaults: { _controller: AppAdminBundle:Supplier:export }
+app_admin_supplier_create:
+    pattern:  /supplier/create
+    defaults: { _controller: AppAdminBundle:Supplier:create }
+app_admin_supplier_edit:
+    pattern:  /supplier/edit
+    defaults: { _controller: AppAdminBundle:Supplier:edit }
+app_admin_supplier_delete:
+    pattern:  /supplier/delete
+    defaults: { _controller: AppAdminBundle:Supplier:delete }
+
+
+## SUPPLIER PURCHASE
+app_admin_supplier_purchase_list:
+    pattern:  /supplier_purchase/list
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:list }
+app_admin_supplier_purchase_read:
+    pattern:  /supplier_purchase/read
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:read }
+app_admin_supplier_purchase_export:
+    pattern:  /supplier_purchase/export
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:export }
+app_admin_supplier_purchase_create:
+    pattern:  /supplier_purchase/create
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:create }
+app_admin_supplier_purchase_edit:
+    pattern:  /supplier_purchase/edit
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:edit }
+app_admin_supplier_purchase_delete:
+    pattern:  /supplier_purchase/delete
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:delete }
+app_admin_supplier_purchase_download:
+    pattern:  /supplier_purchase/download
+    defaults: { _controller: AppAdminBundle:SupplierPurchase:download }
+
+
+## ACCOUNT
+app_admin_account_list:
+    pattern:  /account/list
+    defaults: { _controller: AppAdminBundle:Account:list }
+app_admin_account_read:
+    pattern:  /account/read
+    defaults: { _controller: AppAdminBundle:Account:read }
+app_admin_account_export:
+    pattern:  /account/export
+    defaults: { _controller: AppAdminBundle:Account:export }
+app_admin_account_create:
+    pattern:  /account/create
+    defaults: { _controller: AppAdminBundle:Account:create }
+app_admin_account_edit:
+    pattern:  /account/edit
+    defaults: { _controller: AppAdminBundle:Account:edit }
+app_admin_account_delete:
+    pattern:  /account/delete
+    defaults: { _controller: AppAdminBundle:Account:delete }
+app_admin_account_transfer:
+    pattern:  /account/transfer
+    defaults: { _controller: AppAdminBundle:Account:transfer }
+app_admin_account_get_balance:
+    pattern:  /account/get_balance
+    defaults: { _controller: AppAdminBundle:Account:getBalance }
+
+## ACCOUNT TRANSACTION
+app_admin_account_transaction_list:
+    pattern:  /account_transaction/list
+    defaults: { _controller: AppAdminBundle:AccountTransaction:list }
+app_admin_account_transaction_read:
+    pattern:  /account_transaction/read
+    defaults: { _controller: AppAdminBundle:AccountTransaction:read }
+app_admin_account_transaction_export:
+    pattern:  /account_transaction/export
+    defaults: { _controller: AppAdminBundle:AccountTransaction:export }
+app_admin_account_transaction_create:
+    pattern:  /account_transaction/create
+    defaults: { _controller: AppAdminBundle:AccountTransaction:create }
+app_admin_account_transaction_edit:
+    pattern:  /account_transaction/edit
+    defaults: { _controller: AppAdminBundle:AccountTransaction:edit }
+app_admin_account_transaction_delete:
+    pattern:  /account_transaction/delete
+    defaults: { _controller: AppAdminBundle:AccountTransaction:delete }
+
+## LOG
+app_admin_log_list:
+    pattern:  /log/list
+    defaults: { _controller: AppAdminBundle:Log:list }
+app_admin_log_read:
+    pattern:  /log/read
+    defaults: { _controller: AppAdminBundle:Log:read }
+app_admin_log_export:
+    pattern:  /log/export
+    defaults: { _controller: AppAdminBundle:Log:export }
+
+## CLIENT LOG
+app_admin_client_log_list:
+    pattern:  /client_log/list
+    defaults: { _controller: AppAdminBundle:ClientLog:list }
+app_admin_client_log_read:
+    pattern:  /client_log/read
+    defaults: { _controller: AppAdminBundle:ClientLog:read }
+app_admin_client_log_export:
+    pattern:  /client_log/export
+    defaults: { _controller: AppAdminBundle:ClientLog:export }
+
+## ESIMATE PURCHASE
+app_admin_estimate_purchase_list:
+    pattern:  /estimate_purchase/list
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:list }
+app_admin_estimate_purchase_read:
+    pattern:  /estimate_purchase/read
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:read }
+app_admin_estimate_purchase_export:
+    pattern:  /estimate_purchase/export
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:export }
+app_admin_estimate_purchase_create:
+    pattern:  /estimate_purchase/create
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:create }
+app_admin_estimate_purchase_edit:
+    pattern:  /estimate_purchase/edit
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:edit }
+app_admin_estimate_purchase_delete:
+    pattern:  /estimate_purchase/delete
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:delete }
+app_admin_estimate_purchase_download:
+    pattern:  /estimate_purchase/download
+    defaults: { _controller: AppAdminBundle:EstimatePurchase:download }
+
+## SEARCH
+app_admin_search_search:
+    pattern:  /search/
+    defaults: { _controller: AppAdminBundle:Search:search }
+
+## UPLOAD
+app_admin_upload_save:
+    pattern:  /upload/save
+    defaults: { _controller: AppAdminBundle:Upload:save }
+
+app_admin_upload_remove:
+    pattern:  /upload/remove
+    defaults: { _controller: AppAdminBundle:Upload:remove }
+
+
+## CLIENT CONTACT
+app_admin_client_contact_list:
+    pattern:  /client_contact/list
+    defaults: { _controller: AppAdminBundle:ClientContact:list }
+app_admin_client_contact_read:
+    pattern:  /client_contact/read
+    defaults: { _controller: AppAdminBundle:ClientContact:read }
+app_admin_client_contact_export:
+    pattern:  /client_contact/export
+    defaults: { _controller: AppAdminBundle:ClientContact:export }
+app_admin_client_contact_create:
+    pattern:  /client_contact/create
+    defaults: { _controller: AppAdminBundle:ClientContact:create }
+app_admin_client_contact_edit:
+    pattern:  /client_contact/edit
+    defaults: { _controller: AppAdminBundle:ClientContact:edit }
+app_admin_client_contact_delete:
+    pattern:  /client_contact/delete
+    defaults: { _controller: AppAdminBundle:ClientContact:delete }
+
+## INVOICE
+app_admin_invoice_list:
+    pattern:  /invoice/list
+    defaults: { _controller: AppAdminBundle:Invoice:list }
+app_admin_invoice_read:
+    pattern:  /invoice/read
+    defaults: { _controller: AppAdminBundle:Invoice:read }
+app_admin_invoice_export:
+    pattern:  /invoice/export
+    defaults: { _controller: AppAdminBundle:Invoice:export }
+app_admin_invoice_refund:
+    pattern:  /invoice/refund
+    defaults: { _controller: AppAdminBundle:Invoice:refund }
+app_admin_invoice_send_email:
+    pattern:  /invoice/sendEmail
+    defaults: { _controller: AppAdminBundle:Invoice:sendEmail }
+app_admin_invoice_view:
+    pattern:  /invoice/view/
+    defaults: { _controller: AppAdminBundle:Invoice:view }
+app_admin_invoice_gateway:
+    pattern:  /invoice/gateway
+    defaults: { _controller: AppAdminBundle:Invoice:gateway }
+app_admin_invoice_create:
+    pattern:  /invoice/create
+    defaults: { _controller: AppAdminBundle:Invoice:create }
+app_admin_invoice_edit:
+    pattern:  /invoice/edit
+    defaults: { _controller: AppAdminBundle:Invoice:edit }
+app_admin_invoice_delete:
+    pattern:  /invoice/delete
+    defaults: { _controller: AppAdminBundle:Invoice:delete }
+
+## INVOICE ITEM
+app_admin_invoice_item_list:
+    pattern:  /invoice_item/list
+    defaults: { _controller: AppAdminBundle:InvoiceItem:list }
+app_admin_invoice_item_read:
+    pattern:  /invoice_item/read
+    defaults: { _controller: AppAdminBundle:InvoiceItem:read }
+app_admin_invoice_item_export:
+    pattern:  /invoice_item/export
+    defaults: { _controller: AppAdminBundle:InvoiceItem:export }
+app_admin_invoice_item_create:
+    pattern:  /invoice_item/create
+    defaults: { _controller: AppAdminBundle:InvoiceItem:create }
+app_admin_invoice_item_edit:
+    pattern:  /invoice_item/edit
+    defaults: { _controller: AppAdminBundle:InvoiceItem:edit }
+app_admin_invoice_item_delete:
+    pattern:  /invoice_item/delete
+    defaults: { _controller: AppAdminBundle:InvoiceItem:delete }
+
+
+## INVOICE PAYMENT
+app_admin_invoice_payment_read:
+    pattern:  /invoice_payment/read
+    defaults: { _controller: AppAdminBundle:InvoicePayment:read }
+app_admin_invoice_payment_export:
+    pattern:  /invoice_payment/export
+    defaults: { _controller: AppAdminBundle:InvoicePayment:export }
+app_admin_invoice_payment_create:
+    pattern:  /invoice_payment/create
+    defaults: { _controller: AppAdminBundle:InvoicePayment:create }
+app_admin_invoice_payment_edit:
+    pattern:  /invoice_payment/edit
+    defaults: { _controller: AppAdminBundle:InvoicePayment:edit }
+app_admin_invoice_payment_delete:
+    pattern:  /invoice_payment/delete
+    defaults: { _controller: AppAdminBundle:InvoicePayment:delete }
+app_admin_invoice_payment_refund:
+    pattern:  /invoice_payment/refund
+    defaults: { _controller: AppAdminBundle:InvoicePayment:refund }
+
+
+## CLIENT NOTE
+app_admin_client_note_list:
+    pattern:  /client_note/list
+    defaults: { _controller: AppAdminBundle:ClientNote:list }
+app_admin_client_note_read:
+    pattern:  /client_note/read
+    defaults: { _controller: AppAdminBundle:ClientNote:read }
+app_admin_client_note_export:
+    pattern:  /client_note/export
+    defaults: { _controller: AppAdminBundle:ClientNote:export }
+app_admin_client_note_create:
+    pattern:  /client_note/create
+    defaults: { _controller: AppAdminBundle:ClientNote:create }
+app_admin_client_note_edit:
+    pattern:  /client_note/edit
+    defaults: { _controller: AppAdminBundle:ClientNote:edit }
+app_admin_client_note_delete:
+    pattern:  /client_note/delete
+    defaults: { _controller: AppAdminBundle:ClientNote:delete }
+
+## ESTIMATE PAYMENT
+app_admin_estimate_payment_read:
+    pattern:  /estimate_payment/read
+    defaults: { _controller: AppAdminBundle:EstimatePayment:read }
+app_admin_estimate_payment_export:
+    pattern:  /estimate_payment/export
+    defaults: { _controller: AppAdminBundle:EstimatePayment:export }
+app_admin_estimate_payment_create:
+    pattern:  /estimate_payment/create
+    defaults: { _controller: AppAdminBundle:EstimatePayment:create }
+app_admin_estimate_payment_edit:
+    pattern:  /estimate_payment/edit
+    defaults: { _controller: AppAdminBundle:EstimatePayment:edit }
+app_admin_estimate_payment_delete:
+    pattern:  /estimate_payment/delete
+    defaults: { _controller: AppAdminBundle:EstimatePayment:delete }
+app_admin_estimate_payment_refund:
+    pattern:  /estimate_payment/refund
+    defaults: { _controller: AppAdminBundle:EstimatePayment:refund }
+
+## ORDER
+app_admin_order_list:
+    pattern:  /order/list
+    defaults: { _controller: AppAdminBundle:Order:list }
+app_admin_order_read:
+    pattern:  /order/read
+    defaults: { _controller: AppAdminBundle:Order:read }
+app_admin_order_export:
+    pattern:  /order/export
+    defaults: { _controller: AppAdminBundle:Order:export }
+app_admin_order_create:
+    pattern:  /order/create
+    defaults: { _controller: AppAdminBundle:Order:create }
+app_admin_order_edit:
+    pattern:  /order/edit
+    defaults: { _controller: AppAdminBundle:Order:edit }
+app_admin_order_delete:
+    pattern:  /order/delete
+    defaults: { _controller: AppAdminBundle:Order:delete }
+app_admin_order_change_status:
+    pattern:  /order/changeStatus/{idOrder}
+    defaults: { _controller: AppAdminBundle:Order:changeStatus }
+
+## EMAIL
+app_admin_email_list:
+    pattern:  /email/list
+    defaults: { _controller: AppAdminBundle:Email:list }
+app_admin_email_read:
+    pattern:  /email/read
+    defaults: { _controller: AppAdminBundle:Email:read }
+app_admin_email_export:
+    pattern:  /email/export
+    defaults: { _controller: AppAdminBundle:Email:export }
+app_admin_email_create:
+    pattern:  /email/create
+    defaults: { _controller: AppAdminBundle:Email:create }
+app_admin_email_edit:
+    pattern:  /email/edit
+    defaults: { _controller: AppAdminBundle:Email:edit }
+app_admin_email_delete:
+    pattern:  /email/delete
+    defaults: { _controller: AppAdminBundle:Email:delete }
+app_admin_email_mass_send:
+    pattern:  /email/mass_send
+    defaults: { _controller: AppAdminBundle:Email:massSend }
+
+## PRODUCT GROUP
+app_admin_product_group_list:
+    pattern:  /product_group/list
+    defaults: { _controller: AppAdminBundle:ProductGroup:list }
+app_admin_product_group_read:
+    pattern:  /product_group/read
+    defaults: { _controller: AppAdminBundle:ProductGroup:read }
+app_admin_product_group_export:
+    pattern:  /product_group/export
+    defaults: { _controller: AppAdminBundle:ProductGroup:export }
+app_admin_product_group_create:
+    pattern:  /product_group/create
+    defaults: { _controller: AppAdminBundle:ProductGroup:create }
+app_admin_product_group_edit:
+    pattern:  /product_group/edit
+    defaults: { _controller: AppAdminBundle:ProductGroup:edit }
+app_admin_product_group_delete:
+    pattern:  /product_group/delete
+    defaults: { _controller: AppAdminBundle:ProductGroup:delete }
+
+## TAX
+app_admin_tax_list:
+    pattern:  /tax/list
+    defaults: { _controller: AppAdminBundle:Tax:list }
+app_admin_tax_read:
+    pattern:  /tax/read
+    defaults: { _controller: AppAdminBundle:Tax:read }
+app_admin_tax_export:
+    pattern:  /tax/export
+    defaults: { _controller: AppAdminBundle:Tax:export }
+app_admin_tax_create:
+    pattern:  /tax/create
+    defaults: { _controller: AppAdminBundle:Tax:create }
+app_admin_tax_edit:
+    pattern:  /tax/edit
+    defaults: { _controller: AppAdminBundle:Tax:edit }
+app_admin_tax_delete:
+    pattern:  /tax/delete
+    defaults: { _controller: AppAdminBundle:Tax:delete }
+app_admin_tax_calculate:
+    pattern:  /tax/calculate
+    defaults: { _controller: AppAdminBundle:Tax:calculate }
+
+## PERMISSION GROUPS
+app_admin_permission_group_list:
+    pattern:  /permission_group/list
+    defaults: { _controller: AppAdminBundle:PermissionGroup:list }
+app_admin_permission_group_read:
+    pattern:  /permission_group/read
+    defaults: { _controller: AppAdminBundle:PermissionGroup:read }
+app_admin_permission_group_export:
+    pattern:  /permission_group/export
+    defaults: { _controller: AppAdminBundle:PermissionGroup:export }
+app_admin_permission_group_create:
+    pattern:  /permission_group/create
+    defaults: { _controller: AppAdminBundle:PermissionGroup:create }
+app_admin_permission_group_edit:
+    pattern:  /permission_group/edit
+    defaults: { _controller: AppAdminBundle:PermissionGroup:edit }
+app_admin_permission_group_delete:
+    pattern:  /permission_group/delete
+    defaults: { _controller: AppAdminBundle:PermissionGroup:delete }
+
+
+## PHYSICAL ITEM
+app_admin_physical_item_list:
+    pattern:  /physical_item/list
+    defaults: { _controller: AppAdminBundle:PhysicalItem:list }
+app_admin_physical_item_read:
+    pattern:  /physical_item/read
+    defaults: { _controller: AppAdminBundle:PhysicalItem:read }
+app_admin_physical_item_export:
+    pattern:  /physical_item/export
+    defaults: { _controller: AppAdminBundle:PhysicalItem:export }
+app_admin_physical_item_create:
+    pattern:  /physical_item/create
+    defaults: { _controller: AppAdminBundle:PhysicalItem:create }
+app_admin_physical_item_edit:
+    pattern:  /physical_item/edit
+    defaults: { _controller: AppAdminBundle:PhysicalItem:edit }
+app_admin_physical_item_delete:
+    pattern:  /physical_item/delete
+    defaults: { _controller: AppAdminBundle:PhysicalItem:delete }
+app_admin_physical_item_detail:
+    pattern:  /physical_item/detail
+    defaults: { _controller: AppAdminBundle:PhysicalItem:detail }
+app_admin_physical_item_readStock:
+    pattern:  /physical_item/readStock
+    defaults: { _controller: AppAdminBundle:PhysicalItem:readStock }
+app_admin_physical_item_makeInvoice:
+    pattern:  /physical_item/makeInvoice
+    defaults: { _controller: AppAdminBundle:PhysicalItem:makeInvoice }
+app_admin_physical_item_addPurchase:
+    pattern:  /physical_item/addPurchase
+    defaults: { _controller: AppAdminBundle:PhysicalItem:addPurchase }
+
+## PHYSICAL ITEM SOLD
+app_admin_physical_item_sold_list:
+    pattern:  /physical_item_sold/list
+    defaults: { _controller: AppAdminBundle:PhysicalItemSold:list }
+app_admin_physical_item_sold_read:
+    pattern:  /physical_item_sold/read
+    defaults: { _controller: AppAdminBundle:PhysicalItemSold:read }
+app_admin_physical_item_sold_export:
+    pattern:  /physical_item_sold/export
+    defaults: { _controller: AppAdminBundle:PhysicalItemSold:export }
+app_admin_physical_item_sold_create:
+    pattern:  /physical_item_sold/create
+    defaults: { _controller: AppAdminBundle:PhysicalItemSold:create }
+app_admin_physical_item_sold_edit:
+    pattern:  /physical_item_sold/edit
+    defaults: { _controller: AppAdminBundle:PhysicalItemSold:edit }
+app_admin_physical_item_sold_delete:
+    pattern:  /physical_item_sold/delete
+    defaults: { _controller: AppAdminBundle:PhysicalItemSold:delete }
+
+
+## PHYSICAL ITEM PURCHASE
+app_admin_physical_item_purchase_list:
+    pattern:  /physical_item_purchase/list
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:list }
+app_admin_physical_item_purchase_read:
+    pattern:  /physical_item_purchase/read
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:read }
+app_admin_physical_item_purchase_export:
+    pattern:  /physical_item_purchase/export
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:export }
+app_admin_physical_item_purchase_create:
+    pattern:  /physical_item_purchase/create
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:create }
+app_admin_physical_item_purchase_edit:
+    pattern:  /physical_item_purchase/edit
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:edit }
+app_admin_physical_item_purchase_delete:
+    pattern:  /physical_item_purchase/delete
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:delete }
+app_admin_physical_item_purchase_bulk:
+    pattern:  /physical_item_purchase/bulk
+    defaults: { _controller: AppAdminBundle:PhysicalItemPurchase:bulk }
+
+## CREDIT NOTE
+app_admin_credit_note_list:
+    pattern:  /credit_note/list
+    defaults: { _controller: AppAdminBundle:CreditNote:list }
+app_admin_credit_note_read:
+    pattern:  /credit_note/read
+    defaults: { _controller: AppAdminBundle:CreditNote:read }
+app_admin_credit_note_export:
+    pattern:  /credit_note/export
+    defaults: { _controller: AppAdminBundle:CreditNote:export }
+app_admin_credit_note_create:
+    pattern:  /credit_note/create
+    defaults: { _controller: AppAdminBundle:CreditNote:create }
+app_admin_credit_note_edit:
+    pattern:  /credit_note/edit
+    defaults: { _controller: AppAdminBundle:CreditNote:edit }
+app_admin_credit_note_delete:
+    pattern:  /credit_note/delete
+    defaults: { _controller: AppAdminBundle:CreditNote:delete }
+    
+## SERVER
+app_admin_server_list:
+    pattern:  /server/list
+    defaults: { _controller: AppAdminBundle:Server:list }
+app_admin_server_read:
+    pattern:  /server/read
+    defaults: { _controller: AppAdminBundle:Server:read }
+app_admin_server_export:
+    pattern:  /server/export
+    defaults: { _controller: AppAdminBundle:Server:export }
+app_admin_server_create:
+    pattern:  /server/create
+    defaults: { _controller: AppAdminBundle:Server:create }
+app_admin_server_edit:
+    pattern:  /server/edit
+    defaults: { _controller: AppAdminBundle:Server:edit }
+app_admin_server_delete:
+    pattern:  /server/delete
+    defaults: { _controller: AppAdminBundle:Server:delete }
+
+## SERVER GROUP
+app_admin_server_group_list:
+    pattern:  /server_group/list
+    defaults: { _controller: AppAdminBundle:ServerGroup:list }
+app_admin_server_group_read:
+    pattern:  /server_group/read
+    defaults: { _controller: AppAdminBundle:ServerGroup:read }
+app_admin_server_group_export:
+    pattern:  /server_group/export
+    defaults: { _controller: AppAdminBundle:ServerGroup:export }
+app_admin_server_group_create:
+    pattern:  /server_group/create
+    defaults: { _controller: AppAdminBundle:ServerGroup:create }
+app_admin_server_group_edit:
+    pattern:  /server_group/edit
+    defaults: { _controller: AppAdminBundle:ServerGroup:edit }
+app_admin_server_group_delete:
+    pattern:  /server_group/delete
+    defaults: { _controller: AppAdminBundle:ServerGroup:delete }
+
+## REPORT
+app_admin_report_list:
+    pattern:  /report/list
+    defaults: { _controller: AppAdminBundle:Report:list }

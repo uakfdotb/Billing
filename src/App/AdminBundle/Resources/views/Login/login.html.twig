@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>{{ 'APP_TITLE' | trans }}</title>
+
+        <link rel="stylesheet" href="{{ asset('bundles/appadmin/themes/new/css/lib/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ asset('bundles/appadmin/themes/new/css/main.css') }}">
+    </head>
+
+    <body>
+        <div id="fb-root"></div>
+
+        <div class="apollo">
+            <div class="apollo-container clearfix">
+
+                <img src="{{ asset('bundles/appadmin/images/loginlogo.png') }}" alt="LoadingDeck">
+
+                {% if app.session.hasFlash('error') %}
+                    <div class="alert alert-error">
+                        {{ app.session.flash('error') }}
+                    </div>
+                {% endif %}
+                {% if formError %}
+                    <div class="alert alert-error">{{  }}</div>
+                {% endif %}
+                <div class="apollo-login">
+
+                    <form class="form-signin" id="apollo-login-form" action="{{ formUrl }}" method="post">
+                        <div class="control-group">
+                            <input type="text" value="" class="input-block-level email" placeholder="{{ 'USERNAME' | trans }}"/>
+                        </div>
+
+                        <div class="control-group">
+                            <input type="password" value="" class="input-block-level" placeholder="{{ 'PASSWORD' | trans }}"/>
+                        </div>
+
+                        {% if recaptchaActive %}
+                            <div class="control-group">
+                                {{ recaptcha | raw }}
+                            </div>
+                        {% endif %}
+                        <button class="btn btn-large btn-block btn-primary" type="submit">{{ 'SIGN_IN' | trans }}</button>
+                    </form>
+
+                    {# <p class="apollo-register-account"><a href="#" class="password-link"><small>Forgot your password?</small></a> </p> #}
+                </div>
+
+                {# <div class="apollo-forgotten-password">
+                    <form class="form-signin" id="apollo-forgotten-password-form">
+                        <div class="control-group">
+                            <input type="text" value="" class="input-block-level email" placeholder="Email address"/>
+                        </div>
+                        <button class="btn btn-large btn-block btn-primary" type="submit">Reset password</button>
+                    </form>
+
+                    <p class="apollo-back"> <a href="#"><i class="icon-arrow-left"></i> back to login</a> </p>
+                </div>
+
+                 <div class="apollo-password-reset">
+                    <h2>Check your email</h2>
+                    <p><strong>We've sent you a link, blah blah...</strong></p>
+                    <p>Nullam ac erat nunc. Donec in orci purus, vel tempor tortor. Integer tincidunt ipsum sed ipsum scelerisque malesuada.</p>
+                </div> #}
+            </div>
+        </div>
+
+        <script src="{{ asset('bundles/appadmin/themes/new/js/lib/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/themes/new/js/lib/images.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/themes/new/js/lib/md5.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/themes/new/js/lib/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/appadmin/themes/new/js/main.js') }}"></script>
+    </body>
+</html>

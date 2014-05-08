@@ -1,0 +1,15 @@
+services:
+    app_user.login_success_handler:
+        class: App\UserBundle\Security\LoginSuccessHandler
+        arguments: [ '@kernel', '@security.context', '@router' ]
+
+    app_user.username_password_captcha_listener:
+        class: App\UserBundle\Security\Firewall\UsernamePasswordCaptchaFormAuthenticationListener
+        parent: security.authentication.listener.form
+        abstract: true
+        calls:
+            - [ setContainer, [ "@service_container" ] ]
+
+    app_user.security.user_provider:
+        class: App\UserBundle\Security\UserProvider
+        arguments: [ '@fos_user.user_manager', '@service_container']

@@ -1,0 +1,24 @@
+<style>
+    .maxwidth{
+        width: 200px;
+        max-width: 200px;
+    }
+</style>
+<hr />
+<h4>{{ 'MODULE_SETTINGS' | trans }}</h4>
+{% set i = 0 %}
+{% for element in form %}
+    {% if i % 4 == 0 %}
+        <div class="row-fluid">
+    {% endif %}
+    <div class="span3">
+        {{ form_row(element, {'attr' : { 'class' : 'maxwidth' }}) }}
+    </div>
+    {% set i = i + 1 %}
+    {% if i % 4 == 0 %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% if i % 4 != 0 %}</div>{% endif %}
+<script src="{{ asset('bundles/appadmin/modules/')~module~'.js' }}" type="text/javascript"></script>

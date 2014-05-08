@@ -1,0 +1,228 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'ADD_PRODUCT' | trans }}</h2>
+    <style type="text/css">
+        table.table.table-bordered input[type="text"] {
+            width: 100px !important;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    {% embed 'AppAdminBundle:Component:form_one_column.html.twig' with {'form': form} %}
+        {% block visibleFields %}
+            <div class="row-fluid product-page" style="margin-top: 1em">
+
+                <div class="span3 colored-section">
+                    <h4>{{ 'GENERAL' | trans }}</h4>
+
+                    {{ form_label(form['view'].name) }}
+                    {{ form_errors(form['view'].name) }}
+                    {{ form_widget(form['view'].name) }}
+
+                    <div class="row-fluid" style="margin-top: 0;">
+                        <div class="span6">
+                            {{ form_label(form['view'].idProductGroup) }}
+                            {{ form_errors(form['view'].idProductGroup) }}
+                            {{ form_widget(form['view'].idProductGroup) }}
+                        </div>
+
+                        <div class="span6">
+                            {{ form_label(form['view'].stock) }}
+                            {{ form_errors(form['view'].stock) }}
+                            {{ form_widget(form['view'].stock) }}
+                        </div>
+                    </div>
+
+                    <div class="row-fluid" style="margin-top: 0;">
+                        <div class="span12">
+                            {{ form_widget(form['view'].isAvailable) }}
+                            {{ form_label(form['view'].isAvailable) }}
+                            {{ form_errors(form['view'].isAvailable) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span9 colored-section">
+                    <h4>{{ 'AUTOMATION' | trans }}</h4>
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            {{ form_label(form['view'].idType) }}
+                            {{ form_errors(form['view'].idType) }}
+                            {{ form_widget(form['view'].idType) }}
+                        </div>
+
+                        <div class="span6">
+                            {{ form_label(form['view'].serverGroup) }}
+                            {{ form_errors(form['view'].serverGroup) }}
+                            {{ form_widget(form['view'].serverGroup) }}
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4">
+                            {{ form_label(form['view'].color) }}
+                            {{ form_widget(form['view'].color) }}
+                            {{ form_errors(form['view'].color) }}
+                        </div>
+
+                        <div class="span4">
+                            {{ form_label(form['view'].idEmail) }}
+                            {{ form_errors(form['view'].idEmail) }}
+                            {{ form_widget(form['view'].idEmail) }}
+                        </div>
+
+                        <div class="span4">
+                            {{ form_label(form['view'].triggerCreate) }}
+                            {{ form_errors(form['view'].triggerCreate) }}
+                            {{ form_widget(form['view'].triggerCreate) }}
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            {{ form_widget(form['view'].isRedirectUnpaidInvoice) }}
+                            {{ form_label(form['view'].isRedirectUnpaidInvoice) }}
+                            {{ form_errors(form['view'].isRedirectUnpaidInvoice) }}
+                        </div>
+                    </div>
+                    <!-- Variable form goes here -->
+                    <div id="variableForm"></div>
+                </div>
+
+            </div>
+
+            <div class="row-fluid product-page" style="margin-top: 60px;">
+
+                <div class="span3">
+                    <h4>{{ 'FEATURES' | trans }}</h4>
+
+                    <ul class="features">
+                        {% for feature in form['view'].vars.value.features %}
+                        <li>
+                            <input type="text" name="form[features][]" value="{{ feature }}"> <a href="#" class="remove"><i class="entypo cross"></i></a>
+                        </li>
+                        {% endfor %}
+                        <li class="add-feature">
+                            <input type="text" name="form[features][]" placeholder="Add feature"> <a href="#" class="add"><i class="entypo check"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="span9">
+
+                    <div class="row-fluid">
+
+                        <div class="span12">
+                            <h4>Payment Type</h4>
+
+                            {{ form_errors(form['view'].idPaymentType) }}
+                            {{ form_widget(form['view'].idPaymentType) }}
+                        </div>
+                    </div>
+
+                    <div class="row-fluid" style="margin-top: 30px;">
+
+                        <div class="span12">
+                            <h4>{{ 'PRICE' | trans }}</h4>
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>{{ 'ONE_TIME_OR_MONTHLY' | trans }}</th>
+                                    <th>{{ 'QUARTERLY' | trans }}</th>
+                                    <th>{{ 'SEMI_ANNUALLY' | trans }}</th>
+                                    <th>{{ 'ANNUALLY' | trans }}</th>
+                                    <th>{{ 'BIENNIALLY' | trans }}</th>
+                                    <th>{{ 'TRIENNIALLY' | trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ 'SETUP_FEE' | trans }}</td>
+                                    <td>{{ form_widget(form['view'].setupFeeMonthly ) }}</td>
+                                    <td>{{ form_widget(form['view'].setupFeeQuarterly ) }}</td>
+                                    <td>{{ form_widget(form['view'].setupFeeSemiAnnually ) }}</td>
+                                    <td>{{ form_widget(form['view'].setupFeeAnnually ) }}</td>
+                                    <td>{{ form_widget(form['view'].setupFeeBiennially ) }}</td>
+                                    <td>{{ form_widget(form['view'].setupFeeTriennially ) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'PRICE' | trans }}</td>
+                                    <td>{{ form_widget(form['view'].priceMonthly ) }}</td>
+                                    <td>{{ form_widget(form['view'].priceQuarterly ) }}</td>
+                                    <td>{{ form_widget(form['view'].priceSemiAnnually ) }}</td>
+                                    <td>{{ form_widget(form['view'].priceAnnually ) }}</td>
+                                    <td>{{ form_widget(form['view'].priceBiennially ) }}</td>
+                                    <td>{{ form_widget(form['view'].priceTriennially ) }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <p class="info-text">{{ 'SET_PRICE_TO_NEGATIVE_ONE_TO_DISABLE_ANY_OF_THE_PAYMENT_TERM_OPTIONS__LEAVE_SETUP_FEE_AT_ZERO' | trans }}</p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>                      
+
+            <script type="text/javascript">
+                jQuery(document).ready(function () {
+                    // Features section functionality
+
+                    $(".features").on('click', '.remove', function(event) {
+                        event.preventDefault();
+                        $(this).parent("li").fadeOut("fast").remove();
+                    });            
+
+                    $(".features li .add").click(function(event) {
+                        event.preventDefault();
+                        $(".features li:last").before('<li><input type="text" name="form[features][]" value="' + $(this).prev().attr('value') +'"> <a href="#" class="remove"><i class="entypo cross"></i></a></li>');
+                        $(this).prev().attr('value', '');
+                    });
+
+                    onChangeIdType();
+
+                    jQuery('#{{ form['view'].idType.vars.id }}').change(function () {
+                        onChangeIdType();
+                    });
+
+                    // Colour picker
+                    $("#{{ form['view'].color.vars.id }}").spectrum({
+                        color: "{{ form['view'].vars.value.color }}",
+                        showInput: true,
+                        change: function(color) {
+                            $("#{{ form['view'].color.vars.id }}").val(color.toHexString());
+                        }
+                    });
+
+                    {% if form['view'].vars.value.moduleSettings is not empty %}
+                    // If we're editing a product, get the product type and display the optional boxes
+                    $.get( "{{ path('app_admin_product_variable_form') }}?id="+$('#{{ form['view'].idType.vars.id }}').val(), function( data ) {
+                        $( "#variableForm" ).html( data );
+                        var moduleSettings = JSON.parse('{{ form['view'].vars.value.moduleSettings|raw }}');
+                        $.each(moduleSettings, function(key, value) {
+                            $('#form_'+key).val(value);
+                        });
+                    });
+                    {% endif %}
+                });
+
+                function onChangeIdType() {
+                    $('#{{ form['view'].idType.vars.id }}').on('change', function() {
+                        $.get( "{{ path('app_admin_product_variable_form') }}?id="+$('#{{ form['view'].idType.vars.id }}').val(), function( data ) {
+                            $( "#variableForm" ).html( data );
+                        });
+                    });
+                }
+            </script>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

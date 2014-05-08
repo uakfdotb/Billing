@@ -1,0 +1,39 @@
+{% extends 'AppAdminBundle:Base:create_one_column.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'NEW_GATEWAY' | trans }}</h4>
+    <br />
+    {% form_theme form 'AppAdminBundle:Component:form_basic_theme.html.twig' %}
+
+    <form name="gateway" action="{{ path('app_admin_payment_gateway_create') }}" method="post">
+        <div class="clearfix">
+            {{ form_row(form.type) }}
+        </div>
+        <br />
+        <div class="clearfix">
+            {{ form_rest(form) }}
+        </div>
+        {{ form_errors(form) }}
+        <div class="span12">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="reset" class="btn" value="Reset" />
+        </div>
+    </form>
+    <script type="text/javascript">
+        // GoCardless
+        if(window.location.href.indexOf('_gocardless') > -1)
+        {
+            $.get( "{{ path('app_admin_gocardless_authorise') }}", function( data ) {
+                if(data.indexOf('https://') > -1) window.location.replace(data);
+                else document.getElementById('payment_gateway_credentials_authorization_code').value = data;
+            });
+        }
+
+        // Select box
+        $(function () {
+            $('form[name="gateway"] select').change(function () {
+                window.location.href = '{{ path('app_admin_payment_gateway_new') }}?gw=' + $(this).val();
+            });
+        });
+    </script>
+{% endblock %}

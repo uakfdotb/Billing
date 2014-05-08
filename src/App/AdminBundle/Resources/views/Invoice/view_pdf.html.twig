@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+
+    <title>{{ config.businessName }} Invoice</title>
+
+</head>
+
+<body>
+
+<table width="100%">
+    <tr>
+        <td width="50%">
+            <img src="{% if logo %}{{ logo }}{% endif %}" border="0" />
+        </td>
+        <td rowspan="2" width="50%" style="vertical-align: middle;">
+            <p style="text-align: right; margin-bottom: 0;"><span style="color: #5b5b5b; font-size: 37px;">Invoice</span> <span style="padding-left: 5px; color: #9e9e9e; font-size: 33px; font-weight: 300;">#{{ invoice.number }}</span></p>
+            <p style="text-align: right; color: #7c7c7c; font-size: 18px; margin-top: 0px;">{{ invoice_issue_date }}</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border-top: 1px solid #e9eaee;">
+            <p style="color: #aeaeae; font-size: 20px; font-weight: 300; margin-top: 10px;">{{ config.webSite }}<br />{{ config.defaultEmail }}</p>
+        </td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 40px;">
+    <tr>
+        <td width="33%"><span style="color: #464646; font-size: 22px;">Billing Address</span></td>
+        <td width="33%"><span style="color: #464646; font-size: 22px;">Client</span></td>
+        <td width="33%"><span style="color: #fff; font-weight: 600; font-size: 16px; text-transform: uppercase; background: #e76c63; width: 175px; padding: 10px 0 10px 15px; display: block; float: right;">Due Date</span></td>
+    </tr>
+    <tr>
+        <td><span style="font-weight: 600; font-size: 14px; color: #464646;">{{ config.businessName }}</span></td>
+        <td><span style="font-weight: 600; font-size: 14px; color: #464646;">{% if client.company %}{{ client.company }}{% else %}{{ client.firstname }} {{ client.lastname }}{% endif %}</span></td>
+        <td rowspan="5" style="vertical-align: top;"><span style="color: #737373; font-weight: normal; font-size: 16px; background: #f5f7f8; width: 175px; padding: 10px 0 10px 15px; display: block; float: right;">{{ invoice_due_date }}</span></td>
+    </tr>
+    <tr>
+        <td><span style="font-weight: 300; font-size: 14px; color: #838383;">{{ config.businessAddress|nl2br }}</span></td>
+        <td><span style="font-weight: 300; font-size: 14px; color: #838383;">{{ client.address1 }}, {{ client.address2 }}<br />
+                {{ client.city }}, {{ client.state }}<br />
+                {{ client.postcode }}<br />
+                {{ country }}</span></td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 80px; border-collapse: collapse;">
+    <thead>
+    <tr style="text-align: left; height: 70px;">
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Service</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase; padding-left: 10px; ">Description</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Price</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Qty</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Total</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in invoiceItems %}
+        <tr style="height: 75px;">
+            <td style="border-top: 2px solid #e9eaee;"><span style="color: #e76c63; font-size: 16px; font-weight: 600;">{{ item['type'] }}</span></td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px; padding-left: 10px; padding-right: 10px;">{{ item['description'] }}</td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px;">{{ item['unitPrice'] }}</td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px;">{{ item['quantity'] }}</td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px; font-weight: 600;">{{ item['amount'] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<table width="100%">
+    <tr style="border-top: 2px solid #e9eaee;">
+        <td>
+            <span style="display: block; background: #f5f7f8; float: right; font-weight: 300; font-size: 16px; color: #8f8f8f; padding: 10px 20px;">{{ taxName }} (%): <span style="font-weight: normal;">{{ sumTax }}</span> ({{  taxPercent }}%)</span>
+        </td>
+        <td>
+            <span style="display: block; background: #e76c63; font-weight: 600; font-size: 16px; color: #fff; padding: 10px 20px; text-transform: uppercase; max-height: 75px;">Grand Total: <span style="font-weight: 700; padding-left: 5px;">{{ sumAmount }}</span></span>
+        </td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 50px;">
+    <tr style="display: block; padding-top: 20px;border-top: 1px solid #e9eaee; margin-top: 20px;">
+        <td><span style="color: #9d9d9d; font-size: 16px; font-weight: 300;">{{ invoice.notes|nl2br }}</span></td>
+    </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<div id="{{ widgetElementId }}" class="full" style="height: 200px">
+    <h2>
+        Profit
+        <span>&raquo;&laquo;</span>
+        {% include 'AppAdminBundle:Dashboard:viewby.html.twig' with {'id': widgetElementId ~ '_viewby', 'viewby': viewby } %}
+    </h2>
+    <div id="{{ widgetElementId }}_graph"></div>
+    <p style="padding-top: 0px" id="{{ widgetElementId }}_summary">
+    </p> 
+    <dl id="{{ widgetElementId }}_previous">
+        
+    </dl>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var profitChart = new Highcharts.Chart({
+            chart: {
+                renderTo: '{{ widgetElementId }}_graph', 
+                type: 'column',
+                height: 170,
+                width: 720,
+                backgroundColor: 'transparent',
+            },
+            credits: {
+                enabled: false
+            },
+            colors: ["#68c1ba"],
+            title: {
+                text:''
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                formatter: function() {
+                    var s = this.series.name + ' in <b>' + this.x + '</b>:<br /><b>{{ currencyCode }}'+ this.y +'</b>';
+                    return s;
+                },
+                borderColor: '#FFF',
+                borderWidth: 1,
+                backgroundColor: '#68c1ba',
+                style: {
+                    color: '#FFF',
+                    fontSize: '13px',
+                    padding: '4px'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: '',
+                    style: {
+                        color: '#A6A6A6',
+                        font: 'normal 12px Arial, Helvetica, sans-serif',
+                    }
+                },
+                gridLineColor: '#EEE',
+            },
+            xAxis: {
+                title: {
+                    text: '',
+                    style: {
+                        color: '#A6A6A6',
+                        font: 'normal 12px Arial, Helvetica, sans-serif',
+                    }
+                },
+                categories: []
+            },
+            series: [{
+                name: 'Profit',
+                data: []
+            }]
+        });
+
+        // Process action
+        buildWidgetViewByEvents(
+            '#{{ widgetElementId }}_viewby',
+            '{{ widgetUpdateUrl }}',
+            '{{ idWidget }}',
+            onProfitChartPreUpdate,
+            onProfitChartPostUpdate
+        );
+
+        function onProfitChartPreUpdate() {
+            profitChart.showLoading();
+        }
+        
+        function onProfitChartPostUpdate(response) {
+            var series = JSON.parse(response);
+            profitChart.series[0].setData(series['data']);
+            profitChart.xAxis[0].setCategories(series['categories']);
+            profitChart.hideLoading();
+
+            // Update summary
+            var summaryNode = jQuery('#{{ widgetElementId }}_summary');
+            summaryNode.empty();
+            summaryNode.append(buildAmountElement(series['total']));
+
+            // Update previous
+            var previousNode = jQuery('#{{ widgetElementId }}_previous');
+            previousNode.empty();
+            previousNode.append(jQuery('<dt>' + series['previous'][0]['label'] + ':</dt>'));            
+            previousNode.append(createSubSummaryNode(series['previous'][0]));            
+            previousNode.append(jQuery('<dt>' + series['previous'][1]['label'] + ':</dt>'));
+            previousNode.append(createSubSummaryNode(series['previous'][1]));            
+        }
+
+        function createSubSummaryNode(subData) {
+            var ddNode = jQuery('<dd></dd>');
+            ddNode.append(buildAmountElement(subData['amount']));
+            if (subData['percentage'] == 'NA') {
+                ddNode.append(' <span style="color: #BBBBBB">(N/A)</span>');
+            }
+            else {            
+                if (subData['percentage'] >= 0) {
+                    ddNode.append(' <i>(+' + subData['percentage'] + '%)</i>');
+                }
+                else {
+                    ddNode.append(' <i class="neg">(' + subData['percentage'] + '%)</i>');       
+                }
+            }
+            return ddNode;
+        }
+    });
+</script>

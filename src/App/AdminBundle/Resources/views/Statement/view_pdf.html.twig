@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+
+    <title>{{ config.businessName }} Statement</title>
+
+</head>
+
+<body>
+
+<table width="100%">
+    <tr>
+        <td width="50%">
+            <img src="{% if logo %}{{ logo }}{% endif %}" border="0" />
+        </td>
+        <td rowspan="2" width="50%" style="vertical-align: middle;">
+            <p style="text-align: right; margin-bottom: 0;"><span style="color: #5b5b5b; font-size: 37px;">Statement</span></p>
+            <p style="text-align: right; color: #7c7c7c; font-size: 18px; margin-top: 0px;">{{ statement_date }}</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border-top: 1px solid #e9eaee;">
+            <p style="color: #aeaeae; font-size: 20px; font-weight: 300; margin-top: 10px;">{{ config.webSite }}<br />{{ config.defaultEmail }}</p>
+        </td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 40px;">
+    <tr>
+        <td width="33%"><span style="color: #464646; font-size: 22px;">Billing Address</span></td>
+        <td width="33%"><span style="color: #464646; font-size: 22px;">Client</span></td>
+    </tr>
+    <tr>
+        <td><span style="font-weight: 600; font-size: 14px; color: #464646;">{{ config.businessName }}</span></td>
+        <td><span style="font-weight: 600; font-size: 14px; color: #464646;">{% if client.company %}{{ client.company }}{% else %}{{ client.firstname }} {{ client.lastname }}{% endif %}</span></td>
+    </tr>
+    <tr>
+        <td><span style="font-weight: 300; font-size: 14px; color: #838383;">{{ config.businessAddress|nl2br }}</span></td>
+        <td><span style="font-weight: 300; font-size: 14px; color: #838383;">{{ client.address1 }}, {{ client.address2 }}<br />
+                {{ client.city }}, {{ client.state }}<br />
+                {{ client.postcode }}<br />
+                {{ country }}</span></td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 80px; border-collapse: collapse;">
+    <thead>
+    <tr style="text-align: left; height: 70px;">
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Date</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Title</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Credit</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Debit</span></th>
+        <th><span style="color: #616161; font-size: 16px; font-weight: 600; text-transform: uppercase;">Balance</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in statement_items %}
+        <tr style="height: 75px;">
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px;">{{ item['date'] }}</td>
+            <td style="border-top: 2px solid #e9eaee;"><span style="color: #e76c63; font-size: 16px; font-weight: 600;">{{ item['subject'] }}</span></td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px;">{{ item['credit'] }}</td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px;">{{ item['debit'] }}</td>
+            <td style="border-top: 2px solid #e9eaee; color: #737373; font-size: 16px; font-weight: 600;">{{ item['balance'] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+
+</html>

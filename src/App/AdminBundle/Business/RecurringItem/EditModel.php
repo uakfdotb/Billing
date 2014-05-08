@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\RecurringItem;class EditModel{    public $idType;    public $quantity;    public $unitPrice;    public $description;}

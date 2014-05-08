@@ -1,0 +1,133 @@
+<div id="{{ widgetElementId }}" class="full" style="height: 200px">
+    <h2>
+        Sales of the Month
+        <span>&raquo;&laquo;</span>
+        {% include 'AppAdminBundle:Dashboard:viewby.html.twig' with {'id': widgetElementId ~ '_viewby', 'viewby': viewby, 'label': 'Compare to' } %}
+    </h2>
+    <div id="{{ widgetElementId }}_graph"></div>
+    <p id="{{ widgetElementId }}_summary">
+    </p>    
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var salesOfTheMonthChart = new Highcharts.Chart({
+            chart: {
+                renderTo: '{{ widgetElementId }}_graph',
+                type: 'area',
+                height: 170,
+                width: 720,
+                backgroundColor: 'transparent',
+            },
+            credits: {
+                enabled: false
+            },
+            colors: ["#EEE", "#d0e6e5"],
+            title: {
+                text:''
+            },
+            legend: {
+                enabled: false
+            },
+            navigation: {
+                buttonOptions: {
+                    hoverSymbolStroke: '#FFFFFF',
+                }
+            },
+            plotOptions: {
+                area: {
+                    marker: {
+                        enabled: false
+                    },
+                    pointStart: 1
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    var s = this.x + ' ' + this.series.name + ':<br/><b>'+ this.y +' sales</b>';
+                    return s;
+                },
+                borderColor: '#FFF',
+                borderWidth: 1,
+                backgroundColor: '#50bcb1',
+                style: {
+                    color: '#FFF',
+                    fontSize: '13px',
+                    padding: '4px'
+                }
+            },
+            xAxis: {
+                title: {
+                    text: '',
+                    style: {
+                        color: '#A6A6A6',
+                        font: 'normal 12px Arial, Helvetica, sans-serif',
+                    }
+                },
+                tickInterval: 6,
+                min: 1
+            },
+            yAxis: {
+                title: {
+                    text: '',
+                    style: {
+                        color: '#A6A6A6',
+                        font: 'normal 12px Arial, Helvetica, sans-serif',
+                    }
+                },
+                gridLineColor: '#EEE'
+            },
+            series: [
+                {
+                    name: 'Current',
+                    data: [],
+                    lineColor: '#DDD',
+                    marker: {
+                        fillColor: '#FFF',
+                        lineColor: '#DDD',
+                        lineWidth: 2,
+                        radius: 3
+                    }
+                },
+                {
+                    name: 'Last',
+                    data: [],
+                    lineColor: '#50bcb1',
+                    marker: {
+                        fillColor: '#FFF',
+                        lineColor: '#50bcb1',
+                        lineWidth: 2,
+                        radius: 4
+                    }
+                }
+            ]
+        });
+
+        // Process action
+        buildWidgetViewByEvents(
+            '#{{ widgetElementId }}_viewby',
+            '{{ widgetUpdateUrl }}',
+            '{{ idWidget }}',
+            onSalesOfTheMonthChartPreUpdate,
+            onSalesOfTheMonthChartPostUpdate
+        );
+
+        function onSalesOfTheMonthChartPreUpdate() {
+            salesOfTheMonthChart.showLoading();
+        }
+        
+        function onSalesOfTheMonthChartPostUpdate(response) {
+            var series = JSON.parse(response);
+            salesOfTheMonthChart.series[0].setData(series['current']);
+            salesOfTheMonthChart.series[1].setData(series['last']);
+            salesOfTheMonthChart.hideLoading();
+
+            // Update summary
+            var summaryNode = jQuery('#{{ widgetElementId }}_summary');
+            summaryNode.empty();
+            summaryNode.append(buildNumberElement(series['total']));
+            summaryNode.append(jQuery('<br/>'));
+            summaryNode.append(buildPercentageElement(series['percentage']));
+        }
+    });
+</script>

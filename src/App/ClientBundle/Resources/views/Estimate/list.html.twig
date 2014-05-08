@@ -1,0 +1,26 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'ESTIMATE_LIST' | trans }}</h4>
+    <br />
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block header %}
+            <th>{{ 'ID' | trans }}</th>
+            <th>{{ 'SUBJECT' | trans }}</th>
+            <th>{{ 'ISSUE_DATE' | trans }}</th>
+            <th>{{ 'DUE_DATE' | trans }}</th>
+            <th>{{ 'STATUS' | trans }}</th>
+            <th>{{ 'AMOUNT' | trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['number'] }}</td>
+            <td>{{ row['subject'] }}</td>
+            <td>{{ row['issueDate'] }}</td>
+            <td>{{ row['dueDate'] }}</td>
+            <td>{{ row['status'] }}</td>
+            <td>{{ row['amount'] }}</td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

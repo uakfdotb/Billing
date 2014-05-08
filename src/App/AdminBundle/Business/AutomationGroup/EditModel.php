@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\AutomationGroup;class EditModel{    public $name;    public $url;    //public $fields;}

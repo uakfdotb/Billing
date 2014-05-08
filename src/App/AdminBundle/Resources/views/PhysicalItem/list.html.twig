@@ -1,0 +1,38 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridButtons %}
+            {{ parent() }}
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: false, nullable: true },
+            brand: { editable: false, nullable: true },
+            model: { editable: false, nullable: true },
+            stock: { editable: false, nullable: false },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120, template: '\
+            <a href="{{ grid.physicalItemDetailUrl }}?id=#=id#">#=id#</a>',},
+            { field:"name", title:"{{ 'NAME' | trans }}", width: 200 },
+            { field:"brand", title:"{{ 'BRAND' | trans }}", width: 200 },
+            { field:"model", title:"{{ 'MODEL_DESCRIPTION' | trans }}", width: 200 },
+            { field: "stock", title:"{{ 'STOCK' | trans }}", width: 120},
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

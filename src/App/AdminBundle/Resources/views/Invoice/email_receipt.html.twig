@@ -1,0 +1,15 @@
+Dear {{ client.firstName }} {{ client.lastName }} ({{ client.company }}),<br />
+<br />
+This is a brief e-mail to let you know that I have now received payment for the below. The payment link below has been updated, which will serve as your official receipt for this transaction.
+<br />
+<br />
+Invoice ID: {{ invoice.number }}<br />
+Amount: {{ total }}<br />
+<br />
+Receipt link: {{ receiptUrl }}<br />
+<br />
+Thank you very much for your custom, it is appreciated!<br />
+<br />
+Kind regards,<br />
+<br />
+{{ businessName }}<br />

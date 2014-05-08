@@ -1,0 +1,104 @@
+client:
+    type:        rest
+    name_prefix: app_api_
+    resource:    "App\ApiBundle\Controller\ClientController"
+
+client_contact:
+    type:        rest
+    name_prefix: app_api_
+    resource:    "App\ApiBundle\Controller\ClientContactController"
+
+client_note:
+    type:        rest
+    name_prefix: app_api_
+    resource:    "App\ApiBundle\Controller\ClientNoteController"
+
+project:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\ProjectController
+
+project_tracking:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\ProjectTrackingController
+
+project_task:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\ProjectTaskController
+
+estimate:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\EstimateController
+
+estimate_item:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\EstimateItemController
+
+invoice:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\InvoiceController
+
+invoice_item:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\InvoiceItemController
+
+recurring:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\RecurringController
+
+recurring_item:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\RecurringItemController
+
+order:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\OrderController
+
+product:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\ProductController
+
+purchase:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\PurchaseController
+
+supplier:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\SupplierController
+
+physical_item:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\PhysicalItemController
+
+physical_item_in:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\PhysicalItemInController
+
+physical_item_out:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\PhysicalItemOutController
+
+account:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\AccountController
+
+account_transaction:
+    type:        rest
+    name_prefix: app_api_
+    resource:    App\ApiBundle\Controller\AccountTransactionController

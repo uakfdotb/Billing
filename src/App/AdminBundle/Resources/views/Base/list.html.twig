@@ -1,0 +1,53 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ grid.title | default('LIST') | trans }}</h2>
+    {% block afterTitle %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    {% block listPageHeader %}
+        {% block gridToolbar %}{% endblock %}
+
+        {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+        {% endembed %}
+
+        {# Begin toolbar #}
+        <div class="pull-right">
+            {% if grid.createUrl is defined and grid.createUrl != '#' %}<a href="{{ grid.createUrl }}" class="add-button"><i class="entypo plus"></i> <span>{{ 'ADD_NEW_RECORD' | trans }}</span></a>{% endif %}
+            <div class="actions">
+                <a href="#" class="actions-button"><i class="entypo cog"></i> <span>Actions</span> <i class="entypo chevron-down chevron"></i></a>
+                <ul class="actions-panel">
+                    {% if invoiceItemListUrl is defined %}
+                        <li><a onclick="invoiceView();"><i class="entypo newspaper"></i> {{ 'VIEW_CLIENT_SITE' | trans }}</a></li>
+                        <li><a onclick="invoiceSend('invoice');"><i class="entypo direction"></i> {{ 'SEND_INVOICE' | trans }}</a></li>
+                        <li><a onclick="invoiceSend('reminder');"><i class="entypo clock"></i> {{ 'SEND_REMINDER' | trans }}</a></li>
+                        <li><a onclick="invoiceSend('overdue');"><i class="entypo new"></i> {{ 'SEND_OVERDUE_NOTICE' | trans }}</a></li>
+                    {% endif %}
+                    {% if estimateItemListUrl is defined %}
+                        <li><a onclick="estimateView();"><i class="entypo newspaper"></i> {{ 'VIEW_CLIENT_SITE' | trans }}</a></li>
+                        <li><a onclick="estimateSend('estimate');"><i class="entypo direction"></i> {{ 'SEND_ESTIMATE' | trans }}</a></li>
+                    {% endif %}
+                    {% if grid.exportUrl is defined %}<li><a href="{{ grid.exportUrl }}"><i class="entypo download"></i> {{ 'EXPORT' | trans }}</a></li>{% endif %}
+                    {% if importUrl is defined %}<li><a href="{{ importUrl }}"><i class="entypo upload"></i> {{ 'IMPORT' | trans }}</a></li>{% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        {# End toolbar #}
+
+        <div id="{{ grid.jsId | default('grid') }}" style="margin-top: 15px">
+        </div>
+
+        {% block afterGrid %}
+        {% endblock %}
+        {{ block('gridToolbar') }}
+    {% endblock %}
+
+    {% block listGrid %}
+        {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% endembed %}
+    {% endblock %}
+
+{% endblock %}

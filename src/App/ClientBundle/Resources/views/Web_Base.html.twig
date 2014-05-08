@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Checkout</title>
+    {% block stylesheets %}
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link href="{{ asset('bundles/appclient/web/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+  </head>
+  <body>
+{% if config.clientHeader is defined %}{{ config.clientHeader|raw }}{% endif %}
+{% block content %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+{% if config.clientFooter is defined %}{{ config.clientFooter|raw }}{% endif %}
+  </body>
+</html>

@@ -1,0 +1,17 @@
+services:
+    easy_formatter:
+        class: Easy\FormatterBundle\Formatter\Manager
+        arguments: [@service_container, %easy_formatter.config%]
+
+    ## FORMATTER TYPE
+    easy_formatter_mapping:
+        class: Easy\FormatterBundle\Formatter\Type\Mapping
+        arguments: [@easy_mapping]
+
+    easy_formatter_datetime:
+        class: Easy\FormatterBundle\Formatter\Type\DateTime
+        arguments: [@service_container]
+
+    easy_formatter_date:
+        class: Easy\FormatterBundle\Formatter\Type\Date
+        arguments: [@service_container]

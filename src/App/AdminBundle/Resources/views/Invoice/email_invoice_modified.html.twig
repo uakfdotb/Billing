@@ -1,0 +1,24 @@
+{% block subject %}
+    New invoice from {{ businessName }}
+{% endblock %}
+
+{% block html %}
+    Dear <b>{{ client.firstName }}</b> <b>{{ client.lastName }}</b> (<b>{{ client.company }}</b>),<br />
+    <br />
+    This is a brief e-mail to let you know that a new invoice has been created for your attention at {{ businessName }}. Please find details below:
+    <br />
+    <br />
+    Invoice ID: <b>{{ invoice.id }}</b><br />
+    Amount: <b>{{ invoice.totalAmount }}</b><br />
+    Invoice Date: <b>{{ invoice.issueDate|date('d-m-Y') }}</b><br />
+    Due Date: <b>{{ invoice.dueDate|date('d-m-Y') }}</b><br />
+    <br />
+    Payment link: <a href="{{ invoiceUrl }}">View invoice</a><br />
+    <br />
+    Please do not hesitate to get in touch should you have any questions.<br />
+    <br />
+    Kind regards,<br />
+    <br />
+    <b>{{ businessName }}</b><br />
+{% endblock %}
+

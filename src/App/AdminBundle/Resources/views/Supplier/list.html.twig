@@ -1,0 +1,49 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            firstname: { editable: true, nullable: true },
+            lastname: { editable: true, nullable: true },
+            company: { editable: true, nullable: true },
+            address1: { editable: true, nullable: true },
+            address2: { editable: true, nullable: true },
+            city: { editable: true, nullable: true },
+            state: { editable: true, nullable: true },
+            postcode: { editable: true, nullable: true },
+            country: { editable: true, nullable: true },
+            phone: { editable: true, nullable: true },
+            email: { editable: true, nullable: false, validation: { required: true} },
+            password: { editable: true, nullable: true }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120 },
+            { field:"firstname", title:"{{ 'FIRST_NAME' | trans }}", width: 150 },
+            { field:"lastname", title:"{{ 'LAST_NAME' | trans }}", width: 150},
+            { field:"company", title:"{{ 'COMPANY' | trans }}", width: 150},
+            { field:"address1", title:"{{ 'ADDRESS_1' | trans }}", hidden: true},
+            { field:"address2", title:"{{ 'ADDRESS_2' | trans }}", hidden: true},
+            { field:"city", title:"{{ 'CITY' | trans }}", hidden: true},
+            { field:"state", title:"{{ 'STATE' | trans }}", hidden: true},
+            { field:"postcode", title:"{{ 'POST_CODE' | trans }}", hidden: true},
+            { field:"country", title:"{{ 'COUNTRY' | trans }}", hidden: true},
+            { field:"phone", title:"{{ 'PHONE_NUMBER' | trans }}", hidden: true},
+            { field: "email", title:"{{ 'EMAIL_ADDRESS' | trans }}"},
+            { field:"password", title:"{{ 'PASSWORD' | trans }}", hidden: true},
+            { template: kendo.template(jQuery("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

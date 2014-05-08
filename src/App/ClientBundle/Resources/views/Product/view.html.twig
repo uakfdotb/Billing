@@ -1,0 +1,19 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'PRODUCT' | trans }}</h4>
+    <br />
+    <div class="row-fluid">
+        <div class="span6">
+            Product ID: {{ cp.id }}<br />
+            Paid: {{ cp.term }}<br />
+            IP (if applicable): {{ cp.ip }}<br />
+            Username (if applicable): {{ cp.user }}<br />
+            Password (if applicable): {{ cp.pass }}<br />
+            Server (if applicable): {{ cp.server }}<br />
+            Cost: {{ cp.cost }}<br />
+            Next Due: {{ cp.due|date('d/m/Y') }}<br />
+            Product Name: {{ cp.product }}<br />
+        </div>
+    </div>
+{% endblock %}

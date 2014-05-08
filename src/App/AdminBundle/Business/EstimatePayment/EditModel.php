@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\EstimatePayment;class EditModel{    public $idGateway;    public $transaction;    public $payDate;    public $amount;}

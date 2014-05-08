@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\AccountTransaction;class EditModel{    public $timestamp;    public $amount;    public $idDirection;    public $description;}

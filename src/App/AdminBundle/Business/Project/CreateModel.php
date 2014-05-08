@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\Project;class CreateModel{    public $name;    public $status;    public $idClient;    public $code;    public $budget;    public $dueDate;    public $idType;}

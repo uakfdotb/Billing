@@ -1,0 +1,291 @@
+body {
+  background: #fcfcfc;
+  font-family: 'Open Sans', sans-serif;
+}
+
+input, button, select, textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.apollo {
+  margin: 0 auto;
+  width: 325px;
+  height: 475px;
+  position: absolute;
+  top: 50%;
+  margin-top: -237px;
+  left: 50%;
+  margin-left: -162px;
+  border: 1px solid #e5e5e5;
+  background: #fff url(../../../images/login_bg.png) bottom center no-repeat;
+}
+.apollo .control-group {
+  margin-bottom: 0;
+}
+.apollo .popover {
+  width: 300px;
+}
+.apollo strong {
+  font-weight: 700;
+}
+.apollo.register .apollo-register {
+  display: block;
+}
+.apollo.register .apollo-back {
+  display: block;
+}
+.apollo.register .apollo-login {
+  display: none;
+}
+.apollo.forgotten-password .apollo-forgotten-password {
+  display: block;
+}
+.apollo.forgotten-password .apollo-register {
+  display: none;
+}
+.apollo.forgotten-password .apollo-back {
+  display: block;
+}
+.apollo.forgotten-password .apollo-login {
+  display: none;
+}
+.apollo .apollo-login {
+  margin-top: 75px;
+}
+.alert {
+  margin-top: 20px;
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+  text-shadow: none;
+}
+.alert+.apollo-login {
+  margin-top: 30px;
+}
+.apollo .apollo-login .apollo-seperator:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+.apollo .apollo-login .apollo-seperator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+.apollo .apollo-forgotten-password {
+  display: none;
+  max-width: 300px;
+}
+.apollo .apollo-password-reset {
+  display: none;
+  max-width: 300px;
+  text-align: center;
+}
+.apollo .apollo-register {
+  max-width: 300px;
+  display: none;
+}
+.apollo .apollo-register .apollo-seperator:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 36%;
+  border-bottom: 1px solid #cccccc;
+}
+.apollo .apollo-register .apollo-seperator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 36%;
+  border-bottom: 1px solid #cccccc;
+}
+.apollo a {
+  color: #444;
+}
+.apollo a:hover {
+  text-decoration: none;
+  color: #000;
+}
+.apollo.logged-in-facebook .btn-facebook,
+.apollo.logged-in-facebook .apollo-seperator,
+.apollo.logged-in-facebook input[type="text"] {
+  display: none;
+}
+.apollo.logged-in-facebook .apollo-register-account {
+  display: none;
+}
+.apollo.logged-in-facebook .apollo-change-account {
+  display: block;
+}
+.apollo .apollo-register-account {
+  text-align: center;
+  margin: 25px 0 0;
+}
+.apollo .apollo-change-account,
+.apollo .apollo-back {
+  display: none;
+  font-size: 12px;
+  margin: 25px 0 0 0;
+  text-align: center;
+}
+
+.apollo-facebook {
+  background: url(../img/loader.gif) no-repeat center center;
+}
+
+.apollo-seperator {
+  position: relative;
+  display: block;
+  margin: 0 0 20px 0;
+  text-align: center;
+  color: #666;
+}
+
+.apollo-container {
+  padding: 34px;
+  padding-top: 55px;
+}
+.apollo-container .apollo-logging-in,
+.apollo-container .apollo-registering {
+  text-align: center;
+  display: none;
+}
+.apollo-container .apollo-image {
+  -webkit-box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 150px;
+  margin: 0 auto 40px auto;
+  width: 200px;
+  height: 200px;
+  display: block;
+  background: url(../img/avatar.png) top center;
+}
+.apollo-container .btn-facebook {
+  margin-bottom: 20px;
+}
+.apollo-container form {
+  padding: 0;
+  margin: 0;
+}
+.apollo-container form input[type="text"],
+.apollo-container form input[type="password"] {
+  font-size: 16px;
+  font-weight: 300;
+  color: #99B5DB;
+  padding: 0;
+  padding-left: 30px;
+  position: relative;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  transition: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  margin: 0;
+}
+.apollo-container form .email, .apollo-container form .password {
+  position: relative;  
+}
+.apollo-container form .email {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #dbdbdb;
+}
+.apollo-container form .password {
+  padding-top: 5px;
+}
+.apollo-container form .email:before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  width: 14px;
+  height: 11px;
+  background: url(../../../images/email-icon.png) center no-repeat;
+  z-index: 1;
+}
+.apollo-container form .password:before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: 12px;
+  height: 15px;
+  background: url(../../../images/password-icon.png) center no-repeat;
+  z-index: 1;
+}
+.apollo-container .btn-facebook {
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #586B93;
+  background-image: -moz-linear-gradient(top, #7787a7, #586b93);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7787a7), to(#586b93));
+  background-image: -webkit-linear-gradient(top, #7787a7, #586b93);
+  background-image: -o-linear-gradient(top, #7787a7, #586b93);
+  background-image: linear-gradient(to bottom, #7787a7, #586b93);
+  background-repeat: repeat-x;
+  border-color: #586B93;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7787A7', endColorstr='#586B93', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.apollo-container .btn-facebook:hover,
+.apollo-container .btn-facebook:active,
+.apollo-container .btn-facebook:focus,
+.apollo-container .btn-facebook.active,
+.apollo-container .btn-facebook.disabled,
+.apollo-container .btn-facebook[disabled] {
+  color: #FFFFFF;
+  background-color: #586B93;
+}
+.apollo-container .captcha {
+  text-align: center;
+}
+.apollo-container .captcha input[type="text"] {
+  padding-left: 0;
+  text-align: center;
+  border-bottom: 1px solid #dbdbdb;
+  margin-top: 3px;
+}
+.apollo-container .captcha+.btn-primary {
+  margin-top: 25px;
+}
+.apollo-container .btn-primary {
+  color: #FFFFFF;
+  text-shadow: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  background: #ee685f;
+  padding: 11px 40px;
+  border-radius: 0;
+  border: 0;
+  width: auto;
+  margin: 0 auto;
+  margin-top: 75px;
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+.apollo-container .btn-primary:hover,
+.apollo-container .btn-primary:active,
+.apollo-container .btn-primary.active,
+.apollo-container .btn-primary.disabled,
+.apollo-container .btn-primary[disabled] {
+  text-decoration: underline;
+}
+.apollo-container textarea:focus, .apollo-container input[type="password"]:focus, .apollo-container input[type="datetime"]:focus, .apollo-container input[type="datetime-local"]:focus, .apollo-container input[type="date"]:focus, .apollo-container input[type="month"]:focus, .apollo-container input[type="time"]:focus, .apollo-container input[type="week"]:focus, .apollo-container input[type="number"]:focus, .apollo-container input[type="email"]:focus, .apollo-container input[type="url"]:focus, .apollo-container input[type="search"]:focus, .apollo-container input[type="tel"]:focus, .apollo-container input[type="color"]:focus, .apollo-container .uneditable-input:focus {
+  border: 0; 
+}

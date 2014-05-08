@@ -1,0 +1,3 @@
+App\PaymentsBundle\Entity\PaymentGateway:
+    constraints:
+        - App\PaymentsBundle\Validator\Constraints\PaymentGateway: ~

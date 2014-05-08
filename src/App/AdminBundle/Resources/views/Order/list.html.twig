@@ -1,0 +1,43 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridButtons %}
+            {{ parent() }}
+
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            orderNumber: { editable: false, nullable: true },
+            product: { editable: false, nullable: true },
+            client: { editable: false, nullable: true },
+            timestamp: { editable: false, nullable: true },
+            status: { editable: false, nullable: false },
+            idInvoice: { editable: false, nullable: false },
+            maxmindData: { editable: false, nullable: false },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 85 },
+            { field:"orderNumber", title:"{{ 'ORDER_NUMBER' | trans }}", width: 120 },
+            { field:"product", title:"{{ 'PRODUCT' | trans }}", width: 150, filterable: false, sortable: false },
+            { field:"client", title:"{{ 'CLIENT' | trans }}", width: 150, filterable: false, sortable: false},
+            { field:"timestamp", title:"{{ 'TIMESTAMP' | trans }}", width: 120, filterable: false, sortable: false},
+            { field:"status", title:"{{ 'STATUS' | trans }}", width: 120, filterable: false, sortable: false},
+            { field:"idInvoice", title:"{{ 'INVOICE' | trans }} {{ 'ID' | trans }}", width: 120, filterable: false, sortable: false},
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 },
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -1,0 +1,747 @@
+services:
+    ## LISTENER
+    app_admin.listener.load_mapping:
+        class: App\AdminBundle\Listener\LoadMapping
+        tags: [{name: kernel.event_listener, event: kernel.controller, method: onKernelController}]
+        arguments: [@service_container]
+
+    ## HELPER
+    app_admin.helper.form:
+        class: App\AdminBundle\Helper\Form
+        arguments: [@service_container]
+    app_admin.helper.kendo_grid:
+        class: App\AdminBundle\Helper\KendoGrid
+        arguments: [@service_container]
+    app_admin.helper.common:
+        class: App\AdminBundle\Helper\Common
+        arguments: [@service_container]
+    app_admin.helper.doctrine:
+        class: App\AdminBundle\Helper\Doctrine
+        arguments: [@service_container]
+    app_admin.helper.mapping:
+        class: App\AdminBundle\Helper\Mapping
+        arguments: [@service_container]
+    app_admin.helper.billr_application:
+        class: App\AdminBundle\Helper\BillrApplication
+        arguments: [@service_container]
+    app_admin.helper.user:
+        class: App\AdminBundle\Helper\User
+        arguments: [@service_container]
+    app_admin.helper.formatter:
+        class: App\AdminBundle\Helper\Formatter
+        arguments: [@service_container]
+    app_admin.helper.bcrypt:
+        class: App\AdminBundle\Helper\Bcrypt
+    app_admin.helper.csv_parser:
+        class: App\AdminBundle\Helper\CsvParser
+        arguments: [@service_container]
+    app_admin.helper.credit_card_fraud_detection:
+        class: App\AdminBundle\Helper\CreditCardFraudDetection
+        arguments: [@service_container]
+    app_admin.helper.mcrypt:
+        class: App\AdminBundle\Helper\Mcrypt
+        arguments: [@service_container]
+    app_admin.helper.captcha:
+        class: App\AdminBundle\Helper\Captcha
+        arguments: [@service_container]
+    app_admin.helper.curl:
+        class: App\AdminBundle\Helper\Curl
+        arguments: [@service_container]
+    app_admin.helper.disk_quota:
+        class: App\AdminBundle\Helper\DiskQuota
+        arguments: [@service_container]
+    app_admin.helper.automation_helper:
+        class: App\AdminBundle\Helper\Provision\AutomationHelper
+        arguments: [@service_container]
+    app_admin.helper.gateway_helper:
+        class: App\AdminBundle\Helper\Gateway\GatewayHelper
+        arguments: [@service_container]
+
+    ## FORM TYPE    
+    app_admin.form.type.texteditor:
+        class: App\AdminBundle\Form\Type\TextEditor
+        arguments: [@service_container]
+        tags:
+            - { name: form.type, alias: texteditor }
+    app_admin.form.type.file_attachment:
+        class: App\AdminBundle\Form\Type\FileAttachment
+        arguments: [@service_container]
+        tags:
+            - { name: form.type, alias: file_attachment }
+
+    app_admin.form.type.date_picker:
+        class: App\AdminBundle\Form\Type\DatePicker
+        arguments: [@service_container]
+        tags:
+            - { name: form.type, alias: date_picker }
+    app_admin.form.type.datetime_picker:
+        class: App\AdminBundle\Form\Type\DateTimePicker
+        arguments: [@service_container]
+        tags:
+            - { name: form.type, alias: datetime_picker }
+
+    ## MONOLOG
+    app_admin.handler.loggly:
+        class: App\AdminBundle\Handler\LogglyHandler
+        calls: 
+            - [ setEntityManager, [ "@doctrine.orm.entity_manager" ] ]
+            - [ setContainer, [ "@service_container" ] ]
+
+    ##########################
+    ## BUSINESS 
+
+    # CLIENT
+    app_admin.business.client.grid_handler:
+        class: App\AdminBundle\Business\Client\GridHandler
+        arguments: [@service_container]
+    app_admin.business.client.create_handler:
+        class: App\AdminBundle\Business\Client\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.client.edit_handler:
+        class: App\AdminBundle\Business\Client\EditHandler
+        arguments: [@service_container]
+    app_admin.business.client.delete_handler:
+        class: App\AdminBundle\Business\Client\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.client.import_grid_handler:
+        class: App\AdminBundle\Business\Client\ImportGridHandler
+        arguments: [@service_container]
+    app_admin.business.client.import_validator:
+        class: App\AdminBundle\Business\Client\ImportValidator
+        arguments: [@service_container]
+    app_admin.business.client.import_process:
+        class: App\AdminBundle\Business\Client\ImportProcess
+        arguments: [@service_container]
+    app_admin.business.client.order_handler:
+        class: App\AdminBundle\Business\Client\OrderHandler
+        arguments: [@service_container]
+    app_admin.business.client.statement_generator:
+        class: App\AdminBundle\Business\Client\StatementGenerator
+        arguments: [@service_container]
+
+    # PROJECT
+    app_admin.business.project.grid_handler:
+        class: App\AdminBundle\Business\Project\GridHandler
+        arguments: [@service_container]
+    app_admin.business.project.create_handler:
+        class: App\AdminBundle\Business\Project\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.project.edit_handler:
+        class: App\AdminBundle\Business\Project\EditHandler
+        arguments: [@service_container]
+    app_admin.business.project.delete_handler:
+        class: App\AdminBundle\Business\Project\DeleteHandler
+        arguments: [@service_container]
+
+    # PROJECT TRACKING
+    app_admin.business.project_tracking.grid_handler:
+        class: App\AdminBundle\Business\ProjectTracking\GridHandler
+        arguments: [@service_container]
+    app_admin.business.project_tracking.create_handler:
+        class: App\AdminBundle\Business\ProjectTracking\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.project_tracking.edit_handler:
+        class: App\AdminBundle\Business\ProjectTracking\EditHandler
+        arguments: [@service_container]
+    app_admin.business.project_tracking.delete_handler:
+        class: App\AdminBundle\Business\ProjectTracking\DeleteHandler
+        arguments: [@service_container]
+
+    # PROJECT ATTACHMENT
+    app_admin.business.project_attachment.grid_handler:
+        class: App\AdminBundle\Business\ProjectAttachment\GridHandler
+        arguments: [@service_container]
+    app_admin.business.project_attachment.create_handler:
+        class: App\AdminBundle\Business\ProjectAttachment\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.project_attachment.edit_handler:
+        class: App\AdminBundle\Business\ProjectAttachment\EditHandler
+        arguments: [@service_container]
+    app_admin.business.project_attachment.delete_handler:
+        class: App\AdminBundle\Business\ProjectAttachment\DeleteHandler
+        arguments: [@service_container]
+
+    # PROJECT TASK
+    app_admin.business.project_task.grid_handler:
+        class: App\AdminBundle\Business\ProjectTask\GridHandler
+        arguments: [@service_container]
+    app_admin.business.project_task.create_handler:
+        class: App\AdminBundle\Business\ProjectTask\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.project_task.edit_handler:
+        class: App\AdminBundle\Business\ProjectTask\EditHandler
+        arguments: [@service_container]
+    app_admin.business.project_task.delete_handler:
+        class: App\AdminBundle\Business\ProjectTask\DeleteHandler
+        arguments: [@service_container]
+
+    # ESTIMATE
+    app_admin.business.estimate.grid_handler:
+        class: App\AdminBundle\Business\Estimate\GridHandler
+        arguments: [@service_container]
+    app_admin.business.estimate.create_handler:
+        class: App\AdminBundle\Business\Estimate\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.estimate.edit_handler:
+        class: App\AdminBundle\Business\Estimate\EditHandler
+        arguments: [@service_container]
+    app_admin.business.estimate.delete_handler:
+        class: App\AdminBundle\Business\Estimate\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.estimate.grid_discussion_handler:
+        class: App\AdminBundle\Business\Estimate\GridDiscussionHandler
+        arguments: [@service_container]
+    app_admin.business.estimate.create_discussion_handler:
+        class: App\AdminBundle\Business\Estimate\CreateDiscussionHandler
+        arguments: [@service_container]
+
+    # ESTIMATE ITEM
+    app_admin.business.estimate_item.grid_handler:
+        class: App\AdminBundle\Business\EstimateItem\GridHandler
+        arguments: [@service_container]
+    app_admin.business.estimate_item.create_handler:
+        class: App\AdminBundle\Business\EstimateItem\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.estimate_item.edit_handler:
+        class: App\AdminBundle\Business\EstimateItem\EditHandler
+        arguments: [@service_container]
+    app_admin.business.estimate_item.delete_handler:
+        class: App\AdminBundle\Business\EstimateItem\DeleteHandler
+        arguments: [@service_container]
+
+    # RECURRING
+    app_admin.business.recurring.grid_handler:
+        class: App\AdminBundle\Business\Recurring\GridHandler
+        arguments: [@service_container]
+    app_admin.business.recurring.create_handler:
+        class: App\AdminBundle\Business\Recurring\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.recurring.edit_handler:
+        class: App\AdminBundle\Business\Recurring\EditHandler
+        arguments: [@service_container]
+    app_admin.business.recurring.delete_handler:
+        class: App\AdminBundle\Business\Recurring\DeleteHandler
+        arguments: [@service_container]
+
+    # RECURRING ITEMS
+    app_admin.business.recurring_item.grid_handler:
+        class: App\AdminBundle\Business\RecurringItem\GridHandler
+        arguments: [@service_container]
+    app_admin.business.recurring_item.create_handler:
+        class: App\AdminBundle\Business\RecurringItem\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.recurring_item.edit_handler:
+        class: App\AdminBundle\Business\RecurringItem\EditHandler
+        arguments: [@service_container]
+    app_admin.business.recurring_item.delete_handler:
+        class: App\AdminBundle\Business\RecurringItem\DeleteHandler
+        arguments: [@service_container]
+
+    # TICKET
+    app_admin.business.ticket.grid_handler:
+        class: App\AdminBundle\Business\Ticket\GridHandler
+        arguments: [@service_container]
+    app_admin.business.ticket.create_handler:
+        class: App\AdminBundle\Business\Ticket\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.ticket.edit_handler:
+        class: App\AdminBundle\Business\Ticket\EditHandler
+        arguments: [@service_container]
+    app_admin.business.ticket.delete_handler:
+        class: App\AdminBundle\Business\Ticket\DeleteHandler
+        arguments: [@service_container]
+
+    # TICKET ITEMS
+    app_admin.business.ticket_item.grid_handler:
+        class: App\AdminBundle\Business\TicketItem\GridHandler
+        arguments: [@service_container]
+    app_admin.business.ticket_item.create_handler:
+        class: App\AdminBundle\Business\TicketItem\CreateHandler
+        arguments: [@service_container]
+
+    ## CONFIG
+    app_admin.business.config.edit_handler:
+        class: App\AdminBundle\Business\Config\EditHandler
+        arguments: [@service_container]
+
+    ## GATEWAY
+    app_admin.business.gateway.edit_handler:
+        class: App\AdminBundle\Business\Config\EditGatewayHandler
+        arguments: [@service_container]
+
+    ## GATEWAY
+    app_admin.business.payment_gateway.grid_handler:
+        class: App\AdminBundle\Business\PaymentGateway\GridHandler
+        arguments: [@service_container]
+
+    # STAFF
+    app_admin.business.staff.grid_handler:
+        class: App\AdminBundle\Business\Staff\GridHandler
+        arguments: [@service_container]
+    app_admin.business.staff.create_handler:
+        class: App\AdminBundle\Business\Staff\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.staff.edit_handler:
+        class: App\AdminBundle\Business\Staff\EditHandler
+        arguments: [@service_container]
+    app_admin.business.staff.delete_handler:
+        class: App\AdminBundle\Business\Staff\DeleteHandler
+        arguments: [@service_container]
+
+    ## LOGIN
+    app_admin.business.login.staff_provider:
+        class: App\AdminBundle\Business\Login\StaffProvider
+        arguments: [@service_container]
+    app_admin.business.login.client_provider:
+        class: App\AdminBundle\Business\Login\ClientProvider
+        arguments: [@service_container]
+    app_admin.business.login.bcrypt_password_encoder:
+        class: App\AdminBundle\Business\Login\BcryptPasswordEncoder
+        arguments: [@service_container]
+    app_admin.business.login.login_listener:
+        class: App\AdminBundle\Business\Login\LoginListener
+        arguments: [@service_container]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onLogin }
+
+    # PRODUCT
+    app_admin.business.product.grid_handler:
+        class: App\AdminBundle\Business\Product\GridHandler
+        arguments: [@service_container]
+    app_admin.business.product.create_handler:
+        class: App\AdminBundle\Business\Product\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.product.edit_handler:
+        class: App\AdminBundle\Business\Product\EditHandler
+        arguments: [@service_container]
+    app_admin.business.product.delete_handler:
+        class: App\AdminBundle\Business\Product\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.product.import_grid_handler:
+        class: App\AdminBundle\Business\Product\ImportGridHandler
+        arguments: [@service_container]
+    app_admin.business.product.import_validator:
+        class: App\AdminBundle\Business\Product\ImportValidator
+        arguments: [@service_container]
+    app_admin.business.product.import_process:
+        class: App\AdminBundle\Business\Product\ImportProcess
+        arguments: [@service_container]
+
+    # PRODUCT CUSTOM FIELDS
+    app_admin.business.product.custom_field.manager:
+        class: App\AdminBundle\Business\Product\CustomField\Manager
+        arguments: [@service_container]
+    app_admin.business.product.custom_field.cpanel:
+        class: App\AdminBundle\Business\Product\CustomField\Cpanel
+        arguments: [@service_container]
+    app_admin.business.product.custom_field.solusvm:
+        class: App\AdminBundle\Business\Product\CustomField\Solusvm
+        arguments: [@service_container]
+
+    # AUTOMATION GROUP
+    app_admin.business.automation_group.grid_handler:
+        class: App\AdminBundle\Business\AutomationGroup\GridHandler
+        arguments: [@service_container]
+    app_admin.business.automation_group.create_handler:
+        class: App\AdminBundle\Business\AutomationGroup\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.automation_group.edit_handler:
+        class: App\AdminBundle\Business\AutomationGroup\EditHandler
+        arguments: [@service_container]
+    app_admin.business.automation_group.delete_handler:
+        class: App\AdminBundle\Business\AutomationGroup\DeleteHandler
+        arguments: [@service_container]
+
+    # SUPPLIER
+    app_admin.business.supplier.grid_handler:
+        class: App\AdminBundle\Business\Supplier\GridHandler
+        arguments: [@service_container]
+    app_admin.business.supplier.create_handler:
+        class: App\AdminBundle\Business\Supplier\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.supplier.edit_handler:
+        class: App\AdminBundle\Business\Supplier\EditHandler
+        arguments: [@service_container]
+    app_admin.business.supplier.delete_handler:
+        class: App\AdminBundle\Business\Supplier\DeleteHandler
+        arguments: [@service_container]
+
+    # SUPPLIER PURCHASE
+    app_admin.business.supplier_purchase.grid_handler:
+        class: App\AdminBundle\Business\SupplierPurchase\GridHandler
+        arguments: [@service_container]
+    app_admin.business.supplier_purchase.create_handler:
+        class: App\AdminBundle\Business\SupplierPurchase\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.supplier_purchase.edit_handler:
+        class: App\AdminBundle\Business\SupplierPurchase\EditHandler
+        arguments: [@service_container]
+    app_admin.business.supplier_purchase.delete_handler:
+        class: App\AdminBundle\Business\SupplierPurchase\DeleteHandler
+        arguments: [@service_container]
+
+
+    # ACCOUNT
+    app_admin.business.account.grid_handler:
+        class: App\AdminBundle\Business\Account\GridHandler
+        arguments: [@service_container]
+    app_admin.business.account.create_handler:
+        class: App\AdminBundle\Business\Account\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.account.edit_handler:
+        class: App\AdminBundle\Business\Account\EditHandler
+        arguments: [@service_container]
+    app_admin.business.account.delete_handler:
+        class: App\AdminBundle\Business\Account\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.account.transfer_handler:
+        class: App\AdminBundle\Business\Account\TransferHandler
+        arguments: [@service_container]
+
+    # ACCOUNT TRANSACTION
+    app_admin.business.account_transaction.grid_handler:
+        class: App\AdminBundle\Business\AccountTransaction\GridHandler
+        arguments: [@service_container]
+    app_admin.business.account_transaction.create_handler:
+        class: App\AdminBundle\Business\AccountTransaction\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.account_transaction.edit_handler:
+        class: App\AdminBundle\Business\AccountTransaction\EditHandler
+        arguments: [@service_container]
+    app_admin.business.account_transaction.delete_handler:
+        class: App\AdminBundle\Business\AccountTransaction\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.account_transaction.doctrine_listener_post_update:
+        class: App\AdminBundle\Business\AccountTransaction\DoctrineListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+    app_admin.business.account_transaction.doctrine_listener_post_remove:
+        class: App\AdminBundle\Business\AccountTransaction\DoctrineListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }
+    app_admin.business.account_transaction.doctrine_listener_post_persist:
+        class: App\AdminBundle\Business\AccountTransaction\DoctrineListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+
+    # LOG
+    app_admin.business.log.grid_handler:
+        class: App\AdminBundle\Business\Log\GridHandler
+        arguments: [@service_container]
+
+    # CLIENT LOG
+    app_admin.business.client_log.grid_handler:
+        class: App\AdminBundle\Business\ClientLog\GridHandler
+        arguments: [@service_container]
+
+    # ESTIMATE PURCHASE
+    app_admin.business.estimate_purchase.grid_handler:
+        class: App\AdminBundle\Business\EstimatePurchase\GridHandler
+        arguments: [@service_container]
+    app_admin.business.estimate_purchase.create_handler:
+        class: App\AdminBundle\Business\EstimatePurchase\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.estimate_purchase.edit_handler:
+        class: App\AdminBundle\Business\EstimatePurchase\EditHandler
+        arguments: [@service_container]
+    app_admin.business.estimate_purchase.delete_handler:
+        class: App\AdminBundle\Business\EstimatePurchase\DeleteHandler
+        arguments: [@service_container]
+
+    # CLIENT CONTACTS
+    app_admin.business.client_contact.grid_handler:
+        class: App\AdminBundle\Business\ClientContact\GridHandler
+        arguments: [@service_container]
+    app_admin.business.client_contact.create_handler:
+        class: App\AdminBundle\Business\ClientContact\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.client_contact.edit_handler:
+        class: App\AdminBundle\Business\ClientContact\EditHandler
+        arguments: [@service_container]
+    app_admin.business.client_contact.delete_handler:
+        class: App\AdminBundle\Business\ClientContact\DeleteHandler
+        arguments: [@service_container]
+
+    # INVOICE
+    app_admin.business.invoice.grid_handler:
+        class: App\AdminBundle\Business\Invoice\GridHandler
+        arguments: [@service_container]
+    app_admin.business.invoice.create_handler:
+        class: App\AdminBundle\Business\Invoice\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.invoice.edit_handler:
+        class: App\AdminBundle\Business\Invoice\EditHandler
+        arguments: [@service_container]
+    app_admin.business.invoice.delete_handler:
+        class: App\AdminBundle\Business\Invoice\DeleteHandler
+        arguments: [@service_container]
+
+    # INVOICE ITEM
+    app_admin.business.invoice_item.grid_handler:
+        class: App\AdminBundle\Business\InvoiceItem\GridHandler
+        arguments: [@service_container]
+    app_admin.business.invoice_item.create_handler:
+        class: App\AdminBundle\Business\InvoiceItem\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.invoice_item.edit_handler:
+        class: App\AdminBundle\Business\InvoiceItem\EditHandler
+        arguments: [@service_container]
+    app_admin.business.invoice_item.delete_handler:
+        class: App\AdminBundle\Business\InvoiceItem\DeleteHandler
+        arguments: [@service_container]
+
+    # INVOICE PAYMENT
+    app_admin.business.invoice_payment.grid_handler:
+        class: App\AdminBundle\Business\InvoicePayment\GridHandler
+        arguments: [@service_container]
+    app_admin.business.invoice_payment.create_handler:
+        class: App\AdminBundle\Business\InvoicePayment\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.invoice_payment.edit_handler:
+        class: App\AdminBundle\Business\InvoicePayment\EditHandler
+        arguments: [@service_container]
+    app_admin.business.invoice_payment.delete_handler:
+        class: App\AdminBundle\Business\InvoicePayment\DeleteHandler
+        arguments: [@service_container]
+
+    # CLIENT EMAILS
+    app_admin.business.client_email.grid_handler:
+        class: App\AdminBundle\Business\ClientEmail\GridHandler
+        arguments: [@service_container]
+
+    # CLIENT NOTES
+    app_admin.business.client_note.grid_handler:
+        class: App\AdminBundle\Business\ClientNote\GridHandler
+        arguments: [@service_container]
+    app_admin.business.client_note.create_handler:
+        class: App\AdminBundle\Business\ClientNote\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.client_note.edit_handler:
+        class: App\AdminBundle\Business\ClientNote\EditHandler
+        arguments: [@service_container]
+    app_admin.business.client_note.delete_handler:
+        class: App\AdminBundle\Business\ClientNote\DeleteHandler
+        arguments: [@service_container]
+        
+    # CLIENT PRODUCTS
+    app_admin.business.client_product.grid_handler:
+        class: App\AdminBundle\Business\ClientProduct\GridHandler
+        arguments: [@service_container]
+    app_admin.business.client_product.create_handler:
+        class: App\AdminBundle\Business\ClientProduct\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.client_product.edit_handler:
+        class: App\AdminBundle\Business\ClientProduct\EditHandler
+        arguments: [@service_container]
+    app_admin.business.client_product.delete_handler:
+        class: App\AdminBundle\Business\ClientProduct\DeleteHandler
+        arguments: [@service_container]
+
+    # ORDER
+    app_admin.business.order.grid_handler:
+        class: App\AdminBundle\Business\Order\GridHandler
+        arguments: [@service_container]
+    app_admin.business.order.create_handler:
+        class: App\AdminBundle\Business\Order\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.order.edit_handler:
+        class: App\AdminBundle\Business\Order\EditHandler
+        arguments: [@service_container]
+    app_admin.business.order.delete_handler:
+        class: App\AdminBundle\Business\Order\DeleteHandler
+        arguments: [@service_container]
+
+    # EMAIL
+    app_admin.business.email.grid_handler:
+        class: App\AdminBundle\Business\Email\GridHandler
+        arguments: [@service_container]
+    app_admin.business.email.create_handler:
+        class: App\AdminBundle\Business\Email\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.email.edit_handler:
+        class: App\AdminBundle\Business\Email\EditHandler
+        arguments: [@service_container]
+    app_admin.business.email.delete_handler:
+        class: App\AdminBundle\Business\Email\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.email.mass_send_handler:
+        class: App\AdminBundle\Business\Email\MassSendHandler
+        arguments: [@service_container]
+
+    # PRODUCT GROUP
+    app_admin.business.product_group.grid_handler:
+        class: App\AdminBundle\Business\ProductGroup\GridHandler
+        arguments: [@service_container]
+    app_admin.business.product_group.create_handler:
+        class: App\AdminBundle\Business\ProductGroup\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.product_group.edit_handler:
+        class: App\AdminBundle\Business\ProductGroup\EditHandler
+        arguments: [@service_container]
+    app_admin.business.product_group.delete_handler:
+        class: App\AdminBundle\Business\ProductGroup\DeleteHandler
+        arguments: [@service_container]
+
+    # TAX
+    app_admin.business.tax.grid_handler:
+        class: App\AdminBundle\Business\Tax\GridHandler
+        arguments: [@service_container]
+    app_admin.business.tax.create_handler:
+        class: App\AdminBundle\Business\Tax\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.tax.edit_handler:
+        class: App\AdminBundle\Business\Tax\EditHandler
+        arguments: [@service_container]
+    app_admin.business.tax.delete_handler:
+        class: App\AdminBundle\Business\Tax\DeleteHandler
+        arguments: [@service_container]
+
+
+    # PERMISSION GROUPS
+    app_admin.business.permission_group.grid_handler:
+        class: App\AdminBundle\Business\PermissionGroup\GridHandler
+        arguments: [@service_container]
+    app_admin.business.permission_group.create_handler:
+        class: App\AdminBundle\Business\PermissionGroup\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.permission_group.edit_handler:
+        class: App\AdminBundle\Business\PermissionGroup\EditHandler
+        arguments: [@service_container]
+    app_admin.business.permission_group.delete_handler:
+        class: App\AdminBundle\Business\PermissionGroup\DeleteHandler
+        arguments: [@service_container]
+
+    # PHYSICAL ITEM
+    app_admin.business.physical_item.grid_handler:
+        class: App\AdminBundle\Business\PhysicalItem\GridHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item.create_handler:
+        class: App\AdminBundle\Business\PhysicalItem\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item.edit_handler:
+        class: App\AdminBundle\Business\PhysicalItem\EditHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item.delete_handler:
+        class: App\AdminBundle\Business\PhysicalItem\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item.doctrine_listener_post_update:
+        class: App\AdminBundle\Business\PhysicalItem\DoctrineListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+    app_admin.business.physical_item.doctrine_listener_post_remove:
+        class: App\AdminBundle\Business\PhysicalItem\DoctrineListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }
+    app_admin.business.physical_item.doctrine_listener_post_persist:
+        class: App\AdminBundle\Business\PhysicalItem\DoctrineListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+    # PHYSICAL ITEM SOLD
+    app_admin.business.physical_item_sold.grid_handler:
+        class: App\AdminBundle\Business\PhysicalItemSold\GridHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_sold.create_handler:
+        class: App\AdminBundle\Business\PhysicalItemSold\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_sold.edit_handler:
+        class: App\AdminBundle\Business\PhysicalItemSold\EditHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_sold.delete_handler:
+        class: App\AdminBundle\Business\PhysicalItemSold\DeleteHandler
+        arguments: [@service_container]
+
+    # PHYSICAL ITEM PURCHASE
+    app_admin.business.physical_item_purchase.grid_handler:
+        class: App\AdminBundle\Business\PhysicalItemPurchase\GridHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_purchase.create_handler:
+        class: App\AdminBundle\Business\PhysicalItemPurchase\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_purchase.edit_handler:
+        class: App\AdminBundle\Business\PhysicalItemPurchase\EditHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_purchase.delete_handler:
+        class: App\AdminBundle\Business\PhysicalItemPurchase\DeleteHandler
+        arguments: [@service_container]
+    app_admin.business.physical_item_purchase.bulk_handler:
+        class: App\AdminBundle\Business\PhysicalItemPurchase\BulkHandler
+        arguments: [@service_container]
+
+    # CREDIT NOTE
+    app_admin.business.credit_note.grid_handler:
+        class: App\AdminBundle\Business\CreditNote\GridHandler
+        arguments: [@service_container]
+    app_admin.business.credit_note.create_handler:
+        class: App\AdminBundle\Business\CreditNote\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.credit_note.edit_handler:
+        class: App\AdminBundle\Business\CreditNote\EditHandler
+        arguments: [@service_container]
+    app_admin.business.credit_note.delete_handler:
+        class: App\AdminBundle\Business\CreditNote\DeleteHandler
+        arguments: [@service_container]
+    
+    # SERVER
+    app_admin.business.server.grid_handler:
+        class: App\AdminBundle\Business\Server\GridHandler
+        arguments: [@service_container]
+    app_admin.business.server.create_handler:
+        class: App\AdminBundle\Business\Server\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.server.edit_handler:
+        class: App\AdminBundle\Business\Server\EditHandler
+        arguments: [@service_container]
+    app_admin.business.server.delete_handler:
+        class: App\AdminBundle\Business\Server\DeleteHandler
+        arguments: [@service_container]
+
+    # SERVER GROUP
+    app_admin.business.server_group.grid_handler:
+        class: App\AdminBundle\Business\ServerGroup\GridHandler
+        arguments: [@service_container]
+    app_admin.business.server_group.create_handler:
+        class: App\AdminBundle\Business\ServerGroup\CreateHandler
+        arguments: [@service_container]
+    app_admin.business.server_group.edit_handler:
+        class: App\AdminBundle\Business\ServerGroup\EditHandler
+        arguments: [@service_container]
+    app_admin.business.server_group.delete_handler:
+        class: App\AdminBundle\Business\ServerGroup\DeleteHandler
+        arguments: [@service_container]
+
+    # MAILER SERVICE
+    app_admin.mailer:
+        class: App\AdminBundle\Service\MailerService
+        arguments: [@service_container, @mailer, @twig, @swiftmailer.transport.real]
+
+
+    # DASHBOARD - WIDGET
+    app_admin.business.dashboard.widget.sales_of_the_month:
+        class: App\AdminBundle\Business\Dashboard\Widget\SalesOfTheMonthWidget
+        arguments: [@service_container]
+    app_admin.business.dashboard.widget.total_value_of_sales:
+        class: App\AdminBundle\Business\Dashboard\Widget\TotalValueOfSalesWidget
+        arguments: [@service_container]
+    app_admin.business.dashboard.widget.total_value_of_expenses:
+        class: App\AdminBundle\Business\Dashboard\Widget\TotalValueOfExpensesWidget
+        arguments: [@service_container]
+    app_admin.business.dashboard.widget.profit:
+        class: App\AdminBundle\Business\Dashboard\Widget\ProfitWidget
+        arguments: [@service_container]
+    app_admin.business.dashboard.widget.bank_balance:
+        class: App\AdminBundle\Business\Dashboard\Widget\BankBalanceWidget
+        arguments: [@service_container]
+    app_admin.business.dashboard.widget.client_status:
+        class: App\AdminBundle\Business\Dashboard\Widget\ClientStatusWidget
+        arguments: [@service_container]
+    app_admin.business.dashboard.widget.invoice_status:
+        class: App\AdminBundle\Business\Dashboard\Widget\InvoiceStatusWidget
+        arguments: [@service_container]

@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\SupplierPurchase;class EditModel{    public $idSupplier;    public $name;    public $purchaseDate;    public $attachments;    public $amount;    public $nominalCode;}

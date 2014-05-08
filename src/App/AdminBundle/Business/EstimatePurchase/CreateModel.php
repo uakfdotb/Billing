@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\EstimatePurchase;class CreateModel{    public $idEstimate;    public $name;    public $purchaseDate;    public $attachments;}

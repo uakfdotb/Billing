@@ -1,0 +1,122 @@
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background-color: #F1F1F1;
+    background-image: url(../img/bglg.png);
+    background-repeat: repeat-x;
+    margin: 0px;
+    padding: 0px;
+}
+
+#logincontainer {
+    width: 638px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+    background-image: url(../img/loginlogo.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+#logincontainer h1 {
+    text-transform: uppercase;
+    color: #00C4E6;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+    margin-top: 116px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    background-image: url(../img/toph.png);
+    background-repeat: no-repeat;
+    width: 638px;
+    padding-top: 19px;
+    padding-right: 0px;
+    padding-bottom: 9px;
+    padding-left: 0px;
+    text-shadow: -1px -1px 0px #313131;
+    filter: dropshadow(color=#313131, offx=-1, offy=-1);
+}
+
+#logincontainer #box {
+    background-image: url(../img/loginbox.png);
+    background-repeat: repeat-y;
+    width: 638px;
+    overflow: hidden;
+}
+
+#box form {
+    background-image: url(../img/bgbox2.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    margin: 0px;
+    width: 638px;
+    padding: 0px;
+    overflow: hidden;
+    display: block;
+    height: auto;
+}
+
+form .input {
+    background-image: url(../img/logininput.gif);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 535px;
+    margin-top: 35px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.input .label {
+    color: #00C4E6;
+    font-size: 24px;
+    font-weight: bold;
+    width: 144px;
+    padding-top: 20px;
+    padding-left: 35px;
+    overflow: hidden;
+    float: left;
+}
+
+.input .inputbox {
+    float: left;
+    padding-top: 15px;
+    padding-left: 5px;
+    width: 335px;
+    overflow: hidden;
+}
+
+#box form .input .inputbox #username, #box form .input .inputbox #password {
+    width: 330px;
+    height: 40px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    text-shadow: 1px 1px 0px #ffffff;
+    filter: dropshadow(color=#ffffff, offx=1, offy=1);
+}
+
+#logincontainer #box form #submitbutton {
+    display: block;
+    height: 43px;
+    width: 142px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+#logincontainer #box form #ipaddress {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 11px;
+    text-align: center;
+    margin-top: -30px;
+    padding-left: 200px;
+    color: #999A9B;
+    position: absolute;
+    text-shadow: 1px 1px 0px #ffffff;
+    filter: dropshadow(color=#ffffff, offx=1, offy=1);
+}

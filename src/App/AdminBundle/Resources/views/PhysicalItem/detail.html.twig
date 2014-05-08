@@ -1,0 +1,249 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'VIEW_INVENTORY' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    <div class="row">
+        <div class="span5"><h2>{{ 'ITEM' | trans }}: {{ physicalItem.name }}</h2></div>
+        <div class="span5"><h2>{{ 'STOCK' | trans }}: <span id="stock">{{ physicalItem.stock }}</span></h2></div>
+    </div>
+
+    <h3>Items Out</h3>
+    <div class="pull-right">
+        <a onclick='$("#GridSold").data("kendoGrid").addRow();' class="add-button"><i class="entypo plus"></i> <span>{{ 'ADD_NEW_RECORD' | trans }}</span></a>
+        <div class="actions">
+            <a href="#" class="actions-button"><i class="entypo cog"></i> <span>Actions</span> <i class="entypo chevron-down chevron"></i></a>
+            <ul class="actions-panel">
+                <li><a onclick="makeInvoice();"><i class="entypo newspaper"></i> {{ 'MAKE_INVOICE' | trans }}</a></li>
+                <li><a href="{{ gridSold.exportUrl }}"><i class="entypo download"></i> {{ 'EXPORT' | trans }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="{{ gridSold.jsId | default('grid') }}"></div>
+
+    <br />
+    <h3>Items In</h3>
+    <div class="pull-right">
+        <a href="{{ gridPurchase.createUrl }}" class="add-button"><i class="entypo plus"></i> <span>{{ 'ADD_NEW_RECORD' | trans }}</span></a>
+        <div class="actions">
+            <a href="#" class="actions-button"><i class="entypo cog"></i> <span>Actions</span> <i class="entypo chevron-down chevron"></i></a>
+            <ul class="actions-panel">
+                <li><a onclick="addPurchase();"><i class="entypo newspaper"></i> {{ 'ADD_TO_PURCHASE' | trans }}</a></li>
+                <li><a href="{{ bulkCreateUrl }}"><i class="entypo newspaper"></i> {{ 'ADD_ITEMS' | trans }}</a></li>
+                <li><a href="{{ gridPurchase.exportUrl }}"><i class="entypo download"></i> {{ 'EXPORT' | trans }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="{{ gridPurchase.jsId | default('grid') }}"></div>
+
+    <!-- SOLD -->
+    {% embed 'AppAdminBundle:Component:grid_inline.html.twig' with {'grid': gridSold} %}
+        {% block initializeGrid %}
+            var clients;
+            jQuery.ajax({
+            url: '{{ clientListUrl }}',
+            success: function(response) {
+            clients = response["data"];
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            }
+            });
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "create" },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block extraConfigDataSource %}
+            change: waitAndCalculateStock
+        {% endblock %}
+
+        {% block gridFields %}
+            id: {editable: false,nullable: false},
+            idClient: {editable: true, nullable: false},
+            dateOut: {editable: true, nullable: true, type: "datetime", validation: {required: true}},
+            sellPrice: {editable: true,nullable: false, type: "number"},
+            quantity: {editable: true,nullable: false, type: "number"},
+            serialNumber: {editable: true, nullable: false},
+            invoiced: {editable: false, nullable: false},
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", hidden: true, width: 50},
+            { field:"idClient", title:"{{ 'CLIENT' | trans }}",  width: 200, values: clients },
+            { field:"dateOut", title:"{{ 'DATE_OUT' | trans }}", editor: dateEditor, template: '#= kendo.toString(dateOut,"dd/MM/yyyy HH:mm:ss") #', width: 200, filterable: false },
+            { field:"sellPrice", title:"{{ 'SELL_PRICE' | trans }}", editor: moneyEditor, width: 90, template:"{{ currencyCode }}#=sellPrice#", filterable: false },
+            { field:"quantity", title:"{{ 'QUANTITY' | trans }}", editor: qtyEditor, width: 95, template: kendo.template(jQuery('#qty').html()), filterable: false },
+            { field:"serialNumber", title:"{{ 'SERIAL_NUMBER' | trans }}",  width: 200 },
+            { command: "edit", width: 200  },
+            { command: "destroy", width: 100  },
+            { template: kendo.template(jQuery('#invoice-check-box').html()), width: 40  }
+        {% endblock %}
+
+        {% block extraScript %}
+            function dateEditor(container, options){
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDateTimePicker({
+            format: 'dd/MM/yyyy HH:mm:ss'
+            });
+            }
+            function moneyEditor(container, options) {
+            $('<input min="0" type="number" data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoNumericTextBox({
+            format: "{{ currencyCode }}#.##"
+            });
+            }
+            function qtyEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoNumericTextBox();
+            }
+
+            function makeInvoice() {
+            var items = document.getElementsByName("item");
+            var soldItems = '';
+            for(i=0; i
+            <items.length; i++){
+            if(items[i].checked){
+            soldItems += items[i].value + ",";
+            }
+            }
+
+            if (soldItems == '') {
+            alert("{{ 'PLEASE_CHOOSE_SOME_ITEM' | trans }}");
+            }
+            else {
+            var url = "{{ soldItemInvoiceUrl }}?id={{ physicalItem.id }}&soldItems=" + soldItems;
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET",url,false);
+            xmlhttp.send();
+            var result = xmlhttp.responseText;
+            if (result != 'ok') {
+            alert("{{ 'COULDNT_MAKE_INVOICE_FOR_SELECTED_ITEM' | trans }}");
+            }
+            else {
+            alert("Invoices has been created");
+            jQuery("#{{ grid.jsId | default('grid') }}").data("kendoGrid").dataSource.read();
+            }
+            }
+            }
+        {% endblock %}
+    {% endembed %}
+
+    <!-- ITEMS IN -->
+    {% embed 'AppAdminBundle:Component:grid_inline.html.twig' with {'grid': gridPurchase} %}
+        {% block initializeGrid %}
+            var suppliers;
+            jQuery.ajax({
+            url: '{{ supplierListUrl }}',
+            success: function(response) {
+            suppliers = response["data"];
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            }
+            });
+        {% endblock %}
+
+        {% block extraConfigDataSource %}
+            change: waitAndCalculateStock
+        {% endblock %}
+
+        {% block gridButtons %}
+            <script id="edit-button-purchase" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="{{ grid.editUrl }}?id=${id}">
+                    <i class="k-icon k-edit"></i>{{ 'EDIT' | trans }}
+                </a>
+            </script>
+            <script id="qty" type="text/x-kendo-template">
+                <span name="quantity">#=quantity#</span>
+            </script>
+            <script id="invoice-check-box" type="text/x-kendo-template">
+                <input type="checkbox" name="item" value="#=id#" # if(invoiced == 1){ # disabled="disabled" # } # />
+            </script>
+            <script id="item-in-checkbox" type="text/x-kendo-template">
+                <input type="checkbox" name="item" value="#=id#" # if(invoiced == 1){ # disabled="disabled" # } # />
+            </script>
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "create", text: '{{ 'ADD_ONE_ITEM' | trans }}' },
+            { name: "bulk", 'text': '{{ 'ADD_ITEMS' | trans }}', template: kendo.template(jQuery('#create-button-purchase-bulk').html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button-purchase').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: {editable: false,nullable: false},
+            idSupplier: {editable: true, nullable: false},
+            dateIn: {editable: true, nullable: true, type: "datetime", validation: {required: true}},
+            purchasePrice: {editable: true,nullable: false, type: "number"},
+            quantity: {editable: true,nullable: false, type: "number"},
+            serialNumber: {editable: true, nullable: false},
+            isPurchased: {editable: false, nullable: false},
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", hidden: true, width: 50},
+            { field:"idSupplier", title:"{{ 'SUPPLIER' | trans }}",  width: 200, values: suppliers },
+            { field:"dateIn", title:"{{ 'DATE_IN' | trans }}", editor: dateEditor, template: '#= kendo.toString(dateIn,"dd/MM/yyyy HH:mm:ss") #', width: 200, filterable: false },
+            { field:"purchasePrice", title:"{{ 'PURCHASE_PRICE' | trans }}", editor: moneyEditor, width: 90, template:"{{ currencyCode }}#=purchasePrice#", filterable: false },
+            { field:"quantity", title:"{{ 'QUANTITY' | trans }}", editor: qtyEditor, width: 95, template: kendo.template(jQuery('#qty').html()), filterable: false },
+            { field:"serialNumber", title:"{{ 'SERIAL_NUMBER' | trans }}",  width: 200 },
+            { command: "edit", width: 200  },
+            { command: "destroy", width: 100  },
+            { template: kendo.template(jQuery('#item-in-checkbox').html()), width: 40  }
+        {% endblock %}
+
+        {% block extraScript %}
+            function waitAndCalculateStock(data){
+            setTimeout(calculateStock, 250, data);
+            }
+            function calculateStock(data) {
+            jQuery.ajax({
+            url: '{{ readStockUrl }}',
+            success: function(response) {
+            jQuery('#stock').html(response);
+            }
+            });
+            }
+
+            function addPurchase() {
+            var items = document.getElementsByName("itemIn");
+            var purchaseItems = '';
+            for(i=0; i
+            <items.length; i++){
+            if(items[i].checked){
+            purchaseItems += items[i].value + ",";
+            }
+            }
+
+            if (purchaseItems == '') {
+            alert("{{ 'PLEASE_CHOOSE_SOME_ITEM' | trans }}");
+            }
+            else {
+            var url = "{{ addPurchaseUrl }}?id={{ physicalItem.id }}&purchaseItems=" + purchaseItems;
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET",url,false);
+            xmlhttp.send();
+            var result = xmlhttp.responseText;
+            if (result != 'ok') {
+            alert("{{ 'COULDNT_ADD_PURCHASES_FOR_SELECTED_ITEMS' | trans }}");
+            }
+            else {
+            alert("{{ 'PURCHASE_HAS_BEEN_ADDED' | trans }}");
+            jQuery("#{{ grid.jsId | default('grid') }}").data("kendoGrid").dataSource.read();
+            }
+            }
+            }
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+

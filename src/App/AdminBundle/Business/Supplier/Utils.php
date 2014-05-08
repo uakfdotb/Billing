@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\Supplier;class Utils{    public static function getSupplierName($container, $supplier)    {        $name = $supplier->getFirstName() . ' ' . $supplier->getLastName();        if ($supplier->getCompany() != null) {            $name .= ' (' . $supplier->getCompany() . ')';        }        return $name;    }}

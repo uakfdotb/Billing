@@ -1,0 +1,133 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block afterTitle %}
+
+{% endblock %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block initializeGrid %}
+            var clientDs;
+
+            jQuery.when(
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/client_list',
+            success: function(response) {
+            clientDs = response["data"];
+            }
+            })
+            ).done(function(a1){
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            });
+        {% endblock %}
+
+        {% block gridButtons %}
+            {{ parent() }}
+
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            idClient: { editable: true, nullable: false },
+            subject: {editable: true, nullable: false },
+            amount: { editable: false, nullable: false, type: "number" },
+            payment: { editable: false, nullable: false, type: "number" },
+            status: { editable: false, nullable: false },
+
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 95, template: '<a href="{{ invoiceItemListUrl }}?id=#=id#">#=number#</a>' },
+            { field:"idClient", title:"{{ 'CLIENT' | trans }}", width: 200,
+            filterable: {
+            ui: clientFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"subject", title:"{{ 'SUBJECT' | trans }}", width: 250 },
+            { field:"amount", title:"{{ 'AMOUNT' | trans }}", width: 90, template: "{{ currencyCode }}#= amount ? amount.toFixed(2) : amount#", filterable: false, sortable: false },
+            { field:"payment", title:"{{ 'PAYMENT' | trans }}", width: 90, template: "{{ currencyCode }}#= payment ? payment.toFixed(2) : payment#", filterable: false, sortable: false },
+            { field:"status", title:"{{ 'INVOICE_STATUS' | trans }}", width: 90, filterable: false },
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100  },
+            { template: '<input type="checkbox" name="invoice" value="#=id#" />', width: 40  },
+        {% endblock %}
+
+        {% block extraScript %}
+
+            function clientFilter(element) {
+            element.kendoDropDownList({
+            dataSource: clientDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECTED_VALUE' | trans }} --"
+            });
+            }
+
+
+            jQuery("#{{ grid.jsId | default('grid') }}").on("click", ".k-refund", function() {
+            var button = this.name;
+            var status = this.innerHTML;
+
+            var url = '{{ invoiceRefundUrl }}?id=' + button;
+
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET",url,false);
+            xmlhttp.send();
+            var result = xmlhttp.responseText;
+
+            if(result == 'ok'){
+
+            }
+            else{
+            alert("{{ 'COULDNT_REFUND' }}");
+            }
+            jQuery("#{{ grid.jsId | default('grid') }}").data("kendoGrid").dataSource.read();
+            });
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+
+{% block afterGrid %}
+    <br />
+    <script type="text/javascript">
+        function invoiceView() {
+            var invoices = document.getElementsByName("invoice");
+            for (i = 0; i < invoices.length; i++) {
+                if (invoices[i].checked) {
+                    window.open("{{ invoiceViewClientSideUrl }}?id=" + invoices[i].value);
+                }
+            }
+        }
+
+        function invoiceSend(msg) {
+            var invoices = document.getElementsByName("invoice");
+            for (i = 0; i < invoices.length; i++) {
+                if (invoices[i].checked) {
+                    var url = "{{ invoiceSendEmailUrl }}?msg=" + msg + "&id=" + invoices[i].value;
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", url, false);
+                    xmlhttp.send();
+                    var result = xmlhttp.responseText;
+                    if (result != "ok") alert("{{ 'COULDNT_SEND_INVOICE' | trans }} " + invoices[i].value + ". {{ 'ERROR' | trans }}: " + result);
+                }
+            }
+            if (msg == 'invoice') {
+                alert("{{ 'FINISHED_SENDING_INVOICE' | trans }}");
+            } else if (msg == 'reminder') {
+                alert("{{ 'FINISHED_SENDING_REMINDER' | trans }}");
+            } else {
+                alert("{{ 'FINISHED_SENDING_OVERDUE_NOTICE' | trans }}");
+            }
+        }
+    </script>
+{% endblock %}

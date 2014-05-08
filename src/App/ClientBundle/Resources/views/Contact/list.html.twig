@@ -1,0 +1,27 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'CONTACT_LIST' | trans }}</h4>
+    <br />
+    <div class="pull-right" style="margin-bottom: 10px">
+        <a href="{{ path('app_client_contact_create') }}" class="btn btn-small btn-primary">{{ 'CREATE_NEW_CONTACT' | trans }}</a>
+    </div>
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block header %}
+            <th>{{ 'FIRST_NAME' | trans }}</th>
+            <th>{{ 'LAST_NAME' | trans }}</th>
+            <th>{{ 'EMAIL' | trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['firstname'] }}</td>
+            <td>{{ row['lastname'] }}</td>
+            <td>{{ row['email'] }}</td>
+            <td>
+                <a href="{{ path('app_client_contact_edit') }}?id={{ row['id'] }}">{{ 'EDIT' | trans }}</a>&nbsp;&nbsp;
+                <a onclick="return confirm('{{ 'ARE_YOU_REALLY_WANT_TO_DELETE_THIS_CONTACT' | trans }}?')" href="{{ path('app_client_contact_delete') }}?id={{ row['id'] }}">{{ 'DELETE' | trans }}</a>&nbsp;&nbsp;
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

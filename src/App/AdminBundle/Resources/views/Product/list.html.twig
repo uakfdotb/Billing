@@ -1,0 +1,55 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridButtons %}
+            {{ parent() }}
+
+            <script id="import-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="{{ importUrl }}">
+                    <i class="k-icon k-add"></i>
+                    {{ 'IMPORT_PRODUCTS' | trans }}
+                </a>
+            </script>
+            <script id="order-button" type="text/x-kendo-template">
+                <a target="_blank" class="k-button k-button-icontext" href="#= orderLink #">
+                    <i class="k-icon"></i>
+                    {{ 'ORDER' | trans }}
+                </a>
+            </script>
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "import", text: "{{ 'IMPORT' | trans }}", template: kendo.template(jQuery('#import-button').html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: false, nullable: true },
+            idProductGroup: { editable: false, nullable: true },
+            idPaymentType: { editable: false, nullable: true },
+            stock: { editable: false, nullable: false },
+            orderLink: { editable: false, nullable: false },
+            income: { editable: false, nullable: false }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 85 },
+            { field:"name", title:"{{ 'NAME' | trans }}", width: 200 },
+            { field:"idProductGroup", title:"{{ 'GROUP' | trans }}", width: 120},
+            { field:"idPaymentType", title:"{{ 'PAYMENT_TYPE' | trans }}", width: 130},
+            { field: "stock", title:"{{ 'STOCK' | trans }}", width: 100},
+            { field: "income", title:"{{ 'INCOME' | trans }}", width: 120},
+            { template: kendo.template($("#order-button").html()), width: 115},
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

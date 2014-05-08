@@ -1,0 +1,103 @@
+{% block field_row %}
+    <div class="span5">
+        <div class="control-group {% if errors %} error {% endif %}">
+            {# <label class="control-label" for="inputEmail">{{ form.vars.attr['placeholder'] | trans }}</label> #}
+            <label class="control-label" for="form_{{ form.vars.name }}">{{ form.vars.label | trans }}</label>
+
+            <div class="controls">
+                {{ form_widget(form) }}<br />
+
+                {% if errors %}
+                    <div>
+                    <span class="error" style="display: inline;">
+                        {{ form_errors(form) }}
+                    </span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock field_row %}
+
+{% block field_errors %}
+    {% if errors is defined %}
+        {% for error in errors %}
+            {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<br />
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block texteditor_widget %}
+    <textarea {{ block('widget_attributes') }}>{{ value | raw }}</textarea>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery("#{{ id }}").kendoEditor();
+        });
+    </script>
+{% endblock %}
+
+{% block file_attachment_widget %}
+    <input {{ block('widget_attributes') }} />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#{{ id }}').liveEdit({
+                height: 450,
+                css: ['{{ asset('bundles/appadmin/wysiwyg/styles/default.css')}}'],
+                groups: [
+                    ["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
+                    ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],
+                    ["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
+                    ["group4", "", ["LinkDialog", "ImageDialog", "TableDialog", "Emoticons", "Snippets"]],
+                    ["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]]
+                ]
+            });
+            $('#{{ id }}').data('liveEdit').startedit();
+        });
+    </script>
+{% endblock %}
+
+{% block date_picker_widget %}
+    {% spaceless %}
+        {{ block('date_widget') }}
+        <script type="text/javascript">
+            jQuery("#{{ form.vars.id }}").kendoDatePicker({
+                format: "{{ format }}"
+            });
+        </script>
+    {% endspaceless %}
+{% endblock %}
+
+{% block money_widget %}
+    {% set prepends = money_pattern|split('{{ widget }}') %}
+
+    <div class="{% if prepends[0]|trim|length > 0 %}input-prepend{% endif %} {% if prepends[1]|trim|length > 0 %}input-append{% endif %}">
+        {% if prepends[0]|trim|length > 0 %}
+            <span class="add-on">{{ prepends[0] }}</span>
+        {% endif %}
+
+        {{ block('field_widget') }}
+
+        {% if prepends[1]|trim|length > 0 %}
+            <span class="add-on">{{ prepends[1] }}</span>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block percent_widget %}
+    <div class="input-append">
+        {{ block('field_widget') }}
+        <span class="add-on">%</span>
+    </div>
+{% endblock %}
+
+{% block colorpicker %}
+    {% spaceless %}
+        <input {{ block('widget_attributes') }} />
+        <script>
+            $("#{{ form.vars.id }}").kendoColorPicker({
+                value: "#ffffff",
+                buttons: false
+            });
+        </script>
+    {% endspaceless %}
+{% endblock %}

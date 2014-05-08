@@ -1,0 +1,82 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridButtons %}
+            {% spaceless %}
+            <script id="edit-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="{{ grid.editUrl }}?id=${id}">
+                    <i class="k-icon k-edit"></i>{{ 'EDIT' | trans }}
+                </a>
+            </script>
+
+            <script id="create-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="{{ grid.createUrl }}">
+                    <i class="k-icon k-add"></i>
+                    {{ grid.addNewLabel | default('ADD_NEW_RECORD') | trans }}
+                </a>
+            </script>
+
+            <script id="export-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="javascript:kendoGridExportToCsv('{{ grid.editUrl }}', '{{ grid.jsId | default('grid') }}')">
+                    <i class="k-icon k-export"></i>
+                    {{ 'EXPORT' | trans }}
+                </a>
+            </script>
+
+            <script id="import-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="#">
+                    <i class="k-icon k-add"></i>
+                    {{ 'PAYMENT_GATEWAYS' | trans }}
+                </a>
+            </script>{% endspaceless %}
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) }
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: false, nullable: true }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 85 },
+            { field:"name", title:"{{ 'NAME' | trans }}", width: 250 },
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{# % block contentxxx %}
+    <h4>{{ 'GATEWAY_LIST' | trans }}</h4>
+    <br />
+    <div class="pull-right" style="margin-bottom: 10px">
+        <a href="{{ path('app_admin_payment_gateway_new') }}" class="btn btn-small btn-primary">{{ 'CREATE_NEW_GATEWAY' | trans }}</a>
+    </div>
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block header %}
+            <th>{{ 'ID' | trans }}</th>
+            <th>{{ 'NAME' | trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['id'] }}</td>
+            <td>{{ row['name'] }}</td>
+            <td>
+                <form method="post" action="{{ path('app_admin_payment_gateway_delete', {id: row['id']}) }}">
+                    <a href="{{ path('app_admin_payment_gateway_edit', {id: row['id']}) }}" class="btn">Edit</a>
+                    <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure?');"/>
+                </form>
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock % #}

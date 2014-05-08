@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Loading Deck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ asset('bundles/appadmin/styles/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/appadmin/styles/bootstrap-responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bundles/appadmin/themes/new/css/application.css') }}">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <script src="{{ asset('bundles/appadmin/js/jquery.min.js') }}"></script>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">BILLR</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                    <li><a href="{{ logoutUrl }}"><span>Logout</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span3 bs-docs-sidebar">
+            <ul class="nav nav-tabs nav-stacked">
+                {% for menuId, menu in mainMenu %}
+                    <li {% if menuId == headerMenuSelected %} class="active" {% endif %}>
+                        <a href="{{ menu['href'] }}">
+                            {{ menu['title'] }}
+                            <i class="icon-chevron-right"></i>
+                        </a>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="span9">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% block footerScript %}
+
+{% endblock %}
+</body>
+</html>

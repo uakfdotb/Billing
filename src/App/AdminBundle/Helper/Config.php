@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Helper;class Config{    protected $container;    public function __construct($container)    {        $this->container = $container;    }}

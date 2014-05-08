@@ -1,0 +1,21 @@
+{% extends 'AppAdminBundle:Base:create_one_column.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'MASS_SEND_EMAIL' | trans }}</h2>
+{% endblock %}
+
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    {% embed 'AppAdminBundle:Component:form_one_column.html.twig' with {'form': form} %}
+        {% block visibleFields %}
+            <fieldset>
+                {{ form_row(form['view'].clients) }}
+                {{ form_row(form['view'].subject) }}
+                {{ form_row(form['view'].body) }}
+            </fieldset>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

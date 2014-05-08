@@ -1,0 +1,67 @@
+<div id="{{ widgetElementId }}" class="half" style="height: 200px">
+    <h2>
+        Client Status
+        <span>&laquo;&raquo;</span>
+        {% include 'AppAdminBundle:Dashboard:viewby.html.twig' with {'id': widgetElementId ~ '_viewby', 'viewby': viewby } %}  
+    </h2>
+    <div id="{{ widgetElementId }}_graph"></div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var clientStatusChart = new Highcharts.Chart({
+            chart: {
+                renderTo: '{{ widgetElementId }}_graph',
+                type: 'pie',
+                height: 170,
+                width: 464,
+                backgroundColor: 'transparent',
+            },
+            credits: {
+                enabled: false
+            },
+            colors: ["#68c1ba", "#ffcd77", "#f27362", "#7b8ca0"],
+            title: {
+                text:''
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            series: [{
+                name: 'Clients',
+                data: []
+            }]
+        }); 
+
+        // Process action
+        buildWidgetViewByEvents(
+            '#{{ widgetElementId }}_viewby',
+            '{{ widgetUpdateUrl }}',
+            '{{ idWidget }}',
+            onClientStatusChartPreUpdate,
+            onClientStatusChartPostUpdate
+        );
+
+        function onClientStatusChartPreUpdate() {
+            clientStatusChart.showLoading();
+        }
+        
+        function onClientStatusChartPostUpdate(response) {
+            var series = JSON.parse(response);            
+            clientStatusChart.series[0].setData(series['data']);
+            clientStatusChart.hideLoading();
+        }
+    });
+</script>

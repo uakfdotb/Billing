@@ -1,0 +1,4 @@
+services:
+    cache:
+        class: Doctrine\Common\Cache\FilesystemCache
+        arguments: ["%kernel.root_dir%/cache/php"]

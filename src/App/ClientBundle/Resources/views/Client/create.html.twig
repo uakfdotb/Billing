@@ -1,0 +1,18 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block headerBar %}
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block content %}
+    <a href="{{ path('app_client_invoice_list') }}">{{ 'BACK_TO_LOGIN_PAGE' | trans }}</a>
+    <br /><br />
+    <h4>{{ 'REGISTER' | trans }}</h4>
+    <br />
+
+    {% embed 'AppAdminBundle:Component:form_basic.html.twig' with {'form': form} %}
+
+    {% endembed %}
+{% endblock %}

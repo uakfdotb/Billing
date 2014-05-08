@@ -1,0 +1,40 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridButtons %}
+            {{ parent() }}
+            <script id="mass-send-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="{{ path('app_admin_email_mass_send') }}">
+                    <i class="k-icon k-add"></i>
+                    {{ 'MASS_SEND' | trans }}
+                </a>
+            </script>
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+            { name: "massSend", text: "{{ 'MASS_SEND' | trans }}", template: kendo.template(jQuery('#mass-send-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: false, nullable: true },
+            subject: { editable: false, nullable: true },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 85 },
+            { field:"name", title:"{{ 'NAME' | trans }}", width: 200 },
+            { field:"subject", title:"{{ 'SUBJECT' | trans }}", width: 200 },
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 },
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

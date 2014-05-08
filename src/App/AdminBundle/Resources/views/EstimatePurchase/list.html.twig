@@ -1,0 +1,33 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            idEstimate: { editable: false, nullable: true },
+            name: { editable: false, nullable: true },
+            purchaseDate: { editable: false, nullable: false },
+            attachments: { editable: false, nullable: false }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 85 },
+            { field:"idEstimate", title:"{{ 'ESTIMATE' | trans }}", width: 250 },
+            { field:"name", title:"{{ 'NAME' | trans }}", filterable: false, width: 200 },
+            { field:"purchaseDate", title:"{{ 'PURCHASE_DATE' | trans }}", filterable: false, width: 200 },
+            { field:"attachments", title:"{{ 'ATTACHMENT' | trans }}", filterable: false, sortable: false, template: '#=attachments#'},
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

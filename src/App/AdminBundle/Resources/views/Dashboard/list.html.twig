@@ -1,0 +1,97 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'DASHBOARD' | trans }}</h2>
+{% endblock %}
+
+{% block customHeaderScript %}
+    <link href="{{ asset('bundles/appadmin/lib/kendo-ui/styles/kendo.common.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/appadmin/lib/kendo-ui/styles/kendo.bootstrap.min.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('bundles/appadmin/lib/modernizr/modernizr-latest.js') }}"></script>
+    <script src="{{ asset('bundles/appadmin/lib/jquery-ui/jquery-ui-1.10.3.min.js') }}"></script>
+    <script src="{{ asset('bundles/appadmin/lib/highcharts/highcharts-3.0.7.min.js') }}"></script>
+    <link href="{{ asset('bundles/appadmin/themes/new/css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% block listPageHeader %}   
+        <div id="dashboardContentWrapper">
+            {% for widget in widgets %}
+                {{ widget['content'] | raw }}
+            {% endfor %}    
+        </div>
+
+        <script type="text/javascript">
+            function buildWidgetViewByEvents(viewByNode, updateUrl, idWidget, onPreUpdate, onPostUpdate) {
+                jQuery(viewByNode).find('li').click(function() {
+                    jQuery(viewByNode).find('li').removeClass('current');
+                    jQuery(this).addClass('current');
+                    var selectedValue = jQuery(this).attr('value');
+
+                    jQuery(viewByNode).find('b').html(jQuery(this).html());
+
+                    onPreUpdate();
+                    jQuery.ajax({
+                        url: updateUrl,
+                        data: {
+                            value: selectedValue,
+                            idWidget: idWidget
+                        },
+                        success: function(response) {
+                            onPostUpdate(response);
+                        }
+                    });
+                });
+
+                jQuery(viewByNode).find('.current').click();
+            }
+
+            function buildAmountElement(amount) {
+                return jQuery('<b style="color: #686868">{{ currencyCode }}</b><b>' + amount + '</b>');
+            }
+
+            function buildNumberElement(number) {
+                return jQuery('<b>' + number + '</b>');
+            }
+
+            function buildPercentageElement(percentage) {
+                if (percentage == 'NA') {
+                    return jQuery('<span style="color: #BBBBBB">N/A</span>');
+                }
+
+                var s = percentage.split('.');                
+                if (percentage >= 0) {
+                    return jQuery('<span>&#9650;' + s[0] + '<small>.' + s[1] + '%</small></span>');
+                }
+                else {
+                    return jQuery('<span class="neg">&#9660;' + (-s[0]) + '<small>.' + s[1] + '%</small></span>');
+                }
+            }
+
+            jQuery("#dashboardContentWrapper").sortable({
+                distance: 32,
+                start: function(event, ui) {
+                    jQuery(ui["item"]).addClass("clicked");
+                },
+                stop: function ( event, ui ) {
+                    jQuery(ui["item"]).removeClass("clicked");
+                },
+                update: function( event, ui ) {
+                    var sortOrder = '';
+                    jQuery("#dashboardContentWrapper").find('div').each(function() {
+                        sortOrder += "," + jQuery(this).attr('id');
+                    });
+                    
+                    jQuery.ajax({
+                        url: '{{ updateSortOrderUrl }}',
+                        data: {
+                            newOrder: sortOrder
+                        },
+                        context: document.body                
+                    });
+                }
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

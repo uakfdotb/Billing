@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\Email;class EditModel{    public $name;    public $subject;    public $body;}

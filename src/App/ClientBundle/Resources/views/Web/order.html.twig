@@ -1,0 +1,191 @@
+{% extends 'AppClientBundle::Web_Base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/appclient/web/css/checkout.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+ <div class="container">
+    <div class="checkout">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-11">
+
+                  <!-- ORDER FORM -->
+                  <form role="form" class="order-form" id="order-form" method="post">
+
+                    <input type="hidden" name="token" value="{{ csrf_token('order_form') }}" />
+
+                    <div class="fieldset">
+                        <p class="legend first"><span>1</span> Account credentials</p>
+                        <p>
+                          <input type="text" class="form-control half-row" placeholder="Email address" name="email" id="email-input" value="{{ app.user ? app.user.getEmail() : app.request.get('email') }}" />
+                          <input type="password" class="form-control half-row pull-right" placeholder="Password" name="password" id="password-input" value="{{ app.user ? '123456' : app.request.get('password') }}" />
+                        </p>
+                        {% if app.user is empty %}
+                        <p id="already-registered">
+                            <span>Already registered?</span><span style="display: none">Not a registered user?</span>
+                            <a href="#" class="login-link">Click here to login.</a><a href="#" class="login-link" style="display: none">Click here to bring the form back.</a>
+                            <button class="btn btn-danger btn-sm pull-right" id="login-button" style="display: none">Login</button>
+                        </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissable" id="login-failed" style="display: none">
+                        <button href="#" type="button" class="close">&times;</button>
+                        Login failed. Check your credentials and try again.
+                    </div>
+
+                    <div class="alert alert-warning alert-dismissable" id="login-warning" style="display: none">
+                        <button href="#" type="button" class="close">&times;</button>
+                        Enter your e-mail and password, and try again.
+                    </div>
+
+                    <div class="alert alert-success" id="login-success" {{ app.user ? '' : 'style="display: none"' }}>
+                        You are {{ app.user ? 'already' : 'successfully' }} logged in. Configure your package option to proceed.
+                    </div>
+
+                    {% if app.user is empty %}
+                    <div class="fieldset new-user">
+                        <p class="legend"><span>2</span> Basic information</p>
+                        <p>
+                          <input type="text" class="form-control half-row" placeholder="First name" name="firstname" value="{{ app.request.get('firstname') }}" />
+                          <input type="text" class="form-control half-row pull-right" placeholder="Last name" name="lastname" value="{{ app.request.get('lastname') }}" />
+                        </p>
+                        <p>
+                          <input type="text" class="form-control half-row" placeholder="Company name, or leave blank for none" name="company" value="{{ app.request.get('company') }}" />
+                        </p>
+                    </div>
+
+                    <div class="fieldset new-user">
+                        <p class="legend"><span>3</span> Postal address</p>
+                        <p>
+                          <input type="text" class="form-control half-row" placeholder="Address line 1" name="address1" value="{{ app.request.get('address1') }}" />
+                          <input type="text" class="form-control half-row pull-right" placeholder="Address line 2" name="address2" value="{{ app.request.get('address2') }}" />
+                        </p>
+                        <p>
+                          <input type="text" class="form-control half-row" placeholder="City" name="city" value="{{ app.request.get('city') }}" />
+                          <input type="text" class="form-control half-row pull-right" placeholder="Region / State" name="state" value="{{ app.request.get('state') }}" />
+                        </p>
+                        <p>
+                          <input type="text" class="form-control half-row" placeholder="Postal / Zip code" name="postcode" value="{{ app.request.get('postcode') }}" />
+                          <select class="form-control half-row pull-right" name="idCountry">
+                            <option disabled selected>Select a country</option>
+                            {% for id, name in countries %}
+                            <option value={{ id }}{% if app.request.get('idCountry') == id %} selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                          </select>
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    <div class="fieldset">
+                        <p class="legend"><span>{{ app.user ? '2' : '4' }}</span> Domain Name Configuration</p>
+                        <p class="check-control package-configuration">
+                          <input type="radio" name="domain_configuration" id="already-owned-domain" required />
+                          <label for="already-owned-domain">
+                            I will use a domain I already own and update my name servers.
+                          </label>
+                        </p>
+
+                        <!-- Already Owned Domain -->
+                        <div data-domain-selection="already-owned-domain">
+                          <p>
+                            <div class="input-prepend">
+                              <span class="add-on">http://www.</span>
+                              <input type="text" class="form-control half-row" placeholder="Existing Domain" name="domain" />
+                            </div>
+
+                          </p>
+                        </div>
+                        <!-- /Already Owned Domain -->
+                    </div>
+                    {% if config.tosUrl is not empty or config.privacyUrl is not empty %}
+                    <p class="check-control terms">
+                      <input type="checkbox" id="terms" name="terms" value="1" {{ app.request.get('terms') ? 'checked="checked"' : '' }} required />
+                      <label for="terms">
+                        I agree to the {% if config.tosUrl is not empty %}<a href="{{ config.tosUrl }}" target="_blank">Terms of Service</a>{% if config.privacyUrl is not empty %} and the <a href="{{ config.privacyUrl }}" target="_blank">Privacy Policy</a>{% endif %}{% else %}<a href="{{ config.privacyUrl }}" target="_blank">Privacy Policy</a>{% endif %}.
+                      </label>
+                    </p>
+                    {% endif %}
+                    <p class="sign-up"><input type="submit" class="btn btn-danger btn-lg order-submit" value="{{ app.user ? 'Order Now' : 'Sign Up' }}" /></p>
+                  </form>
+
+                </div>
+                <div class="col-md-1 spacer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12">
+
+              <!-- ORDER SUMMARY -->
+              <div class="order-summary">
+                <div class="header clearfix">
+                  <img src="{{ asset('bundles/appclient/web/img/clipboard.png') }}" />
+                  <span class="title">ORDER SUMMARY</span>
+                  <a class="pull-right" href="javascript:history.go(-1)">CHANGE</a>
+                </div>
+                <hr />
+                <div class="plan-price clearfix">
+                  <span>Plan &amp; Price:</span>
+                  <div class="details pull-right">
+                    <p><strong>{{ product.getName() }}</strong></p>
+                    <p><strong>{{ config.currencyCode }}{{ product.getShortestPeriodicityPrice()|number_format(2, '.', ',') }}</strong> /{{ product.getShortestPeriodicity()|slice(0, -2) }}</p>
+                    <p class="vat">excluding tax (where applicable)</p>
+                  </div>
+                </div>
+                <hr />
+                <div class="price-total clearfix">
+                  Price total:
+                  <span class="pull-right">{{ config.currencyCode }}{{ product.getShortestPeriodicityPrice()|number_format(2, '.', ',') }}</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-12">
+
+              <!-- SUPPORT CONTACT -->
+              <div class="contact">
+                <div class="row ruler">
+                  <div class="col-md-12">
+                    <div class="questions">
+                      <img src="{{ asset('bundles/appclient/web/img/question-mark.png') }}" />
+                      <span>Have any questions?</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row info">
+                  <div class="col-md-6">
+                    <p><img src="{{ asset('bundles/appclient/web/img/contact-email.png') }}"></p>
+                    <p>Email Address</p>
+                    <p><a href="mailto:{{ config.getDefaultEmail() }}">{{ config.getDefaultEmail() }}</a></p>
+                  </div>
+                  <div class="col-md-6">
+                    <p><img src="{{ asset('bundles/appclient/web/img/contact-phone.png') }}"></p>
+                    <p>Telephone</p>
+                    <p><a>{{ config.getDefaultPhone() }}</a></p>
+                  </div>
+                </div>
+                <div class="row ruler"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="{{ asset('bundles/appclient/web/js/checkout.js') }}"></script>
+{% endblock %}

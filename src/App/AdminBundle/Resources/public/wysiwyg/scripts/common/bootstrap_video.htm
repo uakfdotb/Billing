@@ -1,0 +1,71 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        .item {padding:15px 30px 30px;border-bottom:#e7e7e7 1px solid;
+            -webkit-box-shadow:0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow:0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 0 40px rgba(0, 0, 0, 0.1) inset;}
+        /* Responsive Video from Zurb Foundation. Copyright (c) 2011 ZURB, http://www.zurb.com/ License: MIT */
+        .flex-video {position:relative;padding-top:25px;padding-bottom:67.5%;height:0;margin-bottom:16px;overflow: hidden;}
+        .flex-video.widescreen {padding-bottom:57.25%;}
+        .flex-video.vimeo {padding-top:0;}
+        .flex-video iframe, .flex-video object, .flex-video embed {position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+        @media only screen and (max-device-width: 800px), only screen and (device-width: 1024px) and (device-height: 600px), only screen and (width: 1280px) and (orientation: landscape), only screen and (device-width: 800px), only screen and (max-width: 767px) {
+                .flex-video { padding-top: 0; }
+            }
+        body {padding:0px;overflow:hidden}
+    </style>
+    <script src="jquery-1.7.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function insertSnippet(id) {
+            parent.oUtil.obj.insertHTML(document.getElementById(id).innerHTML);
+        }
+        function setPreview() {
+            $('.flex-video iframe').attr('src', $('#inpUrl').val()); 
+        }
+    </script>
+</head>
+<body>
+
+
+<div class="item">
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Video</h4> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div id="divYoutube">
+            <article class="flex-video">   
+	        <iframe width="560" height="315" src="http://www.youtube.com/embed/e7OYeIXsW60"></iframe>
+            </article>
+        </div>
+
+        <label for="inpUrl">URL: </label>
+        <input id="inpUrl" type="text" class="form-control" value="http://www.youtube.com/embed/e7OYeIXsW60" onkeyup="setPreview()" />
+
+        <div class="alert-info" style="margin-top:12px;padding:10px;font-size:12px">
+        ex.<br />
+        http://player.vimeo.com/video/50676747 
+        <br />       
+        http://www.youtube.com/embed/e7OYeIXsW60
+        </div>
+        <br />
+        <a class="btn btn-default" href="javascript:insertSnippet('divYoutube')">Insert</a>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>

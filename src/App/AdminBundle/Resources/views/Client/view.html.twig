@@ -1,0 +1,166 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'EDIT_CLIENT' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    <div class="row-fluid client-page" style="margin-top: 1em">
+        <div class="span6">
+            <div class="row-fluid">
+                <div class="span12">
+                    <p class="item-name first">Name <a href="{{ path('app_admin_client_edit') }}?id={{ summary.clientId }}" class="item-edit"><i class="entypo pencil"></i>Edit Client</a></p>
+                    <h1 class="item-title">{{ summary.details.firstname }} {{ summary.details.lastname }}</h1>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <p class="item-name">Location</p>
+                    <p class="item-value">{{ summary.details.address1 }}{% if summary.details.address1 is not empty %} ,{{ summary.details.address2 }}{% endif %}{% if summary.details.city is not empty %}, {{ summary.details.city }}{% endif %}{% if summary.details.state is not empty %}, {{ summary.details.state }}{% endif %}{% if summary.details.postcode is not empty %}, {{ summary.details.postcode }}{% endif %}</p>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <p class="item-name">Email</p>
+                    <p class="item-value"><a href="mailto:{{ summary.details.email }}">{{ summary.details.email }}</a></p>
+                </div>
+                <div class="span6">
+                    <p class="item-name">Company</p>
+                    <p class="item-value">{{ summary.details.company }}</p>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <p class="item-name">Added on</p>
+                    <p class="item-value">{{ summary.signupDate }}</p>
+                </div>
+            </div>
+
+            <div class="row-fluid stats-bottom" style="margin-top: 30px;">
+                <div class="span4">
+                    <p class="item-name">Projects</p>
+                    <p class="item-value">{{ summary.numProjects }} <a href="{{ path('app_admin_project_create') }}?id={{ summary.clientId }}"><i class="entypo plus"></i></a></p>
+                </div>
+
+                <div class="span4">
+                    <p class="item-name">Estimates</p>
+                    <p class="item-value">{{ summary.numEstimates }} <a href="{{ path('app_admin_estimate_create') }}?id={{ summary.clientId }}"><i class="entypo plus"></i></a></p>
+                </div>
+
+                <div class="span4">
+                    <p class="item-name">Invoices</p>
+                    <p class="item-value">{{ summary.numInvoices }} <a href="{{ path('app_admin_invoice_create') }}?id={{ summary.clientId }}"><i class="entypo plus"></i></a></p>
+                </div>
+            </div>
+
+            <div class="row-fluid stats-bottom">
+                <div class="span4">
+                    <p class="item-name">Recurring</p>
+                    <p class="item-value">{{ summary.numRecurring }} <a href="{{ path('app_admin_recurring_create') }}?id={{ summary.clientId }}"><i class="entypo plus"></i></a></p>
+                </div>
+                <div class="span4">
+                    <p class="item-name">Credit Notes</p>
+                    <p class="item-value">{{ summary.numCredits }} <a href="{{ path('app_admin_credit_note_create') }}?id={{ summary.clientId }}"><i class="entypo plus"></i></a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="row-fluid stats">
+                <div class="span2">
+                    <span class="stat-title">Contacts</span>
+                    <h2>{{ summary.numContacts }}</h2>
+                    <a href="{{ path('app_admin_client_contact_list') }}?id={{ summary.clientId }}">See all</a>
+                </div>
+                <div class="span2">
+                    <span class="stat-title">Notes</span>
+                    <h2>{{ summary.numNotes }}</h2>
+                    <a href="{{ path('app_admin_client_note_list') }}?id={{ summary.clientId }}">See all</a>
+                </div>
+                <div class="span2">
+                    <span class="stat-title">Products</span>
+                    <h2>{{ summary.numProducts }}</h2>
+                    <a href="{{ path('app_admin_client_product_list') }}?id={{ summary.clientId }}">See all</a>
+                </div>
+
+                <div class="span6">
+                    <span class="stat-title">Generate Statement</span>  
+
+                    <form action="{{ statement_form['action'] }}" method="post" novalidate {{ form_enctype(statement_form['view']) }} class="statement-form">
+                        <div class="row-fluid statement-fields">
+                            {{ form_widget(statement_form['view'].fromDate) }}
+                            {{ form_errors(statement_form['view'].fromDate) }}
+
+                            {{ form_widget(statement_form['view'].toDate) }}
+                            {{ form_errors(statement_form['view'].toDate) }}
+                        </div>
+                        <div class="row-fluid statement-bottom">
+                            <input type="submit" class="statement-submit" value="Create" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row-fluid stats">
+                <div class="span6">
+                    <h2>{{ summary.balance }}</h2>
+                    <span class="stat-title">Balance</span>
+                </div>
+
+                <div class="span6 income">
+                    <h2>{{ summary.totalIncome }}</h2>
+                    <span class="stat-title">Total Income</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid recent-emails">
+        <div class="span12">
+            <h2>Recent Emails</h2>
+            <div id="{{ emails_grid.jsId | default('grid') }}" style="margin-top: 5px">
+            </div>
+                {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': emails_grid} %}
+                    {% block gridButtons %}
+                    {% endblock %}
+
+                    {% block gridToolbar %}
+                    {% endblock %}
+
+                    {% block gridFields %}
+                        id: { editable: false, nullable: false },
+                        subject: { editable: true, nullable: true },
+                        timestamp: { editable: true, nullable: true },
+                    {% endblock %}
+
+                    {% block gridColumns %}
+                        { field:"id", title:"{{ 'ID' | trans }}", width: 120 },
+                        { field:"subject", title:"{{ 'SUBJECT' | trans }}", width: 150 },
+                        { field:"timestamp", title:"{{ 'TIMESTAMP' | trans }}", width: 150},
+                    {% endblock %}
+
+                    {% block extraScript %}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery("#form_fromDate").kendoDatePicker({
+            format: "{{ config.dateFormat }}"
+        });
+
+        jQuery("#form_toDate").kendoDatePicker({
+            format: "{{ config.dateFormat }}"
+        });
+    </script>
+
+
+{% endblock %}

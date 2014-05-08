@@ -1,0 +1,31 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'PROJECT_LIST' | trans }}</h4>
+    <br />
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block header %}
+            <th>{{ 'ID' | trans }}</th>
+            <th>{{ 'NAME' | trans }}</th>
+            <th>{{ 'STATUS' | trans }}</th>
+            <th>{{ 'TYPE' | trans }}</th>
+            <th>{{ 'CODE' | trans }}</th>
+            <th>{{ 'BUDGET' | trans }}</th>
+            <th>{{ 'DUE_DATE' | trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block rowData %}
+            <td>{{ row['id'] }}</td>
+            <td>{{ row['name'] }}</td>
+            <td>{{ row['status'] }}</td>
+            <td>{{ row['idType'] }}</td>
+            <td>{{ row['code'] }}</td>
+            <td>{{ row['budget'] }}</td>
+            <td>{{ row['dueDate'] }}</td>
+            <td>
+                <a href="{{ projectDetailUrl }}?id={{ row['id'] }}">{{ 'VIEW' | trans }}</a>
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

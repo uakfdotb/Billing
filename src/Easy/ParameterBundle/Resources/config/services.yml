@@ -1,0 +1,8 @@
+services:
+    easy_parameter:
+        class: Easy\ParameterBundle\Parameter\Manager
+        arguments: [@service_container, %easy_parameter.config%]
+
+    easy_parameter_choice:
+        class: Easy\ParameterBundle\Parameter\Type\Choice
+        arguments: [@service_container]

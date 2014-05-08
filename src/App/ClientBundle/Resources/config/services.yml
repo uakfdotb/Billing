@@ -1,0 +1,80 @@
+services:
+    ## HELPER
+    app_client.helper.billr_application_client:
+        class: App\ClientBundle\Helper\BillrApplicationClient
+        arguments: [@service_container]
+    app_client.handler.login_success:
+        class: App\ClientBundle\Handler\LoginSuccessHandler
+        arguments: [@service_container]
+    app_client.helper.client_log:
+        class: App\ClientBundle\Helper\ClientLog
+        arguments: [@service_container]
+
+    ## ORDER
+    app_client.business.order.create_handler:
+        class: App\ClientBundle\Business\Order\CreateHandler
+        arguments: [@service_container]
+    app_client.business.order.place_handler:
+        class: App\ClientBundle\Business\Order\PlaceHandler
+        arguments: [@service_container]
+    app_client.business.order.place_existing_handler:
+        class: App\ClientBundle\Business\Order\PlaceExistingHandler
+        arguments: [@service_container]
+    app_client.business.order.grid_handler:
+        class: App\ClientBundle\Business\Order\GridHandler
+        arguments: [@service_container]
+
+    ## INVOICE
+    app_client.business.invoice.grid_handler:
+        class: App\ClientBundle\Business\Invoice\GridHandler
+        arguments: [@service_container]
+
+    ## ESTIMATE
+    app_client.business.estimate.grid_handler:
+        class: App\ClientBundle\Business\Estimate\GridHandler
+        arguments: [@service_container]
+
+    ## PRODUCT
+    app_client.business.product.grid_handler:
+        class: App\ClientBundle\Business\Product\GridHandler
+        arguments: [@service_container]
+
+    ## PROFILE
+    app_client.business.profile.edit_handler:
+        class: App\ClientBundle\Business\Profile\EditHandler
+        arguments: [@service_container]
+
+
+    # CONTACTS
+    app_client.business.contact.grid_handler:
+        class: App\ClientBundle\Business\Contact\GridHandler
+        arguments: [@service_container]
+    app_client.business.contact.create_handler:
+        class: App\ClientBundle\Business\Contact\CreateHandler
+        arguments: [@service_container]
+    app_client.business.contact.edit_handler:
+        class: App\ClientBundle\Business\Contact\EditHandler
+        arguments: [@service_container]
+    app_client.business.contact.delete_handler:
+        class: App\ClientBundle\Business\Contact\DeleteHandler
+        arguments: [@service_container]
+
+    ## PROJECT
+    app_client.business.project.grid_handler:
+        class: App\ClientBundle\Business\Project\GridHandler
+        arguments: [@service_container]
+    app_client.business.project.tracking_grid_handler:
+        class: App\ClientBundle\Business\Project\TrackingGridHandler
+        arguments: [@service_container]
+    app_client.business.project.attachment_grid_handler:
+        class: App\ClientBundle\Business\Project\AttachmentGridHandler
+        arguments: [@service_container]
+    app_client.business.project.task_grid_handler:
+        class: App\ClientBundle\Business\Project\TaskGridHandler
+        arguments: [@service_container]
+
+
+    ## LOGIN
+    app_client.security.user_provider:
+        class: App\ClientBundle\Security\UserProvider
+        arguments: [ '@fos_user.user_manager', '@service_container']

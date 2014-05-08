@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\PermissionGroup;use Symfony\Component\Validator\ExecutionContext;class CreateModel{    public $container;    public $name;    public $permissions;    public function isValid(ExecutionContext $context)    {        return true;    }}

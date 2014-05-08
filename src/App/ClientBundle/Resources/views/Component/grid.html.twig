@@ -1,0 +1,17 @@
+<table class="table {% block class %} table-bordered table-striped table-hover {% endblock %}">
+    <thead>
+    {% block header %}
+    {% endblock %}
+    </thead>
+    <tbody>
+    {% for row in grid['data'] %}
+        {% block row %}
+            <tr>
+                {% block rowData %}
+                {% endblock %}
+            </tr>
+        {% endblock %}
+    {% endfor %}
+    </tbody>
+</table>
+

@@ -1,0 +1,50 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            {# name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) #}
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            firstname: { editable: true, nullable: true },
+            lastname: { editable: true, nullable: true },
+            hourly: { editable: true, nullable: true },
+            email: { editable: true, nullable: false, validation: { required: true } },
+            password: { editable: true, nullable: true, validation: { required: true } },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120, template: '<a href="{{ grid.editUrl }}?id=#=id#">#=number#</a>' },
+            { field:"firstname", title:"{{ 'FIRST_NAME' | trans }}" },
+            { field:"lastname", title:"{{ 'LAST_NAME' | trans }}"},
+            { field:"hourly", title:"{{ 'HOURLY_RATE' | trans }}", hidden: true, editor: currencyEditor},
+            { field: "email", title:"{{ 'EMAIL_ADDRESS' | trans }}", editor: emailEditor},
+            { field:"password", title:"{{ 'PASSWORD' | trans }}", hidden: true, editor: passwordEditor},
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+            function passwordEditor(container, options){
+            $('\
+            <input type="password" class="k-input k-textbox" placeholder="Enter to change" value="" data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            }
+            function emailEditor(container, options){
+            $('<input type="email" class="k-input k-textbox" data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            }
+            function currencyEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoNumericTextBox({
+            format: "c"
+            });
+            }
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

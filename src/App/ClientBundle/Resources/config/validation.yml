@@ -1,0 +1,62 @@
+
+## CLIENT CONTACT
+App\ClientBundle\Business\Contact\CreateModel:
+    properties:
+        email:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+App\ClientBundle\Business\Contact\EditModel:
+    properties:
+        email:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+
+## TICKET
+App\ClientBundle\Business\Ticket\CreateModel:
+    properties:
+        subject:
+            - NotBlank: ~
+        body:
+            - NotBlank: ~
+
+## TICKET ITEM
+App\ClientBundle\Business\TicketItem\CreateModel:
+    properties:
+        body:
+            - NotBlank: ~
+
+## CLIENT
+App\ClientBundle\Business\Client\CreateModel:
+    properties:
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+
+## ORDER
+App\ClientBundle\Business\Order\PlaceModel:
+    properties:
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+
+App\ClientBundle\Business\Order\PlaceExistingModel:
+    properties:
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]

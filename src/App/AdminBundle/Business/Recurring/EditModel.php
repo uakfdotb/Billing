@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\Recurring;class EditModel{    public $idClient;    public $subject;    public $idSchedule;    public $nextDue;    public $discount;    public $tax;    public $notes;    public $isInvoiced;}

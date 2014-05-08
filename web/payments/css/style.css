@@ -1,0 +1,255 @@
+.payment-wrapper {
+  text-align: center;
+  margin-bottom: 50px;
+  }
+
+.invoice-header {
+  padding-top: 45px;
+}
+
+.invoice-header h3 {
+  color: #838383;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.invoice-header h4 {
+  font-weight: 700;
+  font-size: 14px;
+  color: #616161;
+}
+
+.total {
+  padding: 5px 10px;
+  margin: 10px;
+  background: #f4f4f4;
+  color: #a9a9a9;
+  text-align: center;
+}
+
+.total strong {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.total span {
+  padding-left: 25px;
+  color: #838383;
+  font-weight: 700;
+}
+
+.payment-select {
+  padding-top: 20px;
+}
+
+.payment-select p {
+  color: #838383;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.payment-select ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-select li {
+  display: inline-block;
+  width: 150px;
+  border: 1px solid #dedede;
+  position: relative;
+  min-height: 65px;
+  vertical-align: top;
+}
+
+.payment-select li.focused {
+  border: 2px solid #3ca1d0;
+}
+
+.payment-select img {
+  max-width: 150px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.payment-select input[type="radio"] {
+  left: -10000px;
+  position: absolute;
+  top: -1000px;
+}
+
+.payment-select hr {
+  height: 1px;
+  background: #e1e1e1;
+  border: 0;
+  margin: 30px 0 30px;
+}
+
+.submit-button {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  background: #ee685f;
+  border: 0;
+  padding: 10px 30px;
+  text-transform: uppercase;
+}
+
+.submit-button:disabled {
+  background: #c6c6c6;
+}
+
+.details {
+  color: #616161;
+  width: 360px;
+  margin: 0 auto;
+}
+
+.details strong {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.credit {
+  width: 360px;
+  margin: 0 auto;
+  border: 1px solid #dedede;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  padding: 20px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.credit .description {
+  color: #b4b4b4;
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.credit .illustration {
+  margin: 0;
+}
+
+.credit input[type="text"] {
+  border: 0;
+  border-bottom: 1px solid #dedede;
+  border-right: 1px solid #dedede;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  color: #939393;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 10px;
+  padding-bottom: 3px;
+}
+
+::-webkit-input-placeholder { color:#939393; }
+::-moz-placeholder { color:#939393; } /* firefox 19+ */
+:-ms-input-placeholder { color:#939393; } /* ie */
+input:-moz-placeholder { color:#939393; }
+
+.credit .number {
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+
+.credit .number input {
+  width: 100%;
+}
+
+.credit .valid-date {
+  padding-bottom: 15px;
+}
+
+.credit .valid-date label {
+  text-transform: uppercase;
+  color: #b4b4b4;
+  font-size: 8px;
+  font-weight: 700;
+  float: left;
+  display: block;
+  width: 30px;
+  text-align: left;
+}
+
+.credit .valid-date .month {
+  float: left;
+  width: 53px;
+}
+
+.credit .valid-date .year {
+  float: left;
+  width: 60px;
+}
+
+.credit .code {
+  padding-bottom: 15px;
+}
+
+.credit .code label {
+  text-transform: uppercase;
+  color: #b4b4b4;
+  font-size: 8px;
+  font-weight: 700;
+  float: left;
+  display: block;
+  width: 30px;
+  text-align: left;
+}
+
+.credit .code .code-number {
+  width: 113px;
+}
+
+.credit .name {
+  padding-top: 10px;
+}
+
+.credit .name input {
+  width: 100%;
+}
+
+.credit+div {
+  display: none;
+}
+
+.pull-left {
+  float: left; }
+
+.pull-right {
+  float: right; }
+
+.half {
+  width: 45%; }
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.clearfix:after {
+  clear: both; }

@@ -1,0 +1,20 @@
+{% block field_row %}
+    <h4>{{ form_label(form) }}</h4>
+    <p>{{ form.vars.attr.description }}</p>
+    <div class="control-group">
+        <div class="form-horizontal">
+            <label class="control-label">{{ form_label(form) }}</label>
+
+            <div class="controls">
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    </div>
+    <br />
+{% endblock field_row %}
+
+{% block form_label %}
+    {% spaceless %}
+        {{ label|trans({}, translation_domain) }}</label>
+    {% endspaceless %}
+{% endblock form_label %}

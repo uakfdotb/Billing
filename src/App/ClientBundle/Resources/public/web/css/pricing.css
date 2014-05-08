@@ -1,0 +1,92 @@
+
+.pricing-tables {
+  color: #5C5F60 !important;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+}
+
+.choose-a-plan {
+  text-align: center !important;
+  padding-top: 6em !important;
+  padding-bottom: 6em !important;
+}
+.choose-a-plan .h1 {
+  font-size: 45px !important;
+  font-weight: 400 !important;
+}
+.choose-a-plan .h2 {
+  font-size: 27px !important;
+  font-weight: 300 !important;
+  color: #EA6156 !important;
+}
+
+.plan {
+  border: solid 1px #E3E3E3 !important;
+  border-radius: 4px !important;
+  text-align: center !important;
+  margin-bottom: 2em !important;
+}
+.plan .h3 {
+  font-size: 27px !important;
+  padding-top: 0.5em !important;
+}
+.plan .price {
+  font-size: 28px !important;
+  font-weight: 400 !important;
+  vertical-align: middle !important;
+  line-height: 2em !important;
+}
+.plan .price strong {
+  font-size: 57px !important;
+  vertical-align: middle !important;
+}
+.plan .periodicity {
+  font-size: 17px !important;
+  color: #949494 !important;
+}
+.plan hr {
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+}
+.plan ul {
+  text-align: left !important;
+  font-size: 16px !important;
+  letter-spacing: 0.1px !important;
+  line-height: 2.7em !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: table !important;
+  /* http://stackoverflow.com/questions/19443013/how-to-center-an-unordered-list */
+}
+.plan ul li {
+  padding-right: 27px !important;
+}
+.plan ul img {
+  margin-right: 9px !important;
+}
+.plan ul strong {
+  padding-right: 3px !important;
+  font-size: 15px !important;
+}
+.plan a.btn {
+  border-radius: 4px !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  color: #FFF !important !important;
+  position: relative !important;
+  top: 1.55em !important;
+  width: 12.5em !important;
+  height: 3.3em !important;
+  line-height: 26px !important;
+}
+
+.need-custom-plan {
+  text-align: center !important;
+  color: #999 !important;
+  font-size: 19px !important;
+  padding-top: 6em !important;
+  padding-bottom: 6em !important;
+}
+.need-custom-plan a {
+  color: #EB6F66 !important;
+}

@@ -1,0 +1,1 @@
+<?phpnamespace App\AdminBundle\Business\ClientNote;use App\AdminBundle\Business\Base\BaseDeleteHandler;use App\ClientBundle\Entity;class DeleteHandler extends BaseDeleteHandler{    public function execute()    {        $model = $this->getModel();        $this->helperDoctrine->deleteOneById('AppClientBundle:ClientNote', $model['id']);    }}

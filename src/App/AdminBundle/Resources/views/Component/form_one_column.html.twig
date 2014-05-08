@@ -1,0 +1,30 @@
+{% extends 'AppAdminBundle:Component:form_basic.html.twig' %}
+
+{% block content %}
+    {% form_theme form['view'] 'AppAdminBundle:Component:form_one_column_theme.html.twig' %}
+    {% block hiddenFields %}
+        {% for element in form['view'] %}
+            {% if 'hidden' in element.vars.block_prefixes %}
+                {{ form_row(element) }}
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block visibleFields %}
+        <fieldset>
+            {% for element in form['view'] %}
+                {% if 'hidden' not in element.vars.block_prefixes %}
+                    {{ form_row(element) }}
+                {% endif %}
+            {% endfor %}
+        </fieldset>
+    {% endblock %}
+
+    {% block submitButton %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-large">Submit</button>
+            <button type="reset" class="btn btn-large" onclick="goback()">Cancel</button>
+        </div>
+    {% endblock %}
+
+{% endblock %}

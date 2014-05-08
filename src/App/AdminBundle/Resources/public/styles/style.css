@@ -1,0 +1,436 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+    background-color: #EFEFEF;
+    margin: 0px;
+    padding: 0px;
+}
+
+form {
+    margin: 0px;
+    padding: 0px;
+}
+
+#container {
+    width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+}
+
+#icons {
+    height: 44px;
+    width: 80px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    margin-left: 6px;
+}
+
+#container #icons a, #container #icons a:visited {
+    background-image: url(../images/pdf.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    display: block;
+    float: left;
+    height: 32px;
+    width: 26px;
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+#container #icons #pay {
+    background-image: url(../images/payicon.png);
+    width: 32px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#container #icons a:hover {
+    background-position: left bottom
+}
+
+#container #estimate {
+    background-color: #FFF;
+    float: left;
+    width: 788px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 3px 3px rgba(223, 223, 223, 0.7);
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(223, 223, 223, 0.7);
+    box-shadow: 0px 0px 3px 3px rgba(223, 223, 223, 0.7);
+    margin-left: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #E2E2E2;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: -7px;
+}
+
+#estimate #logo {
+    background-image: url(../images/logo.gif);
+    background-repeat: no-repeat;
+    background-position: right top;
+    float: left;
+    height: 73px;
+    width: 242px;
+    margin-bottom: 40px;
+}
+
+#estimate #overdue {
+    background-image: url(../images/overdue.png);
+    background-repeat: no-repeat;
+    background-position: 430px 3px;
+}
+
+#estimate #paid {
+    background-image: url(../images/paid.png);
+    background-repeat: no-repeat;
+    background-position: 500px 8px;
+}
+
+#estimate #unpaid {
+    background-image: url(../images/unpaid.png);
+    background-repeat: no-repeat;
+    background-position: 470px 8px;
+}
+
+#estimate #addressob, #estimate #clientaddress {
+    float: left;
+    width: 300px;
+    overflow: hidden;
+    line-height: 19px;
+    margin-left: 37px;
+    margin-top: 10px;
+}
+
+#estimate #clientaddress {
+    margin-top: 0px;
+    margin-bottom: 34px;
+}
+
+.clear {
+    clear: both;
+    height: 0px;
+    width: 0px;
+}
+
+#estimate #client {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #FFF;
+    background-color: #00C4E6;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    width: 230px;
+    text-align: right;
+    padding-right: 13px;
+    float: left;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#estimate #estimatenum {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #FFF;
+    background-color: #003F99;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 33px;
+    width: 230px;
+    text-align: right;
+    padding-right: 13px;
+    float: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+#estimate #estimatedetails {
+    width: 450px;
+    margin-left: 37px;
+    float: left;
+    margin-bottom: 55px;
+}
+
+#estimate #estimatedetails b {
+    display: block;
+    float: left;
+    width: 155px;
+    font-weight: normal;
+}
+
+#table {
+    width: 727px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#estimate #table ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+#estimate #table #tabletitle {
+    background-color: #F6F6F6;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+#estimate #table #row {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #8A8A8A;
+    overflow: hidden;
+}
+
+#estimate #table #row {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #8A8A8A;
+    overflow: hidden;
+}
+
+#estimate #table ul li {
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    display: block;
+}
+
+#estimate #table #tabletitle .type, #estimate #table #row .type {
+    width: 100px;
+    padding-left: 18px;
+    float: left;
+}
+
+#estimate #table #tabletitle .description, #estimate #table #row .description {
+    width: 187px;
+    text-align: left;
+}
+
+#estimate #table #tabletitle .qty, #estimate #table #row .qty {
+    width: 50px;
+    float: left;
+    text-align: center;
+}
+
+#estimate #table #tabletitle .unitprice, #estimate #table #row .unitprice {
+    width: 106px;
+    float: left;
+    text-align: center;
+}
+
+#estimate #table #row .unitprice, #estimate #table #row .qty, #estimate #table #row .description, #estimate #table #row .type {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+#estimate #table #bluesum, #estimate #table #greensum, #estimate #table #total {
+    background-color: #EAF9FB;
+    width: 275px;
+    float: right;
+    border-top-width: 4px;
+    border-top-style: solid;
+    border-top-color: #FFF;
+}
+
+#estimate #table #greensum {
+    background-color: #F1F9EB;
+
+}
+
+#estimate #table #total {
+    background-color: #00C4E6;
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+#estimate #table #bluesum li, #container #estimate #table #greensum li, #estimate #table #total li {
+    float: none;
+    width: 233px;
+    display: block;
+    text-align: right;
+    padding-top: 3px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+}
+
+#estimate #table #bluesum li b, #container #estimate #table #greensum li b, #estimate #table #total li b {
+    display: block;
+    float: left;
+    padding-left: 10px;
+    width: 95px;
+    font-weight: normal;
+}
+
+#estimate #table #total li b {
+    font-weight: bold;
+}
+
+#note {
+    background-color: #F6F6F6;
+    font-size: 11px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    width: 727px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 12px;
+}
+
+#estimate #note p {
+    margin-top: 0px;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+
+#estimate #note p b {
+    text-transform: uppercase;
+}
+
+#estimate #bank {
+    float: left;
+    width: 300px;
+    font-size: 12px;
+    margin-left: 33px;
+    margin-top: 33px;
+}
+
+#estimate #thanks {
+    float: right;
+    width: 210px;
+    margin-right: 65px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 38px;
+    color: #003F99;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 33px;
+}
+
+#estimate #thanks b {
+    font-size: 14px;
+    color: #00C4E6;
+    display: block;
+    font-weight: normal;
+    width: 100%;
+    text-align: center;
+    margin-top: -4px;
+}
+
+#container #discussion {
+    float: left;
+    width: 250px;
+    margin-left: 30px;
+    margin-top: -7px;
+    line-height: 18px;
+    font-size: 11px;
+}
+
+#discussion h1 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 22px;
+    margin: 0px;
+    padding: 0px;
+    text-shadow: 0px 1px 0px #ffffff;
+    filter: dropshadow(color=#ffffff, offx=0, offy=1);
+}
+
+#discussion h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    margin: 0px;
+    padding: 0px;
+    text-shadow: 0px 1px 0px #ffffff;
+    filter: dropshadow(color=#ffffff, offx=0, offy=1);
+    color: #003F99;
+}
+
+.insert {
+    background-image: url(../images/insert2.gif);
+    background-repeat: repeat-x;
+    height: 2px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.insertshort {
+    background-image: url(../images/insert.png);
+    background-repeat: repeat-x;
+    height: 2px;
+    width: 100%;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+
+#discussion ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+#discussion ul li b {
+    font-size: 11px;
+    display: block;
+    float: left;
+}
+
+#discussion ul li span {
+    display: block;
+    float: right;
+    color: #666666;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+#discussion ul li b font {
+    color: #003F99;
+}
+
+#discussion form #formbg {
+    background-image: url(../images/form.gif);
+    background-repeat: no-repeat;
+    height: 97px;
+    width: 249px;
+    margin-top: 25px;
+}
+
+#discussion form #formbg textarea {
+    width: 235px;
+    height: 85px;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+#discussion form #button {
+    width: 65px;
+    float: right;
+    margin-top: 7px;
+}

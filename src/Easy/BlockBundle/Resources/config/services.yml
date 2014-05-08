@@ -1,0 +1,4 @@
+services:
+    easy_block:
+        class: Easy\BlockBundle\Block\Manager
+        arguments: [@service_container, @templating, %easy_block.config%]

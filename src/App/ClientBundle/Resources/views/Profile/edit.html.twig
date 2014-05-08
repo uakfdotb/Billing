@@ -1,0 +1,10 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'EDIT_PROFILE' | trans }}</h4>
+    <br />
+
+    {% embed 'AppAdminBundle:Component:form_basic.html.twig' with {'form': form} %}
+
+    {% endembed %}
+{% endblock %}

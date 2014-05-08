@@ -1,0 +1,70 @@
+{% extends 'AppClientBundle::Web_Base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/appclient/web/css/pricing.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        {% for item in products %}
+        .plan.p{{ loop.index }} .price { color: {{ item.getColor(cycle(['#6AB1AD', '#EA6156', '#6189AC'], loop.index0)) }}; }
+        .plan.p{{ loop.index }} ul img, .plan.p{{ loop.index }} a.btn { background-color: {{ item.getColor(cycle(['#6AB1AD', '#EA6156', '#6189AC'], loop.index0)) }}; }
+        .plan.p{{ loop.index }} a.btn:hover { background-color: {{ item.getHoverColor(cycle(['#6AB1AD', '#EA6156', '#6189AC'], loop.index0)) }}; }
+        {% endfor %}
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container pricing-tables">
+        <div class="row">
+            <div class="col-md-12 choose-a-plan">
+                <p class="h1">Plans that can fit your needs</p>
+                <p class="h2">Choose what works best for you.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12" style="text-align: center; margin-bottom: 40px">
+                <select onchange="reGroup(this.value)">
+                    {% for group in groups %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {% for item in products %}
+            {% if (loop.index0 % 3 == 0) %}
+                <div style="margin: auto"><div class="row">
+            {% endif %}
+            <div class="col-md-4 col-md-offset-{{ (loop.index0 % 3 != 0 ? 0 : (3 - loop.revindex) * 2) }}">
+                <div class="plan p{{ loop.index }}" data-id-product="{{ item.getId() }}">
+                    <p class="h3">{{ item.getName() }}</p>
+                    <p class="price">{{ config.currencyCode }}<strong>{{ item.getShortestPeriodicityPrice()|round(0, 'floor') }}</strong>{{ item.getShortestPeriodicityPrice()|number_format(2, '.')|slice(-3) }}</p>
+                    <p class="periodicity">{{ item.getShortestPeriodicityPrice() == 0 ? 'free' : item.getShortestPeriodicity() }}</p>
+                    <hr />
+                    <ul class="list-unstyled">
+                        {% for feature in item.features %}
+                            <li><img src="{{ asset('bundles/appclient/web/img/feature-check.png') }}" /><strong>{{ feature }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                    {% if item.stock > 0 %}
+                    <a href="{{ path('web_client_order') }}?pid={{ item.getId() }}" role="button" class="btn btn-default btn-lg">SIGN UP</a>
+                    {% else %}
+                    <a href="#" role="button" class="btn btn-default btn-lg">OUT OF STOCK</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% if loop.last or (loop.index % 3 == 0) %}
+                </div></div>
+            {% endif %}
+        {% endfor %}
+        <div class="row">
+            <div class="col-md-12 need-custom-plan">
+                <p>Need a custom plan? Email us at <a href="mailto:{{ config.getDefaultEmail() }}">{{ config.getDefaultEmail() }}</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function reGroup(id)
+        {
+            window.location.replace("{{ path('web_client_order') }}?gid="+id);
+        }
+    </script>
+{% endblock %}

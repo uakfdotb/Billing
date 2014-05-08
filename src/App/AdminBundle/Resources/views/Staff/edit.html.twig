@@ -1,0 +1,72 @@
+{% extends 'AppAdminBundle:Base:create_one_column.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'EDIT_STAFF' | trans }}</h2>
+{% endblock %}
+
+{% block topMessage %}
+    <div style="position: absolute; right: 0px; margin: -18px 18px 0px 0px; background: white; text-align: center;">
+        <button id="generate-api-key" class="btn btn-primary" style="width: 180px; margin-bottom: 2px;">Generate API Key</button>
+        <br>
+        <em style="font-size: 90%">overwrites current one</em>
+        <br>
+        <br>
+        <button id="remove-api-key" class="btn" style="width: 180px; margin-bottom: 2px;">Remove API Key</button>
+        <br>
+        <em style="font-size: 90%">disable API access</em>
+    </div>
+    <script>
+        $(function() {
+
+            function generateApiKey() {
+                ajaxApiKey(
+                    'A new API Key will be generated.\n\nIf one already exists, it will be overwritten.',
+                    'apikey/generate',
+                    showGeneratedKey
+                );
+            }
+
+            function removeApiKey() {
+                ajaxApiKey(
+                    '\nAPI Key will be removed.',
+                    'apikey/remove',
+                    showRemovedKey
+                );
+            }
+
+            function ajaxApiKey(message, url, callback) {
+                if (!confirm(message)) {
+                    return;
+                }
+                $('body').addClass('wait');
+                $.post(url, {
+                    token: $('#form__token').val(),
+                    id: location.search.match(/id=([0-9]+)/)[1]
+                })
+                .fail(ajaxFail)
+                .done(function(response) {
+                    response.error && ajaxFail();
+                    response.success && callback(response);
+                })
+                .always(function() {
+                    $('body').removeClass('wait');
+                });
+            }
+
+            function ajaxFail() {
+                alert('Operation failed.');
+            }
+
+            function showGeneratedKey(response) {
+                alert('Please copy the API key to a safe place:\n\n' + response.key + '\n\nFor security reasons, this API key will NOT be displayed again!');
+            }
+
+            function showRemovedKey() {
+                alert('API key has been removed.\n\nTherefore, API access has been disabled.');
+            }
+
+            $('#generate-api-key').click(generateApiKey);
+            $('#remove-api-key').click(removeApiKey);
+        });
+    </script>
+{% endblock %}

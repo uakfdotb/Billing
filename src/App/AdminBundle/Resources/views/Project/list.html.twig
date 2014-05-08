@@ -1,0 +1,203 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block gridButtons %}
+            {{ parent() }}
+
+            <script id="command-template" type="text/x-kendo-template">
+                # if(timer == 0) { #
+                <a class="btn btn-mini k-timer" name="#= id #">{{ 'START_TIMER' | trans }}</a>
+                # } else { #
+                <a class="btn btn-mini k-timer" name="#= id #">{{ 'STOP_TIMER' | trans }}</a>
+                # } #
+            </script>
+        {% endblock %}
+
+        {% block initializeGrid %}
+            var projectStatusDs;
+            var clientDs;
+
+
+            jQuery.when(
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/project_status',
+            success: function(response) {
+            projectStatusDs = response["data"];
+            }
+            }),
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/client_list',
+            success: function(response) {
+            clientDs = response["data"];
+            }
+            })
+            ).done(function(a1, a2){
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            });
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: true, nullable: true },
+            status: {editable: true, nullable: true },
+            idClient: { editable: true, nullable: true },
+            code: { editable: true, nullable: true },
+            budget: { editable: true, nullable: true },
+            dueDate: { editable: true, nullable: true, type: "date", format: "dd-MM-yyyy" },
+            idType: { editable: true, nullable: true },
+            timer: { editable: false, nullable: false },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120, template: '\
+            <a href="{{ grid.projectTrackingListUrl }}?id=#=id#">#=id#</a>',},
+            { field:"name", title:"{{ 'PROJECT_NAME' | trans }}", width: 300 },
+            { field:"status", title:"{{ 'PROJECT_STATUS' | trans }}", width: 110,
+            filterable: {
+            ui: projectStatusFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"idClient", title:"{{ 'CLIENT' | trans }}", editor: clientEditor,
+            filterable: {
+            ui: clientFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"code", title:"{{ 'PROJECT_CODE' | trans }}", hidden: true},
+            { field:"budget", title:"{{ 'BUDGET' | trans }}", hidden: true, editor: budgetEditor},
+            { field:"dueDate", title:"{{ 'DUE_DATE' | trans }}", hidden: true, editor: datePicker},
+            { field:"idType", title:"{{ 'PROJECT_TYPE' | trans }}", hidden: true, editor: projectTypeEditor},
+            { template: kendo.template($("#command-template").html()), width: 150 },
+            { template: kendo.template($("#edit-button").html()), width: 115 },
+            { command: "destroy", width: 100  }
+        {% endblock %}
+
+        {% block extraScript %}
+            jQuery("#{{ grid.jsId | default('grid') }}").on("click", ".k-timer", function() {
+            var button = this.name;
+            var status = this.innerHTML;
+            if(status == '{{ 'START_TIMER' | trans }}'){
+            var text = '{{ 'STOP_TIMER' | trans }}';
+            var url = '{{ grid.projectTimerUrl }}?timer=start&id=' + button;
+            }
+            else{
+            var text = '{{ 'START_TIMER' | trans }}';
+            var url = '{{ grid.projectTimerUrl }}?timer=stop&id=' + button;
+            }
+
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET",url,false);
+            xmlhttp.send();
+            var result = xmlhttp.responseText;
+
+            if(result == 'ok'){
+            button.innerHTML = text;
+            }
+            else{
+            alert("{{ 'COULDNT_TOGGLE_THE_TIMER' | trans }}");
+            }
+            jQuery("#{{ grid.jsId | default('grid') }}").data("kendoGrid").dataSource.read();
+
+            });
+
+            // Filter
+            function projectStatusFilter(element) {
+            element.kendoDropDownList({
+            dataSource: projectStatusDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECTED_VALUE' | trans }} --"
+            });
+            }
+
+            function clientFilter(element) {
+            element.kendoDropDownList({
+            dataSource: clientDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECTED_VALUE' | trans }} --"
+            });
+            }
+
+            // Editor
+
+
+            function projectStatusEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDropDownList({
+            autoBind: true,
+            dataSource: {
+            type: "json",
+            transport: {
+            read: "http://dev.sysadmin.co.uk/old/admin/crud/projects/status.json.php"
+            },
+            schema: {
+            data: "data",
+            }
+            }
+            });
+            }
+            function budgetEditor(container, options) {
+            $('<input min="0" type="number" data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoNumericTextBox({
+            format: "c",
+            decimals: 2
+            });
+            }
+            function clientEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoAutoComplete({
+            minLength: 3,
+            filter: 'contains',
+            dataSource: {
+            type: "json",
+            transport: {
+            read: "http://dev.sysadmin.co.uk/old/admin/crud/general/clients.json.php"
+            },
+            schema: {
+            data: "data",
+            }
+            }
+            });
+            }
+            function datePicker(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDatePicker({
+
+            });
+            }
+            function projectTypeEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDropDownList({
+            autoBind: true,
+            dataSource: {
+            type: "json",
+            transport: {
+            read: "http://dev.sysadmin.co.uk/old/admin/crud/projects/type.json.php"
+            },
+            schema: {
+            data: "data",
+            }
+            }
+            });
+            }
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

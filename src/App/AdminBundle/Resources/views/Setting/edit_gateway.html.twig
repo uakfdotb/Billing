@@ -1,0 +1,55 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'CORE_SETTINGS' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% block listPageHeader %}
+<div class="main_cont pie">
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    {% embed 'AppAdminBundle:Component:form_basic.html.twig' with {'form': form } %}
+    {% block content %}
+    {% form_theme form['view'] 'AppAdminBundle:Setting:form_config_theme.html.twig' %}
+    {{ block('hiddenFields') }}
+    <div class="row">
+        <div class="tabbable">
+            <div class="span3">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active"><a href="#tabPaypal" data-toggle="tab">
+                            <i class="icon-ok"></i>{{ 'PAYPAL' | trans }}
+                            <i class="icon-chevron-right"></i>
+                        </a></li>
+                    <li><a href="#tabBank" data-toggle="tab">
+                            <i class="icon-ok"></i>{{ 'BANK' | trans }}
+                            <i class="icon-chevron-right"></i>
+                        </a></li>
+                </ul>
+            </div>
+            <div class="span9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tabPaypal">
+                        {{ form_row(form['view'].paypalEnabled ) }}
+                        {{ form_row(form['view'].paypalEmail ) }}
+                        {{ form_row(form['view'].idPaypalAccount ) }}
+                    </div>
+                    <div class="tab-pane" id="tabBank">
+                        {{ form_row(form['view'].bankEnabled ) }}
+                        {{ form_row(form['view'].bankTransferInstruction ) }}
+                        {{ form_row(form['view'].idBankAccount ) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div align="center">
+            <input type="submit" class="btn btn-primary" style="margin-top: 10px" value="{{ 'SUBMIT' | trans }}" />
+        </div>
+        {% endblock %}
+        {% endembed %}
+    </div>
+    {% endblock %}
+    {% endblock %}
+

@@ -1,0 +1,181 @@
+@charset "utf-8";
+.paybox body {
+    color: #333;
+    background-color: #FFF;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.paybox h1 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: #FFF;
+    background-color: #003F99;
+    display: block;
+    float: left;
+    width: 280px;
+    font-weight: normal;
+    text-align: right;
+    padding-top: 7px;
+    padding-right: 20px;
+    padding-bottom: 7px;
+    font-size: 30px;
+    line-height: normal;
+    margin: 0px;
+    padding-left: 0px;
+}
+
+.paybox h2 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: #333;
+    display: block;
+    float: left;
+    width: 200px;
+    font-weight: normal;
+    text-align: left;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 30px;
+    margin-left: 15px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.paybox .clear {
+    clear: both;
+    height: 0px;
+    width: 0px;
+}
+
+.paybox form {
+    overflow: hidden;
+    width: 616px;
+    padding: 0px;
+    margin-top: 50px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 60px;
+}
+
+.paybox form h3 {
+    display: block;
+    float: left;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    padding-top: 5px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    width: auto;
+}
+
+.paybox .inputbg {
+    background-image: url(../images/input1.gif);
+    background-repeat: no-repeat;
+    float: left;
+    height: 44px;
+    width: 100px;
+}
+
+.paybox .inputbg input {
+    background-color: #FFF;
+    height: 37px;
+    width: 93px;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    margin-top: 3px;
+    margin-left: 3px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #003F99;
+    text-align: center;
+}
+
+.paybox .drop {
+    background-image: url(../images/input2.gif);
+    background-repeat: no-repeat;
+    float: left;
+    width: 210px;
+}
+
+.paybox .styled-select select {
+    background: transparent;
+    width: 240px;
+    padding: 5px;
+    font-size: 24px;
+    border: 0px;
+    height: 44px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #003F99;
+    letter-spacing: -1px;
+}
+
+.paybox .styled-select {
+    width: 210px;
+    height: 44px;
+    overflow: hidden;
+    background-image: url(../images/arr.png);
+    background-repeat: no-repeat;
+    background-position: 180px 18px;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+}
+
+.paybox .helptext {
+    margin-left: 465px;
+    margin-top: 10px;
+    font-size: 12px;
+    display: block;
+    width: 210px;
+    line-height: 18px;
+
+}
+
+.paybox #submitline {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #333;
+    margin-top: 10px;
+    width: 610px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 11px;
+    overflow: hidden;
+}
+
+.paybox #submitline input {
+    float: right;
+}
+
+.paybox #submitline .lock {
+    background-image: url(../images/lock.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+    width: 90px;
+    float: right;
+    margin-bottom: 5px;
+}
+
+.paybox .helptext p {
+    height: 50px;
+}

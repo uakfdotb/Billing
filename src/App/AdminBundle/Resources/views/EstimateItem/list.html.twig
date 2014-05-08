@@ -1,0 +1,228 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'VIEW_ESTIMATE' | trans }}</h2>
+{% endblock %}
+
+{% block listPageHeader %}
+    <div class="main_cont pie">
+        {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+        {% endembed %}
+
+        {% embed 'AppAdminBundle:Component:form_basic.html.twig' with {'form': form} %}
+            {% block formBlock %}
+                <div class="clearfix"></div>
+                <form action="{{ form['action'] }}" method="post" novalidate {{ form_enctype(form['view']) }} class="form-horizontal">
+                    {% for element in form['view'] %}
+                        {% if 'hidden' in element.vars.block_prefixes %}
+                            {{ form_row(element) }}
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="row-fluid">
+                        <div class="span5">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    {{ 'ESTIMATE' | trans }} {{ 'ID' | trans }}
+                                </label>
+
+                                <div class="controls">
+                                    <p style="margin-top: 5px">{{ estimate.number }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_row(form['view'].idClient) }}
+                    </div>
+                    <div class="row-fluid">
+                        {{ form_row(form['view'].issueDate) }}
+                        {{ form_row(form['view'].dueDate) }}
+                    </div>
+                    <div class="row-fluid">
+                        {{ form_row(form['view'].discount) }}
+                        {{ form_row(form['view'].tax) }}
+                    </div>
+                    <div class="row-fluid">
+                        {{ form_row(form['view'].subject) }}
+                        {{ form_row(form['view'].status) }}
+                    </div>
+
+                    <h3>{{ 'ESTIMATE_ITEMS' | trans }}</h3>
+                    <div class="pull-right">
+                        <a onclick='$("#grid").data("kendoGrid").addRow();' class="add-button"><i class="entypo plus"></i> <span>{{ 'ADD_NEW_RECORD' | trans }}</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div id="{{ grid.jsId | default('grid') }}" class="single-page-grid"></div>
+
+                    <br />
+
+                    <div class="row-fluid">
+                        {{ form_row(form['view'].notes) }}
+                        <div class="span2">
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        </div>
+                        <div class="span4 pull-right">
+                            <table align="right" style="padding-top: 10px; width: 200px" class="table">
+                                <tr>
+                                    <td width="95px">{{ currencyCode }}<span id="subtotal"></span></td>
+                                    <td width="260px">{{ 'SUBTOTAL' | trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td width="95px">{{ currencyCode }}<span id="totaldiscount"></span></td>
+                                    <td width="260px">{{ 'DISCOUNT' | trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td width="95px">{{ currencyCode }}<span id="totaltax"></span></td>
+                                    <td width="260px">{{ 'TAX' | trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td width="95px"><strong>{{ currencyCode }}<span id="grandtotal"></span></strong>
+                                    </td>
+                                    <td width="260px"><strong>{{ 'GRAND_TOTAL' | trans }}</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            {% endblock %}
+        {% endembed %}
+    </div>
+
+    <div class="clear"></div>
+{% endblock %}
+
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid_inline.html.twig' with {'grid': grid} %}
+        {% block initializeGrid %}
+            var typeEditors;
+            jQuery.ajax({
+            url: '{{ projectTypesListUrl }}',
+            success: function(response) {
+            typeEditors = response["data"];
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            }
+            });
+        {% endblock %}
+
+        {% block extraConfigDataSource %}
+            change: waitAndCalculateTotal
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "create" }
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            idType: { editable: true, nullable: false},
+            description: { editable: true, nullable: false },
+            quantity: { editable: true, nullable: false, type: "number" },
+            unitPrice: { editable: true, nullable: false, type: "number" },
+            total: { editable: false, nullable: false, type: "number" }
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"idType", title:"{{ 'WORK_TYPE' | trans }}", values: typeEditors, width: 120, filterable: false },
+            { field:"description", title:"{{ 'DESCRIPTION' | trans }}" , filterable: false},
+            { field:"quantity", title:"{{ 'QUANTITY' | trans }}", editor: qtyEditor, width: 95, template: '\
+            <span name="quantity">#=quantity#</span>', filterable: false },
+            { field:"unitPrice", title:"{{ 'UNIT_PRICE' | trans }}", editor: priceEditor, width: 95, template: '\
+            <span name="unitPrice">{{ currencyCode }}#= unitPrice.toFixed(2)#</span>', filterable: false},
+            { field:"total", title:"{{ 'LINE_TOTAL' | trans }}", width: 95, template: '\
+            <span name="lineTotal">{{ currencyCode }}#= total.toFixed(2)#</span>', filterable: false, sortable: false },
+            { command: "edit", width: 190 },
+            { command: "destroy", width: 100 }
+        {% endblock %}
+
+        {% block extraScript %}
+            function typeEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoDropDownList({
+            autoBind: true,
+            dataSource: {
+            type: "json",
+            transport: {
+            read: "{{ projectTypesListUrl }}"
+            },
+            schema: {
+            data: "data",
+            }
+            }
+            });
+            }
+            function qtyEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoNumericTextBox();
+            }
+            function priceEditor(container, options) {
+            $('<input data-bind="value:' + options.field + '" />')
+            .appendTo(container)
+            .kendoNumericTextBox({
+            format: "{{ currencyCode }}#.##"
+            });
+            }
+
+            // TOTAL CALCULATION
+            function waitAndCalculateTotal(data){
+            setTimeout(calculateTotal, 250, data);
+            }
+            jQuery("#{{ form['view'].discount.vars.id }}").bind('change', function() {
+            setTimeout(calculateTotal, 250, null);
+            });
+            jQuery("#{{ form['view'].tax.vars.id }}").bind('change', function() {
+            setTimeout(calculateTotal, 250, null);
+            });
+            function calculateTotal(data) {
+            var data = jQuery("#grid").data("kendoGrid").dataSource.data();
+            var subtotal = 0;
+            for (var i = 0; i < data.length; i++) {
+            var lineTotal = data[i]['unitPrice'] * data[i]['quantity'];
+            data[i]['total'] = lineTotal;
+            subtotal += lineTotal;
+            }
+
+            // Compute bottom line
+            var discount = jQuery('#{{ form['view'].discount.vars.id }}').val() / 100;
+            var tax = 0;
+            $.ajax({
+            url: "{{ path('app_admin_tax_calculate') }}?client="+jQuery('#{{ form['view'].idClient.vars.id }}').val()+"&tax="+jQuery('#{{ form['view'].tax.vars.id }}').val(),
+            type: 'get',
+            dataType: 'html',
+            async: false,
+            success: function(data) {
+            tax = parseFloat(data);
+            }
+            });
+
+            jQuery('#subtotal').html(roundToCurrency(subtotal).toFixed(2));
+
+            var totaldiscount = subtotal * discount;
+            jQuery("#totaldiscount").html(roundToCurrency(totaldiscount).toFixed(2));
+
+            var totaltax = (subtotal - totaldiscount) * tax;
+            jQuery("#totaltax").html(roundToCurrency(totaltax).toFixed(2));
+
+            var grandtotal = (subtotal - totaldiscount + totaltax);
+            jQuery("#grandtotal").html(roundToCurrency(grandtotal).toFixed(2));
+
+            }
+
+            function roundToCurrency(decimal){
+            var finalvalue = 100*parseFloat(decimal);
+            finalvalue = Math.round(finalvalue);
+            finalvalue = finalvalue/100;
+            return finalvalue;
+            }
+            $(".addItem").click(function() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.addRow();
+            $(".k-grid-edit-row").appendTo("#grid tbody");
+            });
+
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

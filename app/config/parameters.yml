@@ -1,0 +1,29 @@
+parameters:
+    locale:            en
+    secret:            something # CHANGE ME
+    iv:                somethingelse # CHANGE ME
+
+    temp_dir:          "%kernel.root_dir%/tmp"
+
+    logo_dir: "/var/www/html/web/logo"
+    logo_url: https://assets.yourdomain.com/logo
+
+    email_sender_name:   LoadingDeck
+    email_address:       noreply@loadingdeck.com
+
+    gocardless_identifier: # CHANGE ME
+    gocardless_secret: # CHANGE ME
+
+    database_host: localhost
+    database_dbname: opensource
+    database_username: root
+    database_password: something # CHANGE ME
+
+    recaptcha_threshold: 5
+    recaptcha_private: 6LfS6ucSAAAAAGyphBUgMwYpKu7H5UhXhyjLpz5I
+    recaptcha_public:  6LfS6ucSAAAAAN3D8_sxL_b3M0O5rq8plOsszyGm
+
+    mailer_transport: smtp
+    mailer_host: smtp.sendgrid.net # CHANGE ME
+    mailer_user: username # CHANGE ME
+    mailer_password: password # CHANGE ME

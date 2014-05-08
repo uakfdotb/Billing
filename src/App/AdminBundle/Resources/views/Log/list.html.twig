@@ -1,0 +1,57 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+
+        {% block gridToolbar %}
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery('#export-button').html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            timestamp: { editable: false, nullable: true },
+            idType: { editable: false, nullable: true },
+            description: { editable: false, nullable: true }
+        {% endblock %}
+
+        {% block initializeGrid %}
+            var logTypeDs;
+
+            jQuery.when(
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/log_type',
+            success: function(response) {
+            logTypeDs = response["data"];
+            }
+            })
+            ).done(function(a1){
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            });
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'Event' | trans }}", width: 50 },
+            { field:"timestamp", title:"{{ 'TIMESTAMP' | trans }}",  width: 150 },
+            { field:"idType", title:"{{ 'TYPE' | trans }}", width: 150,
+            filterable: {
+            ui: logTypeFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"description", title:"{{ 'DESCRIPTION' | trans }}", width: 400}
+        {% endblock %}
+
+        {% block extraScript %}
+            function logTypeFilter(element) {
+            element.kendoDropDownList({
+            dataSource: logTypeDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECTED_VALUE' | trans }} --"
+            });
+            }
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

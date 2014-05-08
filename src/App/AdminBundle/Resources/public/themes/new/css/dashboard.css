@@ -1,0 +1,147 @@
+#dashboardContentWrapper {
+	position:relative;
+	width:976px;
+	margin:0 auto;
+	text-align:left;
+	padding:0 8px
+}
+#dashboardContentWrapper h2 {
+  font:normal 16px/24px Arial, Helvetica, sans-serif;
+  text-shadow:0 1px 0 #FFF;
+  padding:0 0 5px;
+  text-transform: none;
+}
+#dashboardContentWrapper h2 span {
+  display:inline-block;
+  cursor:pointer;
+  font:normal 16px/24px Georgia, serif;
+  padding:0 8px;
+  float:left;
+}
+#dashboardContentWrapper h2 small {
+  position:relative;
+  display:inline-block;
+  cursor:default;
+  padding:0 8px;
+  float:right;
+  overflow:hidden;
+  height:28px;
+  font: normal 16px/24px Arial, Helvetica, sans-serif;
+  color: #000000;
+  
+}
+#dashboardContentWrapper h2 small b {
+  padding:0 20px 0 0;
+  background:url('../img/select_arrow.png') right center no-repeat;
+}
+#dashboardContentWrapper h2 small:hover {
+  overflow:visible;
+}
+#dashboardContentWrapper h2 small ul {
+  position:absolute;
+  top:28px;
+  right:0;
+  list-style:none;
+  background:#FFF;
+  border-radius:4px;
+  box-shadow:0 2px 3px #DDD;
+  padding:8px;
+  z-index:1001;
+  text-align:right;
+  border:1px solid #DDD;
+}
+#dashboardContentWrapper h2 small ul li {
+  cursor:pointer;
+  font-size:13px;
+  line-height:18px;
+}
+#dashboardContentWrapper h2 small ul li.current {
+  font-weight:bold;
+}
+#dashboardContentWrapper h2 small ul li:hover {
+  text-decoration:underline;
+}
+
+#dashboardContentWrapper div {
+  -webkit-transition:width 1s ease-in;  
+  -moz-transition:width 1s ease-in;  
+  -o-transition:width 1s ease-in;  
+  transition:width 1s ease-in;
+  position:relative;
+}
+#dashboardContentWrapper div p {
+  float:right;
+  width:230px;
+  padding:24px 0 0;
+  margin:4px 0 0;
+  text-align:center;
+  font:normal 40px/56px Arial, Helvetica, sans-serif;
+  color:#686868;
+  text-shadow:0 2px 0 #FFF;
+  cursor:default;
+}
+#dashboardContentWrapper div dl {
+  position:absolute;
+  bottom:8px;
+  right:8px;
+  width:230px;
+  margin:0;
+  height:100px;
+  font:normal 15px/20px Arial, Helvetica, sans-serif;
+  text-align:center;
+  cursor:default;
+}
+#dashboardContentWrapper div dl dt {
+  color:#888;
+}
+#dashboardContentWrapper div dl dd {
+  margin:0 0 0 16px;
+  font-weight:bold;
+  color:#333;
+  margin:0 0 8px;
+}
+#dashboardContentWrapper div dl dd i {
+  color:#50bcb1;
+}
+#dashboardContentWrapper div p b {
+ font-weight:normal;
+ color:#444;
+}
+#dashboardContentWrapper div p span small {
+  font-size:24px;
+  vertical-align:top;
+}
+#dashboardContentWrapper p span {
+  color:#50bcb1;
+}
+#dashboardContentWrapper div .neg {
+  color:#f27362;
+}
+#dashboardContentWrapper .half,
+#dashboardContentWrapper .full {
+  float:left;
+  height:196px;
+  margin:4px;
+  padding:8px;
+  background:#F9F9FB;
+  border: 1px solid #E3E3E3 !important;
+  border-radius:2px;
+  box-shadow:inset 0 3px 5px #FFF;
+  cursor:move;
+  overflow:hidden;
+}
+#dashboardContentWrapper div.clicked {
+  opacity:0.5;
+  border:2px #777 dashed;
+}
+#dashboardContentWrapper .half {
+  width:462px;
+}
+#dashboardContentWrapper .full {
+  width:950px;
+}
+#dashboardContentWrapper div div {
+  float:left;
+  margin:4px 0 0;
+  cursor:default;
+}

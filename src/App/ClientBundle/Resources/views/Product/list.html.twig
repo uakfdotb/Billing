@@ -1,0 +1,38 @@
+{% extends 'AppClientBundle::Base.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'PRODUCT_LIST' | trans }}</h4>
+    <br />
+    <br />
+    <div class="pull-right" style="margin-bottom: 10px">
+        {% if firstProductGroup is defined and firstProductGroup is not empty %}
+        <a href="{{ path('web_client_order', {'gid': firstProductGroup.id}) }}" class="btn btn-small btn-primary">{{ 'NEW_ORDER' | trans }}</a>
+        {% endif %}
+    </div>
+    {% embed 'AppClientBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block class %}table-bordered {% endblock %}
+        {% block header %}
+            <th>{{ 'ID' | trans }}</th>
+            <th>{{ 'NAME' | trans }}</th>
+            <th>{{ 'TERM' | trans }}</th>
+            <th>{{ 'NEXT_DUE' | trans }}</th>
+            <th>{{ 'STATUS' | trans }}</th>
+            <th>{{ 'PRICE' | trans }}</th>
+            <th></th>
+            <th></th>
+        {% endblock %}
+
+        {% block row %}
+            <tr>
+                <td>{{ row['id'] }}</td>
+                <td>{{ row['name'] }} ({{ row['domain'] }})</td>
+                <td>{{ row['idSchedule'] }}</td>
+                <td>{{ row['nextDue'] }}</td>
+                <td>{{ row['status'] }}</td>
+                <td>{{ row['cost'] }}</td>
+                <td><a href="{{ path('app_client_product_view', {'id': row['id'] }) }}">Details</a></td>
+                <td>{% if row['idType'] is not empty and row['status'] == 'Active' %}<a href="{{ path('app_client_product_control', {'id': row['id'] }) }}">Control</a>{% endif %}</td>
+            </tr>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

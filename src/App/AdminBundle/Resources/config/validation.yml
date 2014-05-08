@@ -1,0 +1,300 @@
+## CLIENT
+App\AdminBundle\Business\Client\CreateModel:
+    properties:
+        email:
+            - NotBlank: ~
+        plainPassword:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+App\AdminBundle\Business\Client\EditModel:
+    properties:
+        email:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+
+App\AdminBundle\Business\Client\OrderModel:
+    properties:
+        idProduct:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~            
+        idOrderPaymentTerm:
+            - NotBlank: ~            
+
+## PROJECT
+App\AdminBundle\Business\Project\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~
+        idType:
+            - NotBlank: ~
+        idClient:
+            - NotBlank: ~
+App\AdminBundle\Business\Project\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~
+        idType:
+            - NotBlank: ~
+        idClient:
+            - NotBlank: ~
+
+## ESTIMATE
+App\AdminBundle\Business\Estimate\CreateModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+App\AdminBundle\Business\Estimate\EditModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+        subject:
+            - NotBlank: ~
+
+## RECURRING
+App\AdminBundle\Business\Recurring\CreateModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+App\AdminBundle\Business\Recurring\EditModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+        subject:
+            - NotBlank: ~
+        nextDue:
+            - NotBlank: ~
+
+## TICKET
+App\AdminBundle\Business\Ticket\CreateModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+        subject:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~
+App\AdminBundle\Business\Ticket\EditModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+        subject:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~
+
+
+## TICKET ITEMS
+App\AdminBundle\Business\TicketItem\CreateModel:
+    properties:
+        body:
+            - NotBlank: ~
+
+## STAFF
+App\AdminBundle\Business\Staff\CreateModel:
+    properties:
+        firstname:
+            - NotBlank: ~
+        lastname:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+App\AdminBundle\Business\Staff\EditModel:
+    properties:
+        firstname:
+            - NotBlank: ~
+        lastname:
+            - NotBlank: ~
+
+## PRODUCT
+App\AdminBundle\Business\Product\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+        idPaymentType:
+            - NotBlank: ~
+App\AdminBundle\Business\Product\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+        idPaymentType:
+            - NotBlank: ~
+
+## AUTOMATION GROUP
+App\AdminBundle\Business\AutomationGroup\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+        url:
+            - NotBlank: ~    
+Appp\AdminBundle\Business\AutomationGroup\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+        url:
+            - NotBlank: ~    
+
+## SUPPLIER
+
+## SUPPLIER PURCHASE
+App\AdminBundle\Business\SupplierPurchase\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+        idAccount:
+            - NotBlank: ~
+        amount:
+            - NotBlank: ~
+
+App\AdminBundle\Business\SupplierPurchase\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+        amount:
+            - NotBlank: ~
+
+## ACCOUNT
+App\AdminBundle\Business\Account\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+App\AdminBundle\Business\Account\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+App\AdminBundle\Business\Account\TransferModel:
+    properties:
+        idAccountOut:
+            - NotBlank: ~
+        idAccountIn:
+            - NotBlank: ~
+        amount:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+
+## ESTIMATE PURCHASE
+App\AdminBundle\Business\EstimatePurchase\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+App\AdminBundle\Business\EstimatePurchase\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+
+## CLIENT CONTACT
+App\AdminBundle\Business\ClientContact\CreateModel:
+    properties:
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+App\AdminBundle\Business\ClientContact\EditModel:
+    properties:
+        email:
+            - NotBlank: ~
+    constraints:
+        - Callback:
+            methods:   [isValid]
+
+## CLIENT NOTE
+App\AdminBundle\Business\ClientNote\CreateModel:
+    properties:
+        subject:
+            - NotBlank: ~
+App\AdminBundle\Business\ClientNote\EditModel:
+    properties:
+        subject:
+            - NotBlank: ~
+
+## ORDER
+App\AdminBundle\Business\Order\CreateModel:
+    properties:
+        idProduct:
+            - NotBlank: ~
+        idClient:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~            
+        idOrderPaymentTerm:
+            - NotBlank: ~            
+App\AdminBundle\Business\Order\EditModel:
+    properties:
+        status:
+            - NotBlank: ~            
+
+## EMAIL
+App\AdminBundle\Business\Email\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+        subject:
+            - NotBlank: ~
+App\AdminBundle\Business\Email\EditModel:
+    properties:
+        name:
+            - NotBlank: ~    
+        subject:
+            - NotBlank: ~
+App\AdminBundle\Business\Email\MassSendModel:
+    properties:
+        clients:
+            - NotBlank: ~
+        subject:
+            - NotBlank: ~
+        body:
+            - NotBlank: ~
+
+## PRODUCT GROUP
+App\AdminBundle\Business\ProductGroup\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+App\AdminBundle\Business\ProductGroup\EditModel:
+    properties:
+        name:
+            - NotBlank: ~    
+
+## PHYSICAL ITEM
+App\AdminBundle\Business\PhysicalItem\CreateModel:
+    properties:
+        name:
+            - NotBlank: ~
+App\AdminBundle\Business\PhysicalItem\EditModel:
+    properties:
+        name:
+            - NotBlank: ~
+
+## CREDIT NOTE
+App\AdminBundle\Business\CreditNote\CreateModel:
+    properties:
+        idClient:
+            - NotBlank: ~
+App\AdminBundle\Business\CreditNote\EditModel:
+    properties:
+        idClient:
+            - NotBlank: ~

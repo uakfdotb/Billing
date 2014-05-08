@@ -1,0 +1,459 @@
+## GENERAL
+USERNAME:          Username
+PASSWORD:          Password
+STATUS:            Status
+SUBJECT:           Subject
+USER:              User
+BAD_CREDENTIALS:   Invalid username/password combination. Please try again.
+
+RECEIVED:          Received
+OPEN:              Open
+CLOSED:            Closed
+
+CONTACT:           Contacts
+REFUND:            Refund
+
+ADD_NEW_RECORD:    New record
+IMPORT:            Import
+EXPORT:            Export
+SUBMIT:            Submit
+BACK:              Back
+ESTIMATE_LIST:     Estimate List
+ID:                ID
+NAME:              Name
+FIRST_NAME:        First name
+LAST_NAME:         Last name
+COMPANY:           Company
+ADDRESS:           Address
+ADDRESS_1:         Address 1
+ADDRESS_2:         Address 2
+CITY:              City
+STATE:             State
+POST_CODE:         Post Code
+COUNTRY:           Country
+PHONE_NUMBER:      Phone number
+PHONE:             Phone number
+EMAIL_ADDRESS:     Email address
+BALANCE:           Balance
+HOURLY_RATE:       Hourly rate
+VAT_NUMBER:        VAT Number
+EMAIL:             Email
+AUTOMATION:        Automation
+
+STEP:              Step
+RESULT:            Result
+DETAIL:            Details
+NOTE:              Notes
+NOTES:             Notes
+IMPORT_FINISH:     Import finish
+SUCCESS:           Success
+FAILED:            Failed
+CLICK:             Click
+HERE:              here
+EDIT:              Edit
+TIMESTAMP:         Timestamp
+TYPE:              Type
+
+PRODUCT_GROUP:     Product Group
+SERVER_GROUP:      Server Group
+CREATE_ACCOUNT:    Create Account
+
+EDIT_PROJECT:      Edit Project
+NEXT_RECURS:       Next Recurs
+
+TAX_GROUPS:        Tax Groups
+ADD_TAX_GROUP:     Add Tax Group
+RATE:              Rate
+
+CHOICE_LOGIC:      Choose Server By
+PRIMARY_SERVER:    Primary Server
+ENABLED:           Enabled
+
+PERMISSION_GROUP:  Permission Group
+PERMISSION_GROUPS: Permission Groups
+ADD_PERMISSION_GROUP: Add Permission Group
+
+OVERVIEW: Overview
+VALID_UNTIL: Valid Until
+
+THE_RECORD_HAS_BEEN_CREATED_SUCCESSFULLY: The record has been created successfully
+INVOICE_VIEWED_BY_CLIENT: Your client has viewed this invoice online
+
+## LOGIN
+APP_TITLE:         Loading Deck
+BACKEND:           Backend
+SIGN_IN:           Login
+SIGN_IN_USE_YOUR_ACCOUNT: Sign in using your registered account
+KEEP_ME_SIGN_IN:   Keep me signed in
+
+## COMMON
+SMART_SEARCH:      Smart Search
+LOGGED_IN_AS:      Logged in as
+LOGOUT:            Logout
+COPYRIGHT:         Copyright
+CUSTOMER:          Customer
+CUSTOMERS:         Customers
+CLIENT:            Client
+CLIENTS:           Clients
+PROJECTS:          Projects
+ESTIMATES:         Estimates
+INVOICES:          Invoices
+RECURRINGS:        Recurring Invoices
+TICKETS:           Tickets
+ORDERS:            Orders
+CREDIT_NOTES:      Credit Notes
+SUPPLIER:          Supplier
+SUPPLIERS:         Suppliers
+PURCHASES:         Purchases
+INVENTORY:         Inventory
+BANK:              Bank
+ACCOUNT:           Bank Accounts
+TRANSFER:          Transfer Funds
+ADMIN:             Admin
+PRODUCT_GROUPS:    Product groups
+PRODUCTS:          Products
+AUTOMATION_GROUPS: Automation Groups
+STAFF:             Staff
+SETTING:           Settings
+GATEWAY:           Gateways
+LOG:               Audit Log
+EMAILS:            Emails
+TAX:               Tax
+
+SERVER_GROUPS:     Server Groups
+
+
+## DASHBOARD
+BILLR: Loading Deck
+DASHBOARD:         Dashboard
+QUICK_LINKS:       Quick links
+CUSTOMER_SUPPORT:  Customer support
+PRODUCT_FEEDBACK:  Product feedback
+PAYMENTS_YEAR_TO_DATE: Payments Year To Date
+
+CLIENT_STATUS:     Client Status
+PROJECT_STATUS:    Project Status
+ESTIMATE_STATUS:   Estimate Status
+INVOICE_STATUS:    Invoice Status
+
+LATEST_TICKET_ACTIVITY: Latest Ticket Activity
+
+PAID_IN:           Paid in
+PAID_OUT:          Paid out
+
+## CLIENT
+IMPORT_CLIENT:     Import Clients
+ADD_CLIENT:        Add Client
+EDIT_CLIENT:       Edit Client
+ADD_ORDER:         Add Order
+
+UPLOAD_FILE:       Upload File
+PARSING_DATA:      Parsing data...
+
+THE_PASSWORD_HAS_BEEN_UPDATED: Your password has been updated
+TO_RETURN_BACK_TO_IMPORT_PAGE: to return to the import page
+
+BODY:              Body
+IS_ENCRYPTED:      Is encrypted
+
+##
+ARE_YOU_REALLY_WANT_TO_CHANGE_THIS_ESTIMATE_TO_AN_INVOICE: Do you really want to change this estimate to an invoice?
+THE_ESTIMATE_HAS_BEEN_CHANGED_TO_AN_INVOICE: The estimate has been converted to an invoice
+COULDNT_MAKE_INVOICE: The invoice could not be created
+COULD_SEND_ESTIMATE: Unable to send estimate
+FINISHED_SENDING_ESTIMATE: The estimate(s) have been sent
+
+COULDNT_SEND_INVOICE: Unable to send invoice
+FINISHED_SENDING_INVOICE: The invoices have been sent
+FINISHED_SENDING_REMINDER: The invoice reminders have been sent
+FINISHED_SENDING_OVERDUE_NOTICE: The invoice overdue notices have been sent
+
+## PRODUCT
+SET_PRICE_TO_NEGATIVE_ONE_TO_DISABLE_ANY_OF_THE_PAYMENT_TERM_OPTIONS__LEAVE_SETUP_FEE_AT_ZERO: Set price to -1.00 to disable any of the payment term options - leave setup fee at zero
+
+## PROJECT
+PROJECT_NAME:      Project Name
+START_TIMER:       Start Timer
+STOP_TIMER:        Stop Timer
+PROJECTS_ALLOW_YOU_TO_TRACK_HOW_MUCH_OF_YOUR_TIME_IS_BEING_SPENT_ON_EACH_PIECE_OF_WORD_FOR_EACH_CLIENT: Projects allow you to track how much of your time is being spent on each piece of work, for each client.
+
+CODE:              Code
+BUDGET:            Budget
+DUE_DATE:          Due Date
+
+TRACKING:          Tracking
+TASKS:             Tasks
+ATTACHMENTS:       Attachments
+
+START_TIME:        Start Time
+END_TIME:          End Time
+STAFF_MEMBER:      Staff Member
+DATETIME:          Date and Time
+WORK_TYPE:         Work Type
+UNIT:              Unit
+QUANTITY:          Quantity
+UNIT_PRICE:        Unit Price
+BILLABLE:          Billable
+DATE:              Date
+DESCRIPTION:       Description
+
+BILL_TIME:         Bill Time
+
+ADD_PROJECT: Add Project
+VIEW_PROJECT: View Project
+
+ADD_PROJECT_ATTACHMENT: Add Project Attachment
+EDIT_PROJECT_ATTACHMENT: Edit Project Attachment
+
+## ESTIMATE / INVOICE / RECURRING
+AMOUNT:            Amount
+INVOICE:           Invoice
+ESTIMATE:          Estimate
+ISSUE_DATE:        Issue Date
+DISCOUNT:          Discount
+ESTIMATE_ITEMS:    Estimate Items
+VIEW_CLIENT_SITE:  Download PDF
+SEND_ESTIMATE:     Send Estimate
+SEND_INVOICE:      Send Invoice
+SEND_REMINDER:     Send Reminder
+SEND_OVERDUE_NOTICE: Send Overdue Notice
+WORK_TYPE:         Work Type
+LINE_TOTAL:        Line Total
+SUBTOTAL:          Subtotal
+GRAND_TOTAL:       Grand Total
+PAYMENT:           Payment
+INVOICE_ITEMS:     Invoice Items
+TRANSACTION:       Transaction
+PAY_DATE:          Payment Date
+VIEW_INVOICE:      View Invoice
+SCHEDULE:          Schedule
+START_DATE:        Start Date
+DUE_DAYS:          Due Date
+GENERATE:          Generate
+ADD_RECURRING:     Add Recurring Invoice
+EDIT_RECURRING:    Edit Recurring Invoice
+
+## Settings
+GENERAL: General
+LOCALE: Locale
+
+IP_START: IP Range Start
+IP_END: IP Range End
+
+## TICKET
+TICKET_SUBJECT:    Ticket Subject
+LAST_UPDATE:       Last Updated
+
+## Gateway
+GATEWAY_LIST:       Gateway List
+NEW_GATEWAY:        New Gateway
+EDIT_GATEWAY:       Edit Gateway
+CREATE_NEW_GATEWAY: Create New Gateway
+GATEWAYS:           Gateways
+
+# Payment Gateways
+PAYMENT_GATEWAYS:  Payment Gateways
+
+## ORDER
+ORDER_NUMBER:      Order Number
+PRODUCT:           Product
+MAXMIND:           Maxmind
+ORDER_PAYMENT_TERM:  Order Payment Term
+
+## PURCHASE
+ADD_PURCHASE:      Add Purchase
+EDIT_PURCHASE:     Edit Purchase
+PURCHASE_DATE:     Purchase Date
+INVOICE_PDF:       Invoice PDF
+
+## INVENTORY
+BRAND:             Brand
+MODEL_DESCRIPTION: Model/Description
+MODEL:             Model
+STOCK:             Stock
+DATE_OUT:          Date Out
+DATE_IN:           Date In
+SELL_PRICE:        Sale Price
+PURCHASE_PRICE:    Purchase Price
+SERIAL_NUMBER:     Serial Number
+SERIAL_NUMBERS:    Serial Numbers
+ADD_ONE_ITEM:      Add One Item
+ADD_ITEMS:         Add Multiple Items
+MAKE_INVOICE:      Create Invoice
+ADD_TO_PURCHASE:   Add to Purchase
+VIEW_INVENTORY:    View Inventory
+PRICE:             Price
+EACH_ROW_ONE_SERIAL_NUMBER: Enter one serial number per row
+ADD_PHYSICAL_ITEM: Add Physical Item
+NOMINAL_CODE:      Nominal Code
+
+
+## ACCOUNT
+ACCOUNT_NAME:      Account Name
+ACCOUNT_NUMBER:    Account Number
+SORT_CODE:         Sort Code
+ACCOUNT_TYPE:      Account Type
+STREET_1:          Address Line 1
+STREET_2:          Address Line 2
+COUNTY:            County
+TOWN:              Town
+TELEPHONE:         Telephone
+TIME:              Time
+DIRECTION:         Direction
+ACCOUNT_OUT:       Debit Account
+ACCOUNT_IN:        Credit Account
+
+## PRODUCT GROUP
+CREATE_PRODUCT_GROUP: Create Product Group
+EDIT_PRODUCT_GROUP:   Edit Product Group
+
+## PRODUCT
+ORDER:             Order
+IMPORT_PRODUCTS:   Import Products
+GROUP:             Group
+WELCOME_EMAIL:     Welcome Email
+PAYMENT_TYPE:      Payment Type
+AVAILABLE_IN_ORDER_FORM: Order Form Availability
+CURRENCY:          Currency
+SETUP_FEE:         Setup Fee
+
+ONE_TIME_OR_MONTHLY: One Time / Monthly
+QUARTERLY:           Quarterly
+SEMI_ANNUALLY:       Semi-Annually
+ANNUALLY:            Annually
+BIENNIALLY:          Biennially
+TRIENNIALLY:         Triennially
+
+## VERSION
+VERSION:
+VERSION_NO:
+
+
+##
+OVERDUE_INVOICES: Overdue Invoices
+PACKAGE:          Package
+SCHEDULES:        Calendar
+PERMISSIONS:      Permissions
+CREATE_NOTE:      Create Note
+EDIT_NOTE:        Edit Note
+VIEW_ESTIMATE:    View Estimate
+CREATE_ORDER:     Create Order
+EDIT_ORDER:       Edit Order
+ADD_CREDIT_NOTE:  Add Credit Note
+EDIT_CREDIT_NOTE: Edit credit Note
+ADD_SUPPLIER:     Add Supplier
+EDIT_SUPPLIER:    Edit Supplier
+ADD_ITEM:         Add Item
+EDIT_ITEM:        Edit Item
+ADD_ACCOUNT:      Add Account
+ADD_PRODUCT:      Add Product
+EDIT_PRODUCT:     Edit Product
+AUTOMATION_GROUP_POST_PRODUCT_ORDER: Trigger Event - After Order
+AUTOMATION_GROUP_POST_PRODUCT_PAID: Trigger Event - After Payment
+AUTOMATION_GROUP_POST_PRODUCT_ACCEPTED: Trigger Event - After Accepted
+ADD_AUTOMATION_GROUP: Add Automation Group
+EDIT_AUTOMATION_GROUP: Edit Automation Group
+ADD_STAFF:        Add Staff Member
+EDIT_STAFF:       Edit Staff Member
+HOURLY:           Hourly Rate
+CORE_SETTINGS:    Core Settings
+CLIENT_AUDIT:     Client Audit
+MASS_SEND:        Mass Send
+KEYWORDS:         Keywords
+MASS_SEND_EMAIL:  Send Mass Email
+LOGGLY:           Loggly
+REPORT:           Reports
+GATEWAY_REPORT:   Gateway Report
+IS_REDIRECT_UNPAID_INVOICE: Redirect To Unpaid Invoice After Ordering
+ADD_RECURING: Add Recurring Invoice
+EVENT: Event
+THE_RECORD_HAS_BEEN_UPDATED_SUCCESSFULLY: The record has been updated successfully
+
+## CLIENT PAGE
+CLIENT_AREA:     Client Area
+PLACE_ORDER:     Place Order
+EXISTING_USER:   Existing User
+NEW_USER:        New User
+PAYMENT_TERM:    Payment Term
+DOMAIN:          Domain
+ACCOUNT_USERNAME: Account Username
+ACCOUNT_PASSWORD: Account Password
+BACK_TO_LOGIN_PAGE : Back to login page
+PLEASE_SIGN_IN:  Please sign in
+REMEMBER_ME:     Remember me
+REGISTER:        Register
+INVOICE_LIST:    Invoice List
+VIEW:            View
+PROFILE:         Profile
+CONTACTS:        Contacts
+INVOICE_TO:      Invoice to
+INVOICE_FROM:    Invoice from
+INVOICE_IS:      Invoice is
+ESTIMATE_TO:     Estimate to
+ESTIMATE_FROM:   Estimate from
+ESTIMATE_IS:     Estimate is
+YOUR_ESTIMATE:   Your estimate
+YOUR_INVOICE:    Your invoice
+PAYMENTS:        Payments
+I_WOULD_LIKE_TO_PAY: I would like to pay
+PLEASE_SELECT:   Please select
+INFORMATION:     Information
+DOWNLOAD_PDF:    Download PDF
+TOTAL:           Total
+TOTAL_DUE:       Total Due
+PAYPAL:          Paypal
+BANK:            Bank
+ITEM:            Item
+TICKET_LIST:     Ticket List
+CREATE_NEW_TICKET:  Create New Ticket
+CREATE_TICKET:      Create Ticket
+VIEW_TICKET:        View Ticket
+ATTACHMENT:         Attachment
+PROJECT_LIST:       Project List
+START:              Start
+STOP:               Stop
+INVOICED:           Invoiced
+FILES:              Files
+ORDER_LIST:         Order List
+EDIT_PROFILE:       Edit Profile
+CONTACT_LIST:       Contact List
+CREATE_NEW_CONTACT: Create New Contact
+CREATE_CONTACT:     Create Contact
+EDIT_CONTACT:       Edit Contact
+DELETE:             Delete
+GENERATE_STATEMENT: Generate Statement
+FROM:               From
+TO:                 To
+
+# Grids
+IS_EQUAL_TO: Is equal to
+SELECT_VALUE: Select Value
+DEFAULTS: Defaults
+THIS_INVOICE_HAS_ADREADY_BEEN_PAID: This invoice has already been paid
+PLEASE_MAKE_SURE_THAT_YOU_REALLY_WANT_TO_EDIT_THIS: Please confirm that you would like to continue
+EMAIL_HAS_BEEN_SENT: Your emails have been sent
+PLEASE_CHOOSE_SOME_ITEM: Please choose some items
+SELECT_VALUES: Select Values
+
+# Payments page
+PAY_WITH: Pay with
+
+# Forum
+TITLE: Title
+AUTHOR: Author
+LAST_UPDATED: Last Updated
+THREAD_STARTED_BY: Thread Started By
+ADD_THREAD: Create Thread
+COMMENT: Comment
+
+# Modules
+MODULE_SETTINGS: Module Settings
+COLOR: Colour
+NEW_ORDER: New Order
+PRODUCT_LIST: Product List
+NEXT_DUE: Next Due
+ORDER_FORM: Order Form
+AUTOMATIC_FRAUD_SCORING: Automatic Fraud Scoring
+IS_AVAILABLE: Is Available
+INCOME: Income
+EDIT_CLIENT_PRODUCT: Edit Client Product

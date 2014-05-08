@@ -1,0 +1,77 @@
+{% extends 'AppAdminBundle:Base:list.html.twig' %}
+
+{% block listGrid %}
+    {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+        {% block initializeGrid %}
+            var accountTypeDs;
+
+            jQuery.when(
+            jQuery.ajax({
+            url: '{{ mappingUrl }}/account_type',
+            success: function(response) {
+            accountTypeDs = response["data"];
+            }
+            })
+            ).done(function(a1){
+            initializeGrid{{ grid.jsId | default('grid') }}();
+            });
+        {% endblock %}
+
+        {% block gridButtons %}
+            {{ parent() }}
+            <script id="transfer-button" type="text/x-kendo-template">
+                <a class="k-button k-button-icontext" href="{{ transferUrl }}">
+                    <i class="k-icon k-edit"></i>{{ 'TRANSFER' | trans }}
+                </a>
+            </script>
+        {% endblock %}
+
+        {% block gridToolbar %}
+            { name: "add", text: "{{ 'ADD_NEW_RECORD' | trans }}", template: kendo.template(jQuery("#create-button").html()) },
+            { name: "export", text: "{{ 'EXPORT' | trans }}", template: kendo.template(jQuery("#export-button").html()) },
+        {% endblock %}
+
+        {% block gridFields %}
+            id: { editable: false, nullable: false },
+            name: { editable: true, nullable: true },
+            number: {editable: true, nullable: true },
+            sortCode: { editable: true, nullable: true },
+            idAccountType: { editable: true, nullable: true },
+            email: { editable: true, nullable: true },
+            balance: { editable: true, nullable: true },
+        {% endblock %}
+
+        {% block gridColumns %}
+            { field:"id", title:"{{ 'ID' | trans }}", width: 120, template: '\
+            <a href="{{ accountTransactionListUrl }}?id=#=id#">#=id#</a>'},
+            { field:"name", title:"{{ 'ACCOUNT_NAME' | trans }}", width: 150 },
+            { field:"number", title:"{{ 'ACCOUNT_NUMBER' | trans }}", width: 150},
+            { field:"sortCode", title:"{{ 'SORT_CODE' | trans }}", width: 100},
+            { field:"idAccountType", title:"{{ 'ACCOUNT_TYPE' | trans }}", width: 150,
+            filterable: {
+            ui: accountTypeFilter,
+            operators: {
+            string: { eq: "{{ 'IS_EQUAL_TO' | trans }}"}
+            }
+            }
+            },
+            { field:"email", title:"{{ 'EMAIL' | trans }}", width: 110},
+            { field:"balance", title:"{{ 'BALANCE' | trans }}", width: 115},
+            { template: kendo.template($("#edit-button").html()), width: 100 },
+            { command: "destroy", width: 100  }
+        {% endblock %}
+
+        {% block extraScript %}
+            // Filter
+            function accountTypeFilter(element) {
+            element.kendoDropDownList({
+            dataSource: accountTypeDs,
+            dataTextField: 'text',
+            dataValueField: 'value',
+            optionLabel: "-- {{ 'SELECT_VALUE' | trans }} --"
+            });
+            }
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

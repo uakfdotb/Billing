@@ -1,0 +1,91 @@
+{% extends 'AppAdminBundle::Base.html.twig' %}
+
+{% block masterHeadText %}
+    <h2>{{ 'CLIENT_IMPORT' | trans }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% embed 'AppAdminBundle:Component:breadscrum.html.twig' with {'breadscum': breadscrum} %}
+    {% endembed %}
+
+    <h3>{{ 'STEP' | trans }} 1: {{ 'UPLOAD_FILE' | trans }}</h3>
+    <input type="file" name="upload" id="upload" />
+    <input type="hidden" id="fileName" />
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#upload').kendoUpload({
+                multiple: false,
+                async: {
+                    autoUpload: true,
+                    saveUrl: '{{ saveUrl }}',
+                    removeUrl: '{{ removeUrl }}'
+                },
+                success: onUploadSuccess
+            });
+        });
+        function onUploadSuccess(e) {
+            jQuery('#step2').css('display', 'none');
+            if (e.response != null) {
+                if (e.response.status == 'Failed') {
+                    alert(e.response.message);
+                }
+                else if (e.response.status == 'OK') {
+                    jQuery('#step2').css('display', '');
+
+                    jQuery('#fileName').val(e.response.fileName);
+
+                    var grid = jQuery('#{{ grid.jsId | default('grid')}}').data("kendoGrid");
+                    grid.dataSource.options.transport.read.url = '{{ grid.readUrl }}?file=' + e.response.fileName;
+                    grid.dataSource.read();
+                    grid.refresh();
+                }
+            }
+        }
+    </script>
+
+    <div id="step2" style="display: none">
+        <br />
+
+        <h3>{{ 'STEP' | trans }} 2: {{ 'PARSING_DATA' | trans }}</h3>
+
+        <div id="{{ grid.jsId | default('grid') }}" style="margin-top: 5px">
+        </div>
+        {% embed 'AppAdminBundle:Component:grid.html.twig' with {'grid': grid} %}
+            {% block gridButtons %}
+
+            {% endblock %}
+
+            {% block gridToolbar %}
+
+            {% endblock %}
+
+            {% block gridFields %}
+                id: { editable: false, nullable: false },
+                name: { editable: false, nullable: true },
+                productGroup: { editable: false, nullable: true },
+                welcomeEmail: { editable: false, nullable: true },
+            {% endblock %}
+
+            {% block gridColumns %}
+                { field:"id", title:"{{ 'ID' | trans }}", width: 120, sortable: false, filterable: false, hidden: true},
+                { field:"message", title:"{{ 'RESULT' | trans }}", width: 250, sortable: false, filterable: false, template: '#=message#'},
+                { field:"name", title:"{{ 'NAME' | trans }}", width: 250, sortable: false, filterable: false },
+                { field:"productGroup", title:"{{ 'GROUP' | trans }}", width: 150, sortable: false, filterable: false},
+                { field:"welcomeEmail", title:"{{ 'WELCOME_EMAIL' | trans }}", width: 150, sortable: false, filterable: false},
+                { field: "stock", title:"{{ 'STOCK' | trans }}", width: 150, sortable: false, filterable: false}
+            {% endblock %}
+        {% endembed %}
+
+        <br />
+
+        <h3>{{ 'STEP' | trans }} 3: {{ 'IMPORT' | trans }}</h3>
+        <button type="submit" class="btn btn-primary btn-large" onclick="javascript:doImport()">{{ 'IMPORT' | trans }}</button>
+        <script type="text/javascript">
+            function doImport() {
+                var fileName = jQuery('#fileName').val();
+                window.location.replace('{{ importProceedUrl }}?fileName=' + fileName);
+            }
+        </script>
+    </div>
+
+{% endblock %}

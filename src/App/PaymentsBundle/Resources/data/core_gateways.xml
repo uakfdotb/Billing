@@ -1,0 +1,86 @@
+<gateways>
+    <gateway>
+        <gateway_type>_paypal</gateway_type>
+        <name>PayPal</name>
+        <auth_modes>
+            <auth_mode>
+                <auth_mode_type>default</auth_mode_type>
+                <name>Default</name>
+                <credentials>
+                    <credential>
+                        <name>email</name>
+                        <label>PayPal Email</label>
+                        <safe type="boolean">true</safe>
+                    </credential>
+                </credentials>
+            </auth_mode>
+        </auth_modes>
+        <payment_methods>
+            <payment_method>paypal</payment_method>
+        </payment_methods>
+        <gateway_specific_fields>
+            <gateway_specific_field>recurring</gateway_specific_field>
+        </gateway_specific_fields>
+        <supported_countries>US, GB, CA</supported_countries>
+        <homepage>http://paypal.com/</homepage>
+    </gateway>
+    <gateway>
+        <gateway_type>_gocardless</gateway_type>
+        <name>GoCardless</name>
+        <auth_modes>
+            <auth_mode>
+                <auth_mode_type>standard</auth_mode_type>
+                <name>Standard</name>
+                <credentials>
+                    <credential>
+                        <name>authorization_code</name>
+                        <label>Authorization code</label>
+                        <safe type="boolean">true</safe>
+                    </credential>
+                </credentials>
+            </auth_mode>
+            <auth_mode>
+                <auth_mode_type>partner</auth_mode_type>
+                <name>Partner</name>
+                <credentials>
+                    <credential>
+                        <name>app_identifier</name>
+                        <label>App identifier</label>
+                        <safe type="boolean">true</safe>
+                    </credential>
+                    <credential>
+                        <name>access_token</name>
+                        <label>Access token</label>
+                        <safe type="boolean">false</safe>
+                    </credential>
+                    <credential>
+                        <name>app_secret</name>
+                        <label>App secret</label>
+                        <safe type="boolean">false</safe>
+                    </credential>
+                </credentials>
+            </auth_mode>
+        </auth_modes>
+        <characteristics>
+            <supports_purchase type="boolean">false</supports_purchase>
+            <supports_authorize type="boolean">false</supports_authorize>
+            <supports_capture type="boolean">false</supports_capture>
+            <supports_credit type="boolean">false</supports_credit>
+            <supports_void type="boolean">false</supports_void>
+            <supports_reference_purchase type="boolean">false</supports_reference_purchase>
+            <supports_purchase_via_preauthorization type="boolean">true</supports_purchase_via_preauthorization>
+            <supports_offsite_purchase type="boolean">true</supports_offsite_purchase>
+            <supports_offsite_authorize type="boolean">true</supports_offsite_authorize>
+            <supports_3dsecure_purchase type="boolean">false</supports_3dsecure_purchase>
+            <supports_3dsecure_authorize type="boolean">false</supports_3dsecure_authorize>
+            <supports_store type="boolean">false</supports_store>
+            <supports_remove type="boolean">false</supports_remove>
+        </characteristics>
+        <payment_methods>
+            <payment_method>gocardless</payment_method>
+        </payment_methods>
+        <gateway_specific_fields/>
+        <supported_countries>GB</supported_countries>
+        <homepage>https://gocardless.com</homepage>
+    </gateway>
+</gateways>

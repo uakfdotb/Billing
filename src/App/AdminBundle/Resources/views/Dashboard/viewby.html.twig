@@ -1,0 +1,8 @@
+<small id="{{ id }}">
+    {{ label | default('View By') }}: <b></b>
+    <ul>
+        {% for k, v in viewby['options'] %}
+            <li{% if k == viewby['selected'] %} class="current"{% endif %} value="{{ k }}">{{ v }}</li>
+        {% endfor %}
+    </ul>
+</small>
