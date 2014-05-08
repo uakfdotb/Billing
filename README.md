@@ -22,7 +22,12 @@ Key features of this software include module support (but unfortunately no modul
 If you need additional help, please consider our [forum](http://community.loadingdeck.com) that you can use to discuss the software with us. Paid support and development are also available by email and telephone (see above).
 
 ### Bugs and Contributions
-Both issues and PR are welcome via the Github repository. If you know Symfony then we'd appreciate you taking the time to send us a PR. Issues and PRs will be reviewed within our spare time.
+Both issues and PR are welcome via the Github repository. If you know Symfony then we'd appreciate you taking the time to send us a PR. Issues and PRs will be reviewed within our spare time. We are aware of a number of bugs already, from both before and during the transition away from SaaS. Use this software at your own risk!
 
+### Third Party Credits
+ * [KendoUI](http://www.kendoui.com) 
+ * [Highcharts](http://www.highcharts.com) 
+ * [Bootstrap](http://www.getbootstrap.com) 
+ * [JQuery](http://www.jquery.com) 
 
-
+Please let us know if we've forgotten anyone.
